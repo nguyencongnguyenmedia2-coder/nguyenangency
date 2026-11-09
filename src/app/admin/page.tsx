@@ -22,80 +22,104 @@ export default async function AdminDashboardPage() {
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
 
-  const [
-    totalCustomers,
-    websiteCustomers,
-    telegramCustomers,
-    newCustomersThisMonth,
-    totalBookings,
-    bookingsToday,
-    websiteBookings,
-    telegramBookings,
-    pendingBookings,
-    totalLeads,
-    inProgressLeads,
-    totalQuotations,
-    pendingQuotations,
-    activeProjects,
-    completedProjects,
-    paidInvoices,
-    unpaidInvoices,
-    recentBookings,
-    recentLeads,
-  ] = await Promise.all([
-    prisma.customer.count({ where: { deletedAt: null } }),
-    prisma.customer.count({ where: { source: "WEBSITE", deletedAt: null } }),
-    prisma.customer.count({
-      where: {
-        OR: [{ source: "TELEGRAM" }, { telegramUserId: { not: null } }],
-        deletedAt: null,
-      },
-    }),
-    prisma.customer.count({
-      where: {
-        createdAt: {
-          gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+  let totalCustomers = 0;
+  let websiteCustomers = 0;
+  let telegramCustomers = 0;
+  let newCustomersThisMonth = 0;
+  let totalBookings = 0;
+  let bookingsToday = 0;
+  let websiteBookings = 0;
+  let telegramBookings = 0;
+  let pendingBookings = 0;
+  let totalLeads = 0;
+  let inProgressLeads = 0;
+  let totalQuotations = 0;
+  let pendingQuotations = 0;
+  let activeProjects = 0;
+  let completedProjects = 0;
+  let paidInvoices: { totalAmount: number }[] = [];
+  let unpaidInvoices: { totalAmount: number }[] = [];
+  let recentBookings: any[] = [];
+  let recentLeads: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.customer.count({ where: { deletedAt: null } }),
+      prisma.customer.count({ where: { source: "WEBSITE", deletedAt: null } }),
+      prisma.customer.count({
+        where: {
+          OR: [{ source: "TELEGRAM" }, { telegramUserId: { not: null } }],
+          deletedAt: null,
         },
-      },
-    }),
-    prisma.serviceBooking.count(),
-    prisma.serviceBooking.count({
-      where: { createdAt: { gte: startOfToday } },
-    }),
-    prisma.serviceBooking.count({ where: { source: "WEBSITE" } }),
-    prisma.serviceBooking.count({ where: { source: "TELEGRAM" } }),
-    prisma.serviceBooking.count({
-      where: { status: { in: ["NEW", "CONFIRMED", "CONSULTING"] } },
-    }),
-    prisma.lead.count(),
-    prisma.lead.count({
-      where: {
-        stage: { in: ["NEW_LEAD", "CONTACTED", "QUALIFIED", "PROPOSAL", "NEGOTIATION"] },
-      },
-    }),
-    prisma.quotation.count(),
-    prisma.quotation.count({
-      where: { status: { in: ["NEW", "REVIEWING", "NEGOTIATING"] } },
-    }),
-    prisma.project.count({ where: { status: "IN_PROGRESS" } }),
-    prisma.project.count({ where: { status: "COMPLETED" } }),
-    prisma.invoice.findMany({ where: { status: "PAID" }, select: { totalAmount: true } }),
-    prisma.invoice.findMany({
-      where: { status: { in: ["UNPAID", "PARTIAL", "OVERDUE"] } },
-      select: { totalAmount: true },
-    }),
-    prisma.serviceBooking.findMany({
-      take: 6,
-      include: {
-        customer: { select: { name: true, phone: true, email: true } },
-      },
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.lead.findMany({
-      take: 6,
-      orderBy: { createdAt: "desc" },
-    }),
-  ]);
+      }),
+      prisma.customer.count({
+        where: {
+          createdAt: {
+            gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+          },
+        },
+      }),
+      prisma.serviceBooking.count(),
+      prisma.serviceBooking.count({
+        where: { createdAt: { gte: startOfToday } },
+      }),
+      prisma.serviceBooking.count({ where: { source: "WEBSITE" } }),
+      prisma.serviceBooking.count({ where: { source: "TELEGRAM" } }),
+      prisma.serviceBooking.count({
+        where: { status: { in: ["NEW", "CONFIRMED", "CONSULTING"] } },
+      }),
+      prisma.lead.count(),
+      prisma.lead.count({
+        where: {
+          stage: { in: ["NEW_LEAD", "CONTACTED", "QUALIFIED", "PROPOSAL", "NEGOTIATION"] },
+        },
+      }),
+      prisma.quotation.count(),
+      prisma.quotation.count({
+        where: { status: { in: ["NEW", "REVIEWING", "NEGOTIATING"] } },
+      }),
+      prisma.project.count({ where: { status: "IN_PROGRESS" } }),
+      prisma.project.count({ where: { status: "COMPLETED" } }),
+      prisma.invoice.findMany({ where: { status: "PAID" }, select: { totalAmount: true } }),
+      prisma.invoice.findMany({
+        where: { status: { in: ["UNPAID", "PARTIAL", "OVERDUE"] } },
+        select: { totalAmount: true },
+      }),
+      prisma.serviceBooking.findMany({
+        take: 6,
+        include: {
+          customer: { select: { name: true, phone: true, email: true } },
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.lead.findMany({
+        take: 6,
+        orderBy: { createdAt: "desc" },
+      }),
+    ]);
+
+    totalCustomers = results[0];
+    websiteCustomers = results[1];
+    telegramCustomers = results[2];
+    newCustomersThisMonth = results[3];
+    totalBookings = results[4];
+    bookingsToday = results[5];
+    websiteBookings = results[6];
+    telegramBookings = results[7];
+    pendingBookings = results[8];
+    totalLeads = results[9];
+    inProgressLeads = results[10];
+    totalQuotations = results[11];
+    pendingQuotations = results[12];
+    activeProjects = results[13];
+    completedProjects = results[14];
+    paidInvoices = results[15];
+    unpaidInvoices = results[16];
+    recentBookings = results[17];
+    recentLeads = results[18];
+  } catch (error) {
+    console.error("Dashboard DB fetch fallback active:", error);
+  }
 
   const totalRevenue = paidInvoices.reduce((acc, cur) => acc + cur.totalAmount, 0);
   const totalOutstanding = unpaidInvoices.reduce((acc, cur) => acc + cur.totalAmount, 0);

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { submitContactForm } from "@/app/actions/contact";
 import {
   Send,
@@ -24,17 +25,12 @@ const FALLBACK_SERVICES = [
   "ERP / Custom CRM Platform",
 ];
 
-export default function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ service?: string; package?: string }>;
-}) {
-  const resolvedParams = use(searchParams);
+function ContactContent() {
+  const searchParams = useSearchParams();
+  const initialService = searchParams.get("service") || searchParams.get("package") || FALLBACK_SERVICES[0];
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serviceOptions, setServiceOptions] = useState<string[]>(FALLBACK_SERVICES);
-  const [selectedService, setSelectedService] = useState(
-    resolvedParams?.service || resolvedParams?.package || FALLBACK_SERVICES[0]
-  );
+  const [selectedService, setSelectedService] = useState(initialService);
   const [selectedBudget, setSelectedBudget] = useState("50M - 100M VNĐ");
 
   const [responseState, setResponseState] = useState<{
@@ -51,7 +47,8 @@ export default function ContactPage({
         if (data?.ok && Array.isArray(data.services) && data.services.length > 0) {
           const titles = data.services.map((s: { title: string }) => s.title);
           setServiceOptions(titles);
-          if (!resolvedParams?.service && !resolvedParams?.package) {
+          const svc = searchParams.get("service") || searchParams.get("package");
+          if (!svc) {
             setSelectedService(titles[0]);
           }
         }
@@ -59,7 +56,7 @@ export default function ContactPage({
       .catch(() => {
         // Fallback to default options silently
       });
-  }, [resolvedParams]);
+  }, [searchParams]);
 
   const budgetOptions = [
     "10M - 30M VNĐ",
@@ -433,5 +430,19 @@ export default function ContactPage({
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-zinc-400 font-mono text-xs uppercase tracking-widest">
+          Đang khởi tạo hệ thống liên hệ...
+        </div>
+      }
+    >
+      <ContactContent />
+    </Suspense>
   );
 }
