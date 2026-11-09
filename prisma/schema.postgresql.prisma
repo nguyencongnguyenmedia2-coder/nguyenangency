@@ -1,0 +1,778 @@
+// PostgreSQL / Supabase Production Schema for NGUYÊN AGENCY
+// Usage: npx prisma migrate deploy --schema=prisma/schema.postgresql.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==========================================
+// 01. AUTHENTICATION, ROLES & PERMISSIONS
+// ==========================================
+
+model Role {
+  id          String       @id @default(cuid())
+  name        String       @unique // SUPER_ADMIN, ADMIN, STAFF, CLIENT
+  displayName String
+  description String?
+  users       User[]
+  permissions Permission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Permission {
+  id          String   @id @default(cuid())
+  code        String   @unique // e.g., cms.manage, crm.write, project.read
+  module      String
+  description String?
+  roleId      String
+  role        Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@index([roleId])
+}
+
+model User {
+  id            String          @id @default(cuid())
+  email         String          @unique
+  passwordHash  String
+  name          String
+  phone         String?
+  avatar        String?
+  title         String?
+  roleName      String          @default("CLIENT") // SUPER_ADMIN, ADMIN, STAFF, CLIENT
+  roleId        String?
+  role          Role?           @relation(fields: [roleId], references: [id])
+  isActive      Boolean         @default(true)
+  lastLoginAt   DateTime?
+  customer      Customer?
+  blogPosts     BlogPost[]
+  projectMember ProjectMember[]
+  assignedTasks ProjectTask[]
+  notifications Notification[]
+  activityLogs  ActivityLog[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  deletedAt     DateTime?
+
+  @@index([email])
+  @@index([roleName])
+}
+
+// ==========================================
+// 02. SERVICES & PRICING PACKAGES
+// ==========================================
+
+model ServiceCategory {
+  id          String           @id @default(cuid())
+  name        String
+  slug        String           @unique
+  group       String           @default("MEDIA") // MEDIA | TECH
+  description String?
+  order       Int              @default(0)
+  services    Service[]
+  packages    ServicePackage[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Service {
+  id              String           @id @default(cuid())
+  title           String
+  slug            String           @unique
+  group           String           @default("MEDIA") // MEDIA | TECH
+  categoryId      String
+  category        ServiceCategory  @relation(fields: [categoryId], references: [id])
+  tagline         String?
+  shortDesc       String
+  description     String
+  thumbnail       String?
+  icon            String           @default("Sparkles")
+  benefitsJson    String           @default("[]")
+  featuresJson    String           @default("[]")
+  processJson     String           @default("[]")
+  estimatedTime   String           @default("2 - 4 tuần")
+  startingPrice   Float?
+  priceLabel      String           @default("Liên hệ báo giá")
+  isFeatured      Boolean          @default(false)
+  status          String           @default("PUBLISHED") // DRAFT | PUBLISHED
+  order           Int              @default(0)
+  metaTitle       String?
+  metaDescription String?
+  bookings        ServiceBooking[]
+  quotationItems  QuotationItem[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  deletedAt       DateTime?
+
+  @@index([group, status])
+  @@index([categoryId])
+}
+
+model ServicePackage {
+  id             String           @id @default(cuid())
+  name           String
+  slug           String           @unique
+  packageGroup   String
+  categoryId     String?
+  category       ServiceCategory? @relation(fields: [categoryId], references: [id])
+  description    String
+  price          Float?
+  priceDisplay   String
+  isCustomQuote  Boolean          @default(false)
+  isPopular      Boolean          @default(false)
+  deliveryTime   String           @default("2 - 3 tuần")
+  featuresJson   String           @default("[]")
+  comparisonJson String           @default("{}")
+  ctaText        String           @default("Chọn gói dịch vụ")
+  status         String           @default("PUBLISHED")
+  order          Int              @default(0)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@index([packageGroup, status])
+}
+
+// ==========================================
+// 03. PORTFOLIO & CASE STUDIES
+// ==========================================
+
+model PortfolioCategory {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  description String?
+  order       Int         @default(0)
+  portfolios  Portfolio[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Portfolio {
+  id               String            @id @default(cuid())
+  title            String
+  slug             String            @unique
+  clientName       String
+  year             String            @default("2026")
+  categoryId       String
+  category         PortfolioCategory @relation(fields: [categoryId], references: [id])
+  shortDesc        String
+  thumbnail        String
+  videoPreview     String?
+  galleryJson      String            @default("[]")
+  objective        String
+  challenge        String
+  solution         String
+  processJson      String            @default("[]")
+  technologiesJson String            @default("[]")
+  resultsJson      String            @default("[]")
+  liveUrl          String?
+  isFeatured       Boolean           @default(false)
+  status           String            @default("PUBLISHED")
+  order            Int               @default(0)
+  metaTitle        String?
+  metaDescription  String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  deletedAt        DateTime?
+
+  @@index([categoryId, status])
+  @@index([isFeatured])
+}
+
+// ==========================================
+// 04. DIGITAL LAB – TECH PRODUCTS
+// ==========================================
+
+model ProductCategory {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  description String?
+  order       Int          @default(0)
+  products    LabProduct[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model LabProduct {
+  id              String          @id @default(cuid())
+  name            String
+  slug            String          @unique
+  tagline         String
+  categoryId      String
+  category        ProductCategory @relation(fields: [categoryId], references: [id])
+  shortDesc       String
+  description     String
+  thumbnail       String
+  videoUrl        String?
+  galleryJson     String          @default("[]")
+  featuresJson    String          @default("[]")
+  techStackJson   String          @default("[]")
+  demoUrl         String?
+  websiteUrl      String?
+  productStage    String          @default("LIVE")
+  version         String          @default("v1.0")
+  pricingModel    String          @default("Freemium / SaaS")
+  ctaText         String          @default("Trải nghiệm ngay")
+  isFeatured      Boolean         @default(false)
+  status          String          @default("PUBLISHED")
+  order           Int             @default(0)
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  deletedAt       DateTime?
+
+  @@index([categoryId, status])
+  @@index([status, isFeatured])
+}
+
+// ==========================================
+// 05. CRM, CUSTOMERS & LEADS
+// ==========================================
+
+model Customer {
+  id                 String           @id @default(cuid())
+  code               String           @unique
+  userId             String?          @unique
+  user               User?            @relation(fields: [userId], references: [id])
+  name               String
+  email              String           @unique
+  phone              String?
+  telegramUserId     String?          @unique
+  telegramUsername   String?
+  company            String?
+  position           String?
+  taxCode            String?
+  address            String?
+  website            String?
+  tier               String           @default("ENTERPRISE")
+  source             String           @default("WEBSITE")
+  careStatus         String           @default("ACTIVE")
+  notes              String?
+  contactHistoryJson String           @default("[]")
+  appointmentsJson   String           @default("[]")
+  projects           Project[]
+  quotations         Quotation[]
+  contracts          Contract[]
+  invoices           Invoice[]
+  leads              Lead[]
+  bookings           ServiceBooking[]
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+
+  @@index([email])
+  @@index([phone])
+  @@index([telegramUserId])
+  @@index([tier, careStatus])
+}
+
+model ServiceBooking {
+  id                   String      @id @default(cuid())
+  bookingCode          String      @unique
+  customerId           String
+  customer             Customer    @relation(fields: [customerId], references: [id])
+  serviceId            String?
+  service              Service?    @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  serviceName          String      @default("Dịch vụ NGUYÊN AGENCY")
+  source               String      @default("WEBSITE")
+  projectTitle         String
+  projectDescription   String
+  budgetRange          String?
+  budgetMin            Float?
+  budgetMax            Float?
+  preferredStartDate   String?
+  preferredContactTime String?
+  customerNotes        String?
+  pageSource           String?
+  status               String      @default("NEW")
+  assignedTo           String?
+  confirmedBy          String?
+  confirmedAt          DateTime?
+  telegramChatId       String?
+  telegramMessageId    Int?
+  leads                Lead[]
+  quotations           Quotation[]
+  projects             Project[]
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+
+  @@index([customerId])
+  @@index([serviceId])
+  @@index([status])
+  @@index([source])
+}
+
+model Lead {
+  id              String          @id @default(cuid())
+  code            String          @unique
+  name            String
+  email           String
+  phone           String?
+  company         String?
+  serviceInterest String?
+  budget          String?
+  source          String          @default("WEBSITE")
+  stage           String          @default("NEW_LEAD")
+  priority        String          @default("HIGH")
+  assignedTo      String?
+  notes           String?
+  nextFollowUp    DateTime?
+  historyJson     String          @default("[]")
+  customerId      String?
+  customer        Customer?       @relation(fields: [customerId], references: [id])
+  bookingId       String?
+  booking         ServiceBooking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  deletedAt       DateTime?
+
+  @@index([stage])
+  @@index([email])
+  @@index([bookingId])
+}
+
+// ==========================================
+// 06. QUOTATION, CONTRACT, INVOICE & PAYMENT
+// ==========================================
+
+model Quotation {
+  id                   String          @id @default(cuid())
+  code                 String          @unique
+  customerId           String?
+  customer             Customer?       @relation(fields: [customerId], references: [id])
+  bookingId            String?
+  booking              ServiceBooking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+  clientName           String
+  clientEmail          String
+  clientPhone          String?
+  clientCompany        String?
+  serviceGroup         String          @default("TECH")
+  serviceName          String
+  packageName          String?
+  selectedFeaturesJson String          @default("[]")
+  requirements         String
+  budgetRange          String?
+  desiredTimeline      String?
+  attachmentUrl        String?
+  subtotal             Float           @default(0)
+  discount             Float           @default(0)
+  taxAmount            Float           @default(0)
+  totalAmount          Float           @default(0)
+  currency             String          @default("VND")
+  status               String          @default("NEW")
+  createdBy            String?
+  adminNotes           String?
+  validUntil           DateTime?
+  historyJson          String          @default("[]")
+  items                QuotationItem[]
+  contracts            Contract[]
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  @@index([status])
+  @@index([customerId])
+  @@index([bookingId])
+}
+
+model QuotationItem {
+  id          String    @id @default(cuid())
+  quotationId String
+  quotation   Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  serviceId   String?
+  service     Service?  @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  title       String
+  description String?
+  quantity    Int       @default(1)
+  unitPrice   Float     @default(0)
+  totalPrice  Float     @default(0)
+  createdAt   DateTime  @default(now())
+
+  @@index([quotationId])
+}
+
+model Contract {
+  id           String     @id @default(cuid())
+  code         String     @unique
+  title        String
+  customerId   String
+  customer     Customer   @relation(fields: [customerId], references: [id])
+  projectId    String?
+  project      Project?   @relation(fields: [projectId], references: [id])
+  quotationId  String?
+  quotation    Quotation? @relation(fields: [quotationId], references: [id])
+  totalValue   Float
+  signedDate   DateTime?
+  startDate    DateTime?
+  endDate      DateTime?
+  status       String     @default("ACTIVE")
+  fileUrl      String?
+  termsSummary String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([customerId])
+}
+
+model Invoice {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  title       String
+  customerId  String
+  customer    Customer  @relation(fields: [customerId], references: [id])
+  projectId   String?
+  project     Project?  @relation(fields: [projectId], references: [id])
+  amount      Float
+  taxAmount   Float     @default(0)
+  totalAmount Float
+  dueDate     DateTime
+  paidDate    DateTime?
+  status      String    @default("UNPAID")
+  itemsJson   String    @default("[]")
+  notes       String?
+  payments    Payment[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([customerId, status])
+}
+
+model Payment {
+  id            String   @id @default(cuid())
+  invoiceId     String
+  invoice       Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  amount        Float
+  method        String   @default("Bank Transfer")
+  transactionId String?
+  paidAt        DateTime @default(now())
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  @@index([invoiceId])
+}
+
+// ==========================================
+// 07. PROJECT MANAGEMENT & CLIENT PORTAL
+// ==========================================
+
+model Project {
+  id             String          @id @default(cuid())
+  code           String          @unique
+  name           String
+  slug           String          @unique
+  customerId     String
+  customer       Customer        @relation(fields: [customerId], references: [id])
+  bookingId      String?         @unique
+  booking        ServiceBooking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+  quotationId    String?
+  category       String          @default("Web Application")
+  description    String
+  status         String          @default("IN_PROGRESS")
+  priority       String          @default("HIGH")
+  progress       Int             @default(0)
+  budget         Float           @default(0)
+  startDate      DateTime?
+  deadline       DateTime?
+  completedAt    DateTime?
+  managerName    String          @default("Nguyên Director")
+  notes          String?
+  discussionJson String          @default("[]")
+  changelogJson  String          @default("[]")
+  tasks          ProjectTask[]
+  members        ProjectMember[]
+  files          ProjectFile[]
+  contracts      Contract[]
+  invoices       Invoice[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  deletedAt      DateTime?
+
+  @@index([customerId, status])
+}
+
+model ProjectTask {
+  id           String    @id @default(cuid())
+  projectId    String
+  project      Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?
+  status       String    @default("IN_PROGRESS")
+  priority     String    @default("MEDIUM")
+  assigneeId   String?
+  assignee     User?     @relation(fields: [assigneeId], references: [id])
+  assigneeName String?
+  dueDate      DateTime?
+  order        Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([projectId, status])
+}
+
+model ProjectMember {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      String   @default("Lead Developer")
+  joinedAt  DateTime @default(now())
+
+  @@unique([projectId, userId])
+}
+
+model ProjectFile {
+  id            String   @id @default(cuid())
+  projectId     String
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name          String
+  fileUrl       String
+  fileType      String   @default("PDF")
+  fileSize      String   @default("4.2 MB")
+  version       String   @default("v1.0")
+  isDeliverable Boolean  @default(true)
+  uploadedBy    String   @default("NGUYÊN AGENCY")
+  createdAt     DateTime @default(now())
+
+  @@index([projectId])
+}
+
+// ==========================================
+// 08. BLOG, SEO, TESTIMONIALS & FAQ
+// ==========================================
+
+model BlogCategory {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  description String?
+  posts       BlogPost[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id              String       @id @default(cuid())
+  title           String
+  slug            String       @unique
+  excerpt         String
+  content         String
+  thumbnail       String
+  categoryId      String
+  category        BlogCategory @relation(fields: [categoryId], references: [id])
+  authorId        String?
+  author          User?        @relation(fields: [authorId], references: [id])
+  authorName      String       @default("NGUYÊN Creative Lab")
+  tagsJson        String       @default("[]")
+  readTime        String       @default("6 phút đọc")
+  status          String       @default("PUBLISHED")
+  publishedAt     DateTime?    @default(now())
+  scheduledAt     DateTime?
+  isFeatured      Boolean      @default(false)
+  views           Int          @default(0)
+  metaTitle       String?
+  metaDescription String?
+  canonicalUrl    String?
+  ogImage         String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  deletedAt       DateTime?
+
+  @@index([categoryId, status])
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  clientName  String
+  clientRole  String
+  company     String
+  avatar      String?
+  content     String
+  rating      Int      @default(5)
+  projectType String?
+  isFeatured  Boolean  @default(true)
+  status      String   @default("PUBLISHED")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  category  String   @default("General")
+  order     Int      @default(0)
+  status    String   @default("PUBLISHED")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ==========================================
+// 09. CONTACT, MEDIA, SETTINGS & AUDIT LOGS
+// ==========================================
+
+model ContactSubmission {
+  id            String   @id @default(cuid())
+  code          String   @unique
+  name          String
+  email         String
+  phone         String?
+  company       String?
+  serviceType   String
+  budget        String?
+  message       String
+  attachmentUrl String?
+  status        String   @default("NEW")
+  ipAddress     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([status])
+}
+
+model Notification {
+  id             String   @id @default(cuid())
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  targetRole     String   @default("ADMIN")
+  title          String
+  message        String
+  type           String   @default("INFO")
+  channel        String   @default("INTERNAL")
+  customerId     String?
+  bookingId      String?
+  link           String?
+  isRead         Boolean  @default(false)
+  deliveryStatus String   @default("SENT")
+  errorLog       String?
+  createdAt      DateTime @default(now())
+
+  @@index([userId, isRead])
+  @@index([targetRole, isRead])
+  @@index([channel, deliveryStatus])
+}
+
+model TelegramAdmin {
+  id               String   @id @default(cuid())
+  telegramUserId   String   @unique
+  telegramUsername String?
+  fullName         String
+  role             String   @default("ADMIN")
+  isActive         Boolean  @default(true)
+  permissions      String   @default("[]")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([telegramUserId, isActive])
+  @@index([role])
+}
+
+model TelegramConversation {
+  id                String   @id @default(cuid())
+  telegramUserId    String   @unique
+  telegramUsername  String?
+  chatId            String
+  currentStep       String   @default("IDLE")
+  conversationState String   @default("IDLE")
+  temporaryData     String   @default("{}")
+  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(now())
+
+  @@index([telegramUserId])
+  @@index([chatId])
+}
+
+model TelegramProcessedUpdate {
+  id          String   @id @default(cuid())
+  updateId    Int      @unique
+  chatId      String?
+  processedAt DateTime @default(now())
+
+  @@index([updateId])
+}
+
+model MediaAsset {
+  id         String   @id @default(cuid())
+  title      String
+  fileName   String
+  url        String
+  mimeType   String   @default("image/webp")
+  type       String   @default("IMAGE")
+  size       Int      @default(0)
+  altText    String?
+  folder     String   @default("general")
+  uploadedBy String   @default("Admin")
+  createdAt  DateTime @default(now())
+}
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  group       String   @default("GENERAL")
+  description String?
+  updatedAt   DateTime @updatedAt
+}
+
+model NavigationItem {
+  id         String   @id @default(cuid())
+  label      String
+  href       String
+  location   String   @default("HEADER")
+  order      Int      @default(0)
+  isVisible  Boolean  @default(true)
+  isExternal Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model ActivityLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  actorType  String   @default("ADMIN")
+  actorName  String   @default("System")
+  action     String
+  entity     String
+  entityId   String?
+  details    String?
+  beforeData String?
+  afterData  String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model HomepageSection {
+  id          String   @id @default(cuid())
+  sectionKey  String   @unique
+  name        String
+  title       String
+  subtitle    String?
+  description String?
+  content     String?
+  mediaUrl    String?
+  ctaText     String?
+  ctaLink     String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}

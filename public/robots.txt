@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /Admin/
+Disallow: /admin
+Disallow: /Admin
+Disallow: /client/
+Disallow: /api/
+
+Sitemap: https://nguyenagency.vn/sitemap.xml
+
