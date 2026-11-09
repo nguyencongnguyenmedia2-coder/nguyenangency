@@ -2,6 +2,9 @@ import React from "react";
 import { getCurrentUser } from "@/lib/auth";
 import AdminSidebarLayout from "@/components/admin/AdminSidebarLayout";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await getCurrentUser();
 
