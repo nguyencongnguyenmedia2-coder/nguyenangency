@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 
@@ -46,22 +47,14 @@ export default function Footer({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           {/* Brand Info */}
           <div className="lg:col-span-2 flex flex-col gap-5">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#007BA7] to-[#FF2D95] p-[1.5px]">
-                <div className="w-full h-full bg-[#0A0A0A] rounded-[10px] flex items-center justify-center">
-                  <span className="font-extrabold text-xl text-white">
-                    {brandName.charAt(0)}.
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold tracking-[0.25em] text-base text-white uppercase">
-                  {brandName}
-                </span>
-                <span className="text-[11px] tracking-widest text-[#71717A] uppercase font-mono">
-                  {brandTagline}
-                </span>
-              </div>
+            <Link href="/" className="flex items-start group w-fit">
+              <Image
+                src="/images/logo.png"
+                alt="NGUYÊN AGENCY"
+                width={240}
+                height={80}
+                className="h-14 w-auto object-contain transition-all duration-300 group-hover:brightness-110 drop-shadow-md"
+              />
             </Link>
 
             <p className="text-sm text-[#A1A1AA] leading-relaxed max-w-sm">
