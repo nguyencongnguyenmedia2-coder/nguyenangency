@@ -40,6 +40,15 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     type: "website",
   },
+  verification: {
+    google: "google65e91d408d51fefb",
+    other: {
+      "google-site-verification": [
+        "google65e91d408d51fefb.html",
+        "google65e91d408d51fefb",
+      ],
+    },
+  },
 };
 
 export default async function RootLayout({
@@ -49,8 +58,45 @@ export default async function RootLayout({
 }) {
   const settings = await getPublicSiteSettings();
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": settings.brandName || "NGUYÊN AGENCY",
+    "url": "https://nguyenagency.vn",
+    "logo": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    "description": settings.brandDescription,
+    "email": settings.contactEmail,
+    "telephone": settings.hotline,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": settings.officeAddress,
+      "addressLocality": "Hồ Chí Minh",
+      "addressCountry": "VN",
+    },
+    "sameAs": [
+      settings.facebookUrl,
+      settings.linkedinUrl,
+      settings.behanceUrl,
+      settings.zaloUrl,
+    ].filter(Boolean),
+  };
+
   return (
     <html lang="vi" className="dark">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="google65e91d408d51fefb"
+        />
+        <meta
+          name="google-site-verification"
+          content="google65e91d408d51fefb.html"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body className="bg-[#0A0A0A] text-white selection:bg-[#FF2D95]/30 selection:text-white antialiased">
         <SmoothScrollProvider>
           <ScrollProgressIndicator />
