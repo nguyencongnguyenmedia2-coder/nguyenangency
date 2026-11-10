@@ -6,19 +6,15 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await getCurrentUser();
-
-  const user = session
-    ? {
-        name: session.name,
-        email: session.email,
-        role: session.role,
-      }
-    : {
-        name: "Admin",
-        email: "admin@nguyenagency.vn",
-        role: "ADMIN",
-      };
+  let user = { name: "Admin", email: "admin@nguyenagency.vn", role: "ADMIN" };
+  try {
+    const session = await getCurrentUser();
+    if (session) {
+      user = { name: session.name, email: session.email, role: session.role };
+    }
+  } catch {
+    // JWT/cookie error – use default guest profile; login page will handle auth
+  }
 
   return <AdminSidebarLayout user={user}>{children}</AdminSidebarLayout>;
 }

@@ -6,7 +6,9 @@ import CustomCursor from "@/components/motion/CustomCursor";
 import SmoothScrollProvider from "@/components/motion/SmoothScrollProvider";
 import ScrollProgressIndicator from "@/components/motion/ScrollProgressIndicator";
 import MascotSupportAssistant from "@/components/mascot/MascotSupportAssistant";
-import { getPublicSiteSettings } from "@/lib/site-settings";
+import { getPublicSiteSettings, type PublicSiteSettings } from "@/lib/site-settings";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "NGUYÊN AGENCY – BEYOND DIGITAL | Premium Creative Digital Agency",
@@ -61,12 +63,40 @@ export const metadata: Metadata = {
   },
 };
 
+const DEFAULT_SETTINGS: PublicSiteSettings = {
+  brandName: "NGUYÊN AGENCY",
+  brandTagline: "VƯỢT CHUẨN SỐ HÓA",
+  brandDescription: "Premium Creative Digital Agency tiên phong kết hợp giữa nghệ thuật thị giác đương đại, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
+  contactEmail: "contact@nguyenagency.vn",
+  hotline: "+84 344 979 307",
+  officeAddress: "TP. Quảng Ngãi - TP. Hồ Chí Minh",
+  zaloUrl: "https://zalo.me/0344979307",
+  facebookUrl: "https://www.facebook.com/nguyenads7",
+  linkedinUrl: "https://linkedin.com",
+  behanceUrl: "https://behance.net",
+  telegramBotUsername: "nguyenangency_bot",
+  mascotEnabled: true,
+  mascotName: "NGUYÊN AI ASSISTANT",
+  mascotTitle: "Trợ lý trực tuyến",
+  mascotGreeting: "Xin chào! 👋 Mình là trợ lý của NGUYÊN AGENCY. Bạn đang cần giải pháp truyền thông hay lập trình website?",
+  mascotImage: "/assets/mascot/mascot.webp",
+  mascotAnimationEnabled: true,
+  mascotSizeDesktop: 125,
+  mascotPosition: "bottom-right",
+  rawMap: {},
+};
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await getPublicSiteSettings();
+  let settings: PublicSiteSettings = DEFAULT_SETTINGS;
+  try {
+    settings = await getPublicSiteSettings();
+  } catch {
+    // DB unavailable → use defaults; site still renders
+  }
 
   const organizationSchema = {
     "@context": "https://schema.org",
