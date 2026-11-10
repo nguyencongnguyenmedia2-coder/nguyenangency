@@ -6,6 +6,7 @@ import CustomCursor from "@/components/motion/CustomCursor";
 import SmoothScrollProvider from "@/components/motion/SmoothScrollProvider";
 import ScrollProgressIndicator from "@/components/motion/ScrollProgressIndicator";
 import TelegramFloatingButton from "@/components/layout/TelegramFloatingButton";
+import MascotSupportAssistant from "@/components/mascot/MascotSupportAssistant";
 import { getPublicSiteSettings } from "@/lib/site-settings";
 
 export const metadata: Metadata = {
@@ -149,6 +150,7 @@ export default async function RootLayout({
             behanceUrl={settings.behanceUrl}
           />
           <TelegramFloatingButton />
+          <MascotSupportAssistant settings={settings} />
         </SmoothScrollProvider>
       </body>
     </html>

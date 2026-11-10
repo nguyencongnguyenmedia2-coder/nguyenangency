@@ -30,6 +30,7 @@ import {
   LayoutTemplate,
   CalendarCheck,
   Send,
+  Bot,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { logoutUser } from "@/app/actions/auth";
@@ -39,6 +40,7 @@ const MENU_GROUPS = [
     title: "TỔNG QUAN",
     items: [
       { label: "Bảng Điều Khiển", href: "/admin", icon: LayoutDashboard },
+      { label: "Mascot Trợ Lý AI", href: "/admin/mascot", icon: Bot },
       { label: "Đặt Dịch Vụ (Bookings)", href: "/admin/bookings", icon: CalendarCheck },
       { label: "Telegram & Supabase", href: "/admin/telegram", icon: Send },
       { label: "Thông Báo", href: "/admin/notifications", icon: Bell },

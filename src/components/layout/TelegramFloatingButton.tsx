@@ -20,7 +20,7 @@ export default function TelegramFloatingButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Tư vấn & Đặt dịch vụ qua Telegram Bot"
-      className="fixed bottom-6 right-6 z-40 group flex items-center gap-3 px-4 py-3 rounded-full bg-[#121212]/90 backdrop-blur-md border border-[#007BA7] hover:border-[#FF2D95] text-white shadow-2xl transition-all duration-300 hover:scale-105"
+      className="fixed bottom-6 left-6 z-40 group flex items-center gap-3 px-4 py-3 rounded-full bg-[#121212]/90 backdrop-blur-md border border-[#007BA7] hover:border-[#FF2D95] text-white shadow-2xl transition-all duration-300 hover:scale-105"
     >
       <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#007BA7] text-white">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#007BA7] opacity-40" />

@@ -137,3 +137,32 @@ body {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Mascot Assistant Keyframes & Animations */
+@keyframes mascotFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
+}
+
+@keyframes mascotAura {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.12);
+  }
+}
+
+.animate-mascot-float {
+  animation: mascotFloat 3.5s ease-in-out infinite;
+}
+
+.animate-mascot-aura {
+  animation: mascotAura 4s ease-in-out infinite;
+}

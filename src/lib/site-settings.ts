@@ -12,6 +12,14 @@ export interface PublicSiteSettings {
   linkedinUrl: string;
   behanceUrl: string;
   telegramBotUsername: string;
+  mascotEnabled: boolean;
+  mascotName: string;
+  mascotTitle: string;
+  mascotGreeting: string;
+  mascotImage: string;
+  mascotAnimationEnabled: boolean;
+  mascotSizeDesktop: number;
+  mascotPosition: string;
   rawMap: Record<string, string>;
 }
 
@@ -77,6 +85,55 @@ const DEFAULT_SETTINGS_SEED = [
     group: "SOCIAL",
     description: "Liên kết showcase thiết kế trên Behance",
   },
+  {
+    key: "mascot_enabled",
+    value: "true",
+    group: "MASCOT",
+    description: "Bật/Tắt Mascot Trợ lý hỗ trợ khách hàng toàn website",
+  },
+  {
+    key: "mascot_name",
+    value: "NGUYÊN AI ASSISTANT",
+    group: "MASCOT",
+    description: "Tên hiển thị của trợ lý ảo Mascot",
+  },
+  {
+    key: "mascot_title",
+    value: "Trợ lý trực tuyến",
+    group: "MASCOT",
+    description: "Tiêu đề trạng thái của Mascot",
+  },
+  {
+    key: "mascot_greeting",
+    value:
+      "Xin chào! 👋 Mình là trợ lý của NGUYÊN AGENCY. Bạn đang cần giải pháp truyền thông hay lập trình website?",
+    group: "MASCOT",
+    description: "Lời chào mở đầu khi khách hàng truy cập website",
+  },
+  {
+    key: "mascot_image",
+    value: "/assets/mascot/mascot.webp",
+    group: "MASCOT",
+    description: "Đường dẫn hình ảnh Mascot (PNG/WebP trong suốt)",
+  },
+  {
+    key: "mascot_animation_enabled",
+    value: "true",
+    group: "MASCOT",
+    description: "Bật/Tắt hiệu ứng chuyển động Floating & Glow của Mascot",
+  },
+  {
+    key: "mascot_size_desktop",
+    value: "125",
+    group: "MASCOT",
+    description: "Kích thước hiển thị trên Desktop (px)",
+  },
+  {
+    key: "mascot_position",
+    value: "bottom-right",
+    group: "MASCOT",
+    description: "Vị trí neo trên màn hình (bottom-right / bottom-left)",
+  },
 ];
 
 export async function ensureDefaultSiteSettings() {
@@ -139,6 +196,16 @@ export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
       rawMap["telegram_bot_username"] ||
       process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME ||
       "nguyenangency_bot",
+    mascotEnabled: rawMap["mascot_enabled"] !== "false",
+    mascotName: rawMap["mascot_name"] || "NGUYÊN AI ASSISTANT",
+    mascotTitle: rawMap["mascot_title"] || "Trợ lý trực tuyến",
+    mascotGreeting:
+      rawMap["mascot_greeting"] ||
+      "Xin chào! 👋 Mình là trợ lý của NGUYÊN AGENCY. Bạn đang cần giải pháp truyền thông hay lập trình website?",
+    mascotImage: rawMap["mascot_image"] || "/assets/mascot/mascot.webp",
+    mascotAnimationEnabled: rawMap["mascot_animation_enabled"] !== "false",
+    mascotSizeDesktop: Number(rawMap["mascot_size_desktop"]) || 125,
+    mascotPosition: rawMap["mascot_position"] || "bottom-right",
     rawMap,
   };
 }
