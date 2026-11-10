@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -51,22 +52,27 @@ export default function Header({
       )}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Brand Monogram & Name */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#007BA7] to-[#FF2D95] p-[1.5px] transition-transform group-hover:scale-105 duration-300">
-            <div className="w-full h-full bg-[#0A0A0A] rounded-[10px] flex items-center justify-center">
-              <span className="font-extrabold text-lg tracking-wider text-white">
-                {brandName.charAt(0)}.
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold tracking-[0.2em] text-sm text-white group-hover:text-[#007BA7] transition-colors uppercase">
-              {brandName}
-            </span>
-            <span className="text-[10px] tracking-widest text-[#71717A] uppercase font-mono">
-              {brandTagline}
-            </span>
+        {/* Logo Image */}
+        <Link href="/" className="flex items-center group">
+          <div className="relative transition-all duration-300 group-hover:scale-[1.03] group-hover:brightness-110">
+            {/* Desktop: full logo */}
+            <Image
+              src="/images/logo.png"
+              alt="NGUYÊN AGENCY"
+              width={180}
+              height={60}
+              className="hidden sm:block h-10 w-auto object-contain"
+              priority
+            />
+            {/* Mobile: compact logo (crop to icon portion) */}
+            <Image
+              src="/images/logo.png"
+              alt="NGUYÊN AGENCY"
+              width={100}
+              height={34}
+              className="sm:hidden h-8 w-auto object-contain"
+              priority
+            />
           </div>
         </Link>
 
