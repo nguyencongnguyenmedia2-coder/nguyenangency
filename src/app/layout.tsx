@@ -23,22 +23,32 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "NGUYÊN AGENCY", url: "https://nguyenagency.vn" }],
   creator: "NGUYÊN AGENCY",
-  metadataBase: new URL("https://nguyenagency.vn"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://nguyenangency.vercel.app"
+  ),
   openGraph: {
-    title: "NGUYÊN AGENCY – BEYOND DIGITAL",
-    description: "We Create. We Build. We Transform.",
-    url: "https://nguyenagency.vn",
+    title: "NGUYÊN AGENCY – BEYOND DIGITAL | VƯỢT CHUẨN SỐ HÓA",
+    description:
+      "We Create. We Build. We Transform. Nền tảng Digital Agency cao cấp kết hợp nghệ thuật thị giác Luxury Dark, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
+    url: "https://nguyenangency.vercel.app",
     siteName: "NGUYÊN AGENCY",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "NGUYÊN AGENCY Preview",
+        alt: "NGUYÊN AGENCY – VƯỢT CHUẨN SỐ HÓA",
       },
     ],
     locale: "vi_VN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NGUYÊN AGENCY – BEYOND DIGITAL",
+    description:
+      "We Create. We Build. We Transform. Nền tảng Digital Agency cao cấp kết hợp nghệ thuật thị giác Luxury Dark, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
+    images: ["/images/og-image.jpg"],
   },
   verification: {
     google: "google65e91d408d51fefb",
@@ -63,7 +73,8 @@ export default async function RootLayout({
     "@type": "Organization",
     "name": settings.brandName || "NGUYÊN AGENCY",
     "url": "https://nguyenagency.vn",
-    "logo": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    "logo": "https://nguyenangency.vercel.app/images/og-image.jpg",
+    "image": "https://nguyenangency.vercel.app/images/og-image.jpg",
     "description": settings.brandDescription,
     "email": settings.contactEmail,
     "telephone": settings.hotline,
@@ -84,6 +95,25 @@ export default async function RootLayout({
   return (
     <html lang="vi" className="dark">
       <head>
+        <meta
+          property="og:image"
+          content="https://nguyenangency.vercel.app/images/og-image.jpg"
+        />
+        <meta
+          property="og:image:secure_url"
+          content="https://nguyenangency.vercel.app/images/og-image.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta
+          property="og:image:alt"
+          content="NGUYÊN AGENCY – VƯỢT CHUẨN SỐ HÓA"
+        />
+        <meta
+          name="twitter:image"
+          content="https://nguyenangency.vercel.app/images/og-image.jpg"
+        />
         <meta
           name="google-site-verification"
           content="google65e91d408d51fefb"
