@@ -54,10 +54,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }> | { slug: string };
 }) {
   const resolvedParams = await params;
-  const prod = await prisma.labProduct.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: { category: true },
-  });
+  let prod: any = null;
+  try {
+    prod = await prisma.labProduct.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: { category: true },
+    });
+  } catch {
+    prod = null;
+  }
 
   if (!prod || prod.deletedAt !== null) {
     return { title: "Sản phẩm LAB không tồn tại – NGUYÊN AGENCY" };
@@ -112,10 +117,15 @@ export default async function LabProductDetailPage({
   ]);
   const isPreview = resolvedSearchParams?.preview === "true";
 
-  const prod = await prisma.labProduct.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: { category: true },
-  });
+  let prod: any = null;
+  try {
+    prod = await prisma.labProduct.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: { category: true },
+    });
+  } catch (err) {
+    console.warn("[LabProductDetailPage] DB fetch fallback active:", err);
+  }
 
   if (
     !prod ||

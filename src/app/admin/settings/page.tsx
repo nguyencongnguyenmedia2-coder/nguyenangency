@@ -10,11 +10,16 @@ export const metadata = {
 };
 
 export default async function AdminSettingsPage() {
-  await ensureDefaultSiteSettings();
+  let settings: any[] = [];
+  try {
+    await ensureDefaultSiteSettings();
 
-  const settings = await prisma.siteSetting.findMany({
-    orderBy: [{ group: "asc" }, { key: "asc" }],
-  });
+    settings = await prisma.siteSetting.findMany({
+      orderBy: [{ group: "asc" }, { key: "asc" }],
+    });
+  } catch (err) {
+    console.warn("[AdminSettingsPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

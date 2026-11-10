@@ -7,9 +7,14 @@ export const metadata = {
 };
 
 export default async function AdminMediaPage() {
-  const assets = await prisma.mediaAsset.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  let assets: any[] = [];
+  try {
+    assets = await prisma.mediaAsset.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (err) {
+    console.warn("[AdminMediaPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

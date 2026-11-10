@@ -15,27 +15,36 @@ export const dynamic = "force-dynamic";
 export default async function PortfolioPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams?: Promise<{ category?: string }> | { category?: string };
 }) {
-  const resolvedParams = await searchParams;
+  const resolvedParams = searchParams ? await Promise.resolve(searchParams) : {};
   const activeCategory = resolvedParams?.category || "ALL";
 
-  const [categories, portfolios] = await Promise.all([
-    prisma.portfolioCategory.findMany({
-      orderBy: { order: "asc" },
-    }),
-    prisma.portfolio.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-        ...(activeCategory !== "ALL"
-          ? { category: { slug: activeCategory } }
-          : {}),
-      },
-      include: { category: true },
-      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-    }),
-  ]);
+  let categories: any[] = [];
+  let portfolios: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.portfolioCategory.findMany({
+        orderBy: { order: "asc" },
+      }),
+      prisma.portfolio.findMany({
+        where: {
+          status: "PUBLISHED",
+          deletedAt: null,
+          ...(activeCategory !== "ALL"
+            ? { category: { slug: activeCategory } }
+            : {}),
+        },
+        include: { category: true },
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      }),
+    ]);
+    categories = results[0] || [];
+    portfolios = results[1] || [];
+  } catch (err) {
+    console.warn("[PortfolioPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="pt-32 pb-24 px-6 bg-[#0A0A0A] text-white">

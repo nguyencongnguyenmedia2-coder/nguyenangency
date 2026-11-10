@@ -7,10 +7,15 @@ export const metadata = {
 };
 
 export default async function AdminBlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    include: { category: true },
-    orderBy: { createdAt: "desc" },
-  });
+  let posts: any[] = [];
+  try {
+    posts = await prisma.blogPost.findMany({
+      include: { category: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (err) {
+    console.warn("[AdminBlogPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

@@ -7,13 +7,22 @@ export const metadata = {
 };
 
 export default async function AdminPortfolioPage() {
-  const [portfolios, categories] = await Promise.all([
-    prisma.portfolio.findMany({
-      include: { category: true },
-      orderBy: { order: "asc" },
-    }),
-    prisma.portfolioCategory.findMany(),
-  ]);
+  let portfolios: any[] = [];
+  let categories: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.portfolio.findMany({
+        include: { category: true },
+        orderBy: { order: "asc" },
+      }),
+      prisma.portfolioCategory.findMany(),
+    ]);
+    portfolios = results[0] || [];
+    categories = results[1] || [];
+  } catch (err) {
+    console.warn("[AdminPortfolioPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

@@ -32,22 +32,27 @@ export default async function ClientDashboardPage() {
   }
 
   // Fetch client customer profile and associated projects
-  const customer = await prisma.customer.findFirst({
-    where: { email: session.email },
-    include: {
-      projects: {
-        include: {
-          tasks: { orderBy: { order: "asc" } },
-          files: { orderBy: { createdAt: "desc" } },
+  let customer: any = null;
+  try {
+    customer = await prisma.customer.findFirst({
+      where: { email: session.email },
+      include: {
+        projects: {
+          include: {
+            tasks: { orderBy: { order: "asc" } },
+            files: { orderBy: { createdAt: "desc" } },
+          },
         },
+        quotations: { orderBy: { createdAt: "desc" } },
+        contracts: { orderBy: { createdAt: "desc" } },
+        invoices: { orderBy: { createdAt: "desc" } },
       },
-      quotations: { orderBy: { createdAt: "desc" } },
-      contracts: { orderBy: { createdAt: "desc" } },
-      invoices: { orderBy: { createdAt: "desc" } },
-    },
-  });
+    });
+  } catch (err) {
+    console.warn("[ClientDashboardPage] DB fetch fallback active:", err);
+  }
 
-  const activeProject = customer?.projects[0];
+  const activeProject = customer?.projects?.[0];
 
   let discussions: any[] = [];
   try {
@@ -134,7 +139,7 @@ export default async function ClientDashboardPage() {
                     Hạng Mục & Nhiệm Vụ (Sprint Tasks)
                   </h3>
                   <div className="space-y-2.5">
-                    {activeProject.tasks.map((task) => (
+                    {activeProject.tasks?.map((task: any) => (
                       <div
                         key={task.id}
                         className="p-3.5 rounded-xl bg-[#171717] border border-[#292929] flex items-center justify-between text-xs"
@@ -172,7 +177,7 @@ export default async function ClientDashboardPage() {
                     File Bàn Giao & Tài Nguyên (Deliverables)
                   </h3>
                   <div className="space-y-2.5">
-                    {activeProject.files.map((file) => (
+                    {activeProject.files?.map((file: any) => (
                       <div
                         key={file.id}
                         className="p-3.5 rounded-xl bg-[#171717] border border-[#292929] flex items-center justify-between text-xs hover:border-[#007BA7] transition-all"
@@ -249,39 +254,39 @@ export default async function ClientDashboardPage() {
               <div className="p-6 rounded-3xl bg-[#121212] border border-[#292929]">
                 <span className="text-[10px] font-mono text-[#71717A] uppercase block mb-1">Báo Giá Gần Nhất</span>
                 <h4 className="text-base font-bold text-white mb-2">
-                  {customer?.quotations[0]?.code || "QT-2026-0001"}
+                  {customer?.quotations?.[0]?.code || "QT-2026-0001"}
                 </h4>
                 <p className="text-xl font-black font-mono text-white mb-2">
-                  {formatCurrencyVND(customer?.quotations[0]?.totalAmount || 162000000)}
+                  {formatCurrencyVND(customer?.quotations?.[0]?.totalAmount || 162000000)}
                 </p>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-500/30">
-                  {customer?.quotations[0]?.status || "APPROVED"}
+                  {customer?.quotations?.[0]?.status || "APPROVED"}
                 </span>
               </div>
 
               <div className="p-6 rounded-3xl bg-[#121212] border border-[#292929]">
                 <span className="text-[10px] font-mono text-[#71717A] uppercase block mb-1">Hợp Đồng Ký Kết</span>
                 <h4 className="text-base font-bold text-white mb-2">
-                  {customer?.contracts[0]?.code || "CTR-2026-001"}
+                  {customer?.contracts?.[0]?.code || "CTR-2026-001"}
                 </h4>
                 <p className="text-xs text-[#A1A1AA] mb-4 line-clamp-2">
-                  {customer?.contracts[0]?.title}
+                  {customer?.contracts?.[0]?.title || "Hợp đồng dịch vụ số"}
                 </p>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#007BA7]/20 text-[#007BA7] border border-[#007BA7]/40">
-                  {customer?.contracts[0]?.status || "ACTIVE"}
+                  {customer?.contracts?.[0]?.status || "ACTIVE"}
                 </span>
               </div>
 
               <div className="p-6 rounded-3xl bg-[#121212] border border-[#292929]">
                 <span className="text-[10px] font-mono text-[#71717A] uppercase block mb-1">Hóa Đơn & Thanh Toán</span>
                 <h4 className="text-base font-bold text-white mb-2">
-                  {customer?.invoices[0]?.code || "INV-2026-001"}
+                  {customer?.invoices?.[0]?.code || "INV-2026-001"}
                 </h4>
                 <p className="text-xl font-black font-mono text-emerald-400 mb-2">
-                  {formatCurrencyVND(customer?.invoices[0]?.totalAmount || 69984000)}
+                  {formatCurrencyVND(customer?.invoices?.[0]?.totalAmount || 69984000)}
                 </p>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-500/30">
-                  {customer?.invoices[0]?.status || "PAID"}
+                  {customer?.invoices?.[0]?.status || "PAID"}
                 </span>
               </div>
             </div>

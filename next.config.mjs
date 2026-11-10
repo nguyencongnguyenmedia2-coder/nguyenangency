@@ -3,7 +3,8 @@ const nextConfig = {
   transpilePackages: ["three"],
   experimental: {
     outputFileTracingIncludes: {
-      "/**": ["./prisma/dev.db"],
+      "/*": ["./prisma/dev.db"],
+      "/**/*": ["./prisma/dev.db"],
     },
   },
   images: {

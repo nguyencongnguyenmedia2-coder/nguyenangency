@@ -7,9 +7,14 @@ export const metadata = {
 };
 
 export default async function AdminLeadsPage() {
-  const leads = await prisma.lead.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  let leads: any[] = [];
+  try {
+    leads = await prisma.lead.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (err) {
+    console.warn("[AdminLeadsPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

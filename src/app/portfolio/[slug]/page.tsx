@@ -35,10 +35,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }> | { slug: string };
 }) {
   const resolvedParams = await params;
-  const item = await prisma.portfolio.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: { category: true },
-  });
+  let item: any = null;
+  try {
+    item = await prisma.portfolio.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: { category: true },
+    });
+  } catch {
+    item = null;
+  }
 
   if (!item || item.deletedAt !== null) {
     return { title: "Dự án không tồn tại – NGUYÊN AGENCY" };
@@ -91,10 +96,15 @@ export default async function PortfolioDetailPage({
   ]);
   const isPreview = resolvedSearchParams?.preview === "true";
 
-  const item = await prisma.portfolio.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: { category: true },
-  });
+  let item: any = null;
+  try {
+    item = await prisma.portfolio.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: { category: true },
+    });
+  } catch (err) {
+    console.warn("[PortfolioDetailPage] DB fetch fallback active:", err);
+  }
 
   if (
     !item ||

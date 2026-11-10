@@ -11,10 +11,15 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function FAQPage() {
-  const faqs = await prisma.fAQ.findMany({
-    where: { status: "PUBLISHED" },
-    orderBy: { order: "asc" },
-  });
+  let faqs: any[] = [];
+  try {
+    faqs = await prisma.fAQ.findMany({
+      where: { status: "PUBLISHED" },
+      orderBy: { order: "asc" },
+    });
+  } catch (err) {
+    console.warn("[FAQPage] DB fetch fallback active:", err);
+  }
 
   return <FAQPageClient faqs={faqs} />;
 }

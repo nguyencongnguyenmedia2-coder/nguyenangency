@@ -7,10 +7,15 @@ export const metadata = {
 };
 
 export default async function AdminUsersPage() {
-  const users = await prisma.user.findMany({
-    include: { role: true },
-    orderBy: { createdAt: "desc" },
-  });
+  let users: any[] = [];
+  try {
+    users = await prisma.user.findMany({
+      include: { role: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (err) {
+    console.warn("[AdminUsersPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

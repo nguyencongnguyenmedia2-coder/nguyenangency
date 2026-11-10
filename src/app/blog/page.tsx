@@ -13,17 +13,22 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: {
-      status: "PUBLISHED",
-      deletedAt: null,
-    },
-    include: {
-      category: true,
-      author: true,
-    },
-    orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
-  });
+  let posts: any[] = [];
+  try {
+    posts = await prisma.blogPost.findMany({
+      where: {
+        status: "PUBLISHED",
+        deletedAt: null,
+      },
+      include: {
+        category: true,
+        author: true,
+      },
+      orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+    });
+  } catch (err) {
+    console.warn("[BlogPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="pt-32 pb-24 px-6 bg-[#0A0A0A]">

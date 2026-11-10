@@ -7,29 +7,38 @@ export const metadata = {
 };
 
 export default async function AdminPaymentsPage() {
-  const [payments, invoices] = await Promise.all([
-    prisma.payment.findMany({
-      include: {
-        invoice: {
-          include: { customer: true },
+  let payments: any[] = [];
+  let invoices: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.payment.findMany({
+        include: {
+          invoice: {
+            include: { customer: true },
+          },
         },
-      },
-      orderBy: { paidAt: "desc" },
-    }),
-    prisma.invoice.findMany({
-      select: {
-        id: true,
-        code: true,
-        title: true,
-        totalAmount: true,
-        status: true,
-        customer: {
-          select: { name: true },
+        orderBy: { paidAt: "desc" },
+      }),
+      prisma.invoice.findMany({
+        select: {
+          id: true,
+          code: true,
+          title: true,
+          totalAmount: true,
+          status: true,
+          customer: {
+            select: { name: true },
+          },
         },
-      },
-      orderBy: { createdAt: "desc" },
-    }),
-  ]);
+        orderBy: { createdAt: "desc" },
+      }),
+    ]);
+    payments = results[0] || [];
+    invoices = results[1] || [];
+  } catch (err) {
+    console.warn("[AdminPaymentsPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

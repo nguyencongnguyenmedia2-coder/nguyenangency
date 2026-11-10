@@ -1,6 +1,6 @@
 import React from "react";
 import prisma from "@/lib/prisma";
-import { ensureHomepageSections } from "@/lib/homepage-init";
+import { ensureHomepageSections, DEFAULT_HOMEPAGE_SECTIONS } from "@/lib/homepage-init";
 import { getPublicSiteSettings } from "@/lib/site-settings";
 import HeroSection from "@/components/home/HeroSection";
 import BrandIntroSection from "@/components/home/BrandIntroSection";
@@ -17,70 +17,88 @@ import ContactCTASection from "@/components/home/ContactCTASection";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  // Ensure default homepage sections exist in DB
-  await ensureHomepageSections();
+  let homepageSections: any[] = [];
+  let featuredPortfolios: any[] = [];
+  let labProducts: any[] = [];
+  let latestBlogPosts: any[] = [];
+  let testimonials: any[] = [];
+  let faqs: any[] = [];
+  let siteSettings: any = null;
 
-  // Fetch data from DB for dynamic public sections + HomepageSection configurations
-  const [
-    homepageSections,
-    featuredPortfolios,
-    labProducts,
-    latestBlogPosts,
-    testimonials,
-    faqs,
-    siteSettings,
-  ] = await Promise.all([
-    prisma.homepageSection.findMany({
-      where: { isActive: true },
-      orderBy: { order: "asc" },
-    }),
-    prisma.portfolio.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-      },
-      include: { category: true },
-      orderBy: [
-        { isFeatured: "desc" },
-        { order: "asc" },
-        { createdAt: "desc" },
-      ],
-      take: 3,
-    }),
-    prisma.labProduct.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-      },
-      include: { category: true },
-      orderBy: [
-        { isFeatured: "desc" },
-        { order: "asc" },
-        { createdAt: "desc" },
-      ],
-      take: 3,
-    }),
-    prisma.blogPost.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-      },
-      include: { category: true },
-      orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
-      take: 3,
-    }),
-    prisma.testimonial.findMany({
-      where: { status: "PUBLISHED" },
-      orderBy: { createdAt: "desc" },
-      take: 3,
-    }),
-    prisma.fAQ.findMany({
-      where: { status: "PUBLISHED" },
-      orderBy: { order: "asc" },
-      take: 5,
-    }),
-    getPublicSiteSettings(),
-  ]);
+  try {
+    await ensureHomepageSections();
+
+    const results = await Promise.all([
+      prisma.homepageSection.findMany({
+        where: { isActive: true },
+        orderBy: { order: "asc" },
+      }),
+      prisma.portfolio.findMany({
+        where: {
+          status: "PUBLISHED",
+          deletedAt: null,
+        },
+        include: { category: true },
+        orderBy: [
+          { isFeatured: "desc" },
+          { order: "asc" },
+          { createdAt: "desc" },
+        ],
+        take: 3,
+      }),
+      prisma.labProduct.findMany({
+        where: {
+          status: "PUBLISHED",
+          deletedAt: null,
+        },
+        include: { category: true },
+        orderBy: [
+          { isFeatured: "desc" },
+          { order: "asc" },
+          { createdAt: "desc" },
+        ],
+        take: 3,
+      }),
+      prisma.blogPost.findMany({
+        where: {
+          status: "PUBLISHED",
+          deletedAt: null,
+        },
+        include: { category: true },
+        orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+        take: 3,
+      }),
+      prisma.testimonial.findMany({
+        where: { status: "PUBLISHED" },
+        orderBy: { createdAt: "desc" },
+        take: 3,
+      }),
+      prisma.fAQ.findMany({
+        where: { status: "PUBLISHED" },
+        orderBy: { order: "asc" },
+        take: 5,
+      }),
+      getPublicSiteSettings(),
+    ]);
+
+    homepageSections = results[0] || [];
+    featuredPortfolios = results[1] || [];
+    labProducts = results[2] || [];
+    latestBlogPosts = results[3] || [];
+    testimonials = results[4] || [];
+    faqs = results[5] || [];
+    siteSettings = results[6];
+  } catch (err) {
+    console.warn("[HomePage] DB load fallback active:", err);
+  }
+
+  // Graceful fallback to default sections if DB is not populated yet
+  if (!homepageSections || homepageSections.length === 0) {
+    homepageSections = DEFAULT_HOMEPAGE_SECTIONS.map((sec, idx) => ({
+      ...sec,
+      id: `default_${sec.sectionKey || idx}`,
+    }));
+  }
 
   return (
     <div className="flex flex-col">

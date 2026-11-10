@@ -7,13 +7,18 @@ export const metadata = {
 };
 
 export default async function AdminQuotationsPage() {
-  const quotations = await prisma.quotation.findMany({
-    include: {
-      customer: true,
-      items: true,
-    },
-    orderBy: { createdAt: "desc" },
-  });
+  let quotations: any[] = [];
+  try {
+    quotations = await prisma.quotation.findMany({
+      include: {
+        customer: true,
+        items: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (err) {
+    console.warn("[AdminQuotationsPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

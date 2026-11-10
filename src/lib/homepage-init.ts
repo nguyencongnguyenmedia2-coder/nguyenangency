@@ -128,26 +128,30 @@ export const DEFAULT_HOMEPAGE_SECTIONS = [
 ];
 
 export async function ensureHomepageSections() {
-  const count = await prisma.homepageSection.count();
-  if (count === 0) {
-    for (const sec of DEFAULT_HOMEPAGE_SECTIONS) {
-      await prisma.homepageSection.create({
-        data: sec,
-      });
+  try {
+    const count = await prisma.homepageSection.count();
+    if (count === 0) {
+      for (const sec of DEFAULT_HOMEPAGE_SECTIONS) {
+        await prisma.homepageSection.create({
+          data: sec,
+        });
+      }
+      return;
     }
-    return;
-  }
 
-  // Ensure LATEST_BLOG section exists if database was seeded before it was added
-  const hasLatestBlog = await prisma.homepageSection.findUnique({
-    where: { sectionKey: "LATEST_BLOG" },
-  });
-  if (!hasLatestBlog) {
-    const blogDef = DEFAULT_HOMEPAGE_SECTIONS.find(
-      (s) => s.sectionKey === "LATEST_BLOG"
-    );
-    if (blogDef) {
-      await prisma.homepageSection.create({ data: blogDef });
+    // Ensure LATEST_BLOG section exists if database was seeded before it was added
+    const hasLatestBlog = await prisma.homepageSection.findUnique({
+      where: { sectionKey: "LATEST_BLOG" },
+    });
+    if (!hasLatestBlog) {
+      const blogDef = DEFAULT_HOMEPAGE_SECTIONS.find(
+        (s) => s.sectionKey === "LATEST_BLOG"
+      );
+      if (blogDef) {
+        await prisma.homepageSection.create({ data: blogDef });
+      }
     }
+  } catch (err) {
+    console.warn("[ensureHomepageSections] Non-fatal section initialization:", err);
   }
 }

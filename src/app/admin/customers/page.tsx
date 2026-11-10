@@ -7,14 +7,19 @@ export const metadata = {
 };
 
 export default async function AdminCustomersPage() {
-  const customers = await prisma.customer.findMany({
-    include: {
-      projects: true,
-      contracts: true,
-      invoices: true,
-    },
-    orderBy: { createdAt: "desc" },
-  });
+  let customers: any[] = [];
+  try {
+    customers = await prisma.customer.findMany({
+      include: {
+        projects: true,
+        contracts: true,
+        invoices: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (err) {
+    console.warn("[AdminCustomersPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

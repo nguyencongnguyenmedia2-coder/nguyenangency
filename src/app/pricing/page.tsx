@@ -13,17 +13,26 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function PricingPage() {
-  const [packages, dbFaqs] = await Promise.all([
-    prisma.servicePackage.findMany({
-      where: { status: "PUBLISHED" },
-      orderBy: { order: "asc" },
-    }),
-    prisma.fAQ.findMany({
-      where: { status: "PUBLISHED" },
-      orderBy: { order: "asc" },
-      take: 6,
-    }),
-  ]);
+  let packages: any[] = [];
+  let dbFaqs: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.servicePackage.findMany({
+        where: { status: "PUBLISHED" },
+        orderBy: { order: "asc" },
+      }),
+      prisma.fAQ.findMany({
+        where: { status: "PUBLISHED" },
+        orderBy: { order: "asc" },
+        take: 6,
+      }),
+    ]);
+    packages = results[0] || [];
+    dbFaqs = results[1] || [];
+  } catch (err) {
+    console.warn("[PricingPage] DB fetch fallback active:", err);
+  }
 
   const faqs =
     dbFaqs.length > 0

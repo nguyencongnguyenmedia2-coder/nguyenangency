@@ -36,10 +36,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }> | { slug: string };
 }) {
   const resolvedParams = await params;
-  const service = await prisma.service.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: { category: true },
-  });
+  let service: any = null;
+  try {
+    service = await prisma.service.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: { category: true },
+    });
+  } catch {
+    service = null;
+  }
 
   if (!service || service.deletedAt !== null) {
     return { title: "Dịch vụ không tồn tại – NGUYÊN AGENCY" };
@@ -90,10 +95,15 @@ export default async function ServiceDetailPage({
   ]);
   const isPreview = resolvedSearchParams?.preview === "true";
 
-  const service = await prisma.service.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: { category: true },
-  });
+  let service: any = null;
+  try {
+    service = await prisma.service.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: { category: true },
+    });
+  } catch (err) {
+    console.warn("[ServiceDetailPage] DB fetch fallback active:", err);
+  }
 
   if (
     !service ||

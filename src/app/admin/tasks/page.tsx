@@ -7,16 +7,25 @@ export const metadata = {
 };
 
 export default async function AdminTasksPage() {
-  const [tasks, projects] = await Promise.all([
-    prisma.projectTask.findMany({
-      include: { project: true },
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.project.findMany({
-      select: { id: true, name: true, code: true },
-      orderBy: { name: "asc" },
-    }),
-  ]);
+  let tasks: any[] = [];
+  let projects: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.projectTask.findMany({
+        include: { project: true },
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.project.findMany({
+        select: { id: true, name: true, code: true },
+        orderBy: { name: "asc" },
+      }),
+    ]);
+    tasks = results[0] || [];
+    projects = results[1] || [];
+  } catch (err) {
+    console.warn("[AdminTasksPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

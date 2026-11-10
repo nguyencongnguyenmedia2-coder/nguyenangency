@@ -7,13 +7,22 @@ export const metadata = {
 };
 
 export default async function AdminServicesPage() {
-  const [services, categories] = await Promise.all([
-    prisma.service.findMany({
-      include: { category: true },
-      orderBy: { order: "asc" },
-    }),
-    prisma.serviceCategory.findMany(),
-  ]);
+  let services: any[] = [];
+  let categories: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.service.findMany({
+        include: { category: true },
+        orderBy: { order: "asc" },
+      }),
+      prisma.serviceCategory.findMany(),
+    ]);
+    services = results[0] || [];
+    categories = results[1] || [];
+  } catch (err) {
+    console.warn("[AdminServicesPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="space-y-8">

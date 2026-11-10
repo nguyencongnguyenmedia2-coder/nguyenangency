@@ -1,6 +1,6 @@
 import React from "react";
 import prisma from "@/lib/prisma";
-import { ensureHomepageSections } from "@/lib/homepage-init";
+import { ensureHomepageSections, DEFAULT_HOMEPAGE_SECTIONS } from "@/lib/homepage-init";
 import HomepageBuilderClient from "@/components/admin/HomepageBuilderClient";
 import { LayoutTemplate } from "lucide-react";
 
@@ -9,11 +9,23 @@ export const metadata = {
 };
 
 export default async function AdminHomepageBuilderPage() {
-  await ensureHomepageSections();
+  let sections: any[] = [];
+  try {
+    await ensureHomepageSections();
 
-  const sections = await prisma.homepageSection.findMany({
-    orderBy: { order: "asc" },
-  });
+    sections = await prisma.homepageSection.findMany({
+      orderBy: { order: "asc" },
+    });
+  } catch (err) {
+    console.warn("[AdminHomepageBuilderPage] DB fetch fallback active:", err);
+  }
+
+  if (!sections || sections.length === 0) {
+    sections = DEFAULT_HOMEPAGE_SECTIONS.map((sec, idx) => ({
+      ...sec,
+      id: `sec_${sec.sectionKey || idx}`,
+    }));
+  }
 
   return (
     <div className="space-y-8">

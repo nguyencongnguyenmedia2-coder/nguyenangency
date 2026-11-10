@@ -32,10 +32,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }> | { slug: string };
 }) {
   const resolvedParams = await params;
-  const post = await prisma.blogPost.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: { category: true, author: true },
-  });
+  let post: any = null;
+  try {
+    post = await prisma.blogPost.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: { category: true, author: true },
+    });
+  } catch {
+    post = null;
+  }
 
   if (!post || post.deletedAt !== null) {
     return { title: "Bài viết không tìm thấy – NGUYÊN AGENCY" };
@@ -85,13 +90,18 @@ export default async function BlogPostDetailPage({
   ]);
   const isPreview = resolvedSearchParams?.preview === "true";
 
-  const post = await prisma.blogPost.findUnique({
-    where: { slug: resolvedParams.slug },
-    include: {
-      category: true,
-      author: true,
-    },
-  });
+  let post: any = null;
+  try {
+    post = await prisma.blogPost.findUnique({
+      where: { slug: resolvedParams.slug },
+      include: {
+        category: true,
+        author: true,
+      },
+    });
+  } catch (err) {
+    console.warn("[BlogPostDetailPage] DB fetch fallback active:", err);
+  }
 
   if (
     !post ||

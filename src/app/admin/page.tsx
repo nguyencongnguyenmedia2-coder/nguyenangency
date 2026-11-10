@@ -351,14 +351,14 @@ export default async function AdminDashboardPage() {
                       <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-[#0A0A0A] border border-[#292929] text-white">
                         {b.source}
                       </span>
-                      <strong className="text-white">{b.customer.name}</strong>
+                      <strong className="text-white">{b.customer?.name || "Khách Hàng"}</strong>
                     </div>
                     <p className="text-[#A1A1AA] line-clamp-1">
-                      Dịch vụ: <span className="text-white">{b.serviceName}</span> • Ngân sách: {b.budgetRange || "Thỏa thuận"}
+                      Dịch vụ: <span className="text-white">{b.serviceName || "Chưa xác định"}</span> • Ngân sách: {b.budgetRange || "Thỏa thuận"}
                     </p>
                   </div>
                   <span className="px-2.5 py-1 rounded text-[10px] font-mono bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 shrink-0">
-                    {b.status}
+                    {b.status || "NEW"}
                   </span>
                 </Link>
               ))
@@ -382,24 +382,28 @@ export default async function AdminDashboardPage() {
           </div>
 
           <div className="space-y-3">
-            {recentLeads.map((lead) => (
-              <div
-                key={lead.id}
-                className="p-4 rounded-2xl bg-[#171717] border border-[#292929] flex items-center justify-between gap-4 text-xs"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-mono text-[#FF2D95] font-semibold">{lead.code}</span>
-                    <strong className="text-white">{lead.name}</strong>
-                    <span className="text-[10px] font-mono text-[#38BDF8]">({lead.source})</span>
+            {recentLeads.length === 0 ? (
+              <p className="text-xs text-[#71717A] py-4">Chưa có leads nào trong hệ thống.</p>
+            ) : (
+              recentLeads.map((lead) => (
+                <div
+                  key={lead.id}
+                  className="p-4 rounded-2xl bg-[#171717] border border-[#292929] flex items-center justify-between gap-4 text-xs"
+                >
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-mono text-[#FF2D95] font-semibold">{lead.code || "LEAD"}</span>
+                      <strong className="text-white">{lead.name || "Khách tiềm năng"}</strong>
+                      <span className="text-[10px] font-mono text-[#38BDF8]">({lead.source || "WEB"})</span>
+                    </div>
+                    <p className="text-[#A1A1AA] line-clamp-1">{lead.serviceInterest || "Yêu cầu chung"}</p>
                   </div>
-                  <p className="text-[#A1A1AA] line-clamp-1">{lead.serviceInterest || "Yêu cầu chung"}</p>
+                  <span className="px-2.5 py-1 rounded text-[10px] font-mono bg-[#007BA7]/20 text-[#007BA7] border border-[#007BA7]/30 shrink-0">
+                    {lead.stage || "NEW"}
+                  </span>
                 </div>
-                <span className="px-2.5 py-1 rounded text-[10px] font-mono bg-[#007BA7]/20 text-[#007BA7] border border-[#007BA7]/30 shrink-0">
-                  {lead.stage}
-                </span>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

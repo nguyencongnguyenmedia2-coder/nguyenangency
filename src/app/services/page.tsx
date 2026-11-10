@@ -22,44 +22,136 @@ export const metadata = {
 
 export const dynamic = "force-dynamic";
 
+const FALLBACK_ALL_SERVICES = [
+  {
+    id: "svc_01",
+    title: "Phát Triển Website 3D & Three.js",
+    slug: "3d-website-development",
+    group: "TECH",
+    shortDesc: "Kiến trúc website tương tác không gian 3D WebGL đột phá, tối ưu hóa tốc độ 60 FPS chuẩn Luxury Brand.",
+    estimatedTime: "3 - 5 tuần",
+    startingPrice: 45000000,
+    benefitsJson: JSON.stringify(["Mô hình 3D tương tác thực tế", "WebGL tối ưu 60 FPS", "Chuẩn SEO & Mobile first"]),
+    category: { name: "3D & Interactive" },
+  },
+  {
+    id: "svc_02",
+    title: "Nhận Diện Thương Hiệu Độc Bản (Luxury Brand)",
+    slug: "luxury-brand-identity",
+    group: "MEDIA",
+    shortDesc: "Định hình ngôn ngữ thị giác sang trọng, hệ thống Brand Guideline và tài sản nhận diện đa nền tảng.",
+    estimatedTime: "2 - 3 tuần",
+    startingPrice: 30000000,
+    benefitsJson: JSON.stringify(["Bộ nhận diện thương hiệu chuẩn quốc tế", "Brand Guideline toàn diện", "Bàn giao file vector gốc"]),
+    category: { name: "Branding & Visual" },
+  },
+  {
+    id: "svc_03",
+    title: "Ứng Dụng Web & Nền Tảng SaaS Doanh Nghiệp",
+    slug: "saas-web-application",
+    group: "TECH",
+    shortDesc: "Phần mềm quản trị đám mây, tích hợp CRM tự động hóa và bảo mật đa tầng cho doanh nghiệp mở rộng quy mô.",
+    estimatedTime: "4 - 8 tuần",
+    startingPrice: 60000000,
+    benefitsJson: JSON.stringify(["Kiến trúc Next.js Serverless", "Bảo mật chuẩn ISO", "Khả năng mở rộng hàng triệu user"]),
+    category: { name: "Web & Software" },
+  },
+  {
+    id: "svc_04",
+    title: "Sản Xuất TVC & Video Motion 3D CGI",
+    slug: "3d-motion-tvc-production",
+    group: "MEDIA",
+    shortDesc: "Thước phim quảng cáo điện ảnh 3D CGI mãn nhãn, thu hút hàng triệu lượt xem và khẳng định đẳng cấp thương hiệu.",
+    estimatedTime: "3 - 4 tuần",
+    startingPrice: 50000000,
+    benefitsJson: JSON.stringify(["Kỹ xảo 3D CGI điện ảnh", "Kịch bản viral đa kênh", "Render 4K chuẩn rạp"]),
+    category: { name: "CGI & Motion" },
+  },
+  {
+    id: "svc_05",
+    title: "Tích Hợp Trí Tuệ Nhân Tạo (Generative AI)",
+    slug: "generative-ai-integration",
+    group: "TECH",
+    shortDesc: "Tích hợp trợ lý ảo AI LLM, tự động hóa dịch vụ khách hàng 24/7 và hệ thống gợi ý thông minh.",
+    estimatedTime: "2 - 4 tuần",
+    startingPrice: 40000000,
+    benefitsJson: JSON.stringify(["Tự động hóa 80% tác vụ hỗ trợ", "Fine-tune dữ liệu riêng của DN", "Đa ngôn ngữ thông minh"]),
+    category: { name: "AI & Innovation" },
+  },
+  {
+    id: "svc_06",
+    title: "Chiến Lược Digital Marketing & Tăng Trưởng",
+    slug: "performance-digital-marketing",
+    group: "MEDIA",
+    shortDesc: "Tối ưu hóa phễu chuyển đổi số toàn diện, gia tăng tỷ lệ chốt đơn và doanh thu cho thương hiệu.",
+    estimatedTime: "Hàng tháng",
+    startingPrice: 25000000,
+    benefitsJson: JSON.stringify(["Tối ưu ROAS và CPA", "Theo dõi Attribution minh bạch", "Báo cáo tự động mỗi ngày"]),
+    category: { name: "Growth & Performance" },
+  },
+];
+
 export default async function ServicesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ group?: string; q?: string }>;
+  searchParams?: Promise<{ group?: string; q?: string }> | { group?: string; q?: string };
 }) {
-  const resolvedParams = await searchParams;
+  const resolvedParams = searchParams ? await Promise.resolve(searchParams) : {};
   const activeGroup = resolvedParams?.group?.toUpperCase() || "ALL";
   const query = resolvedParams?.q?.toLowerCase() || "";
 
-  const [services, totalMedia, totalTech] = await Promise.all([
-    prisma.service.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-        ...(activeGroup === "MEDIA" || activeGroup === "TECH"
-          ? { group: activeGroup }
-          : {}),
-        ...(query
-          ? {
-              OR: [
-                { title: { contains: query } },
-                { shortDesc: { contains: query } },
-              ],
-            }
-          : {}),
-      },
-      include: {
-        category: true,
-      },
-      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-    }),
-    prisma.service.count({
-      where: { status: "PUBLISHED", deletedAt: null, group: "MEDIA" },
-    }),
-    prisma.service.count({
-      where: { status: "PUBLISHED", deletedAt: null, group: "TECH" },
-    }),
-  ]);
+  let services: any[] = [];
+  let totalMedia = 0;
+  let totalTech = 0;
+
+  try {
+    const results = await Promise.all([
+      prisma.service.findMany({
+        where: {
+          status: "PUBLISHED",
+          deletedAt: null,
+          ...(activeGroup === "MEDIA" || activeGroup === "TECH"
+            ? { group: activeGroup }
+            : {}),
+          ...(query
+            ? {
+                OR: [
+                  { title: { contains: query } },
+                  { shortDesc: { contains: query } },
+                ],
+              }
+            : {}),
+        },
+        include: {
+          category: true,
+        },
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      }),
+      prisma.service.count({
+        where: { status: "PUBLISHED", deletedAt: null, group: "MEDIA" },
+      }),
+      prisma.service.count({
+        where: { status: "PUBLISHED", deletedAt: null, group: "TECH" },
+      }),
+    ]);
+
+    services = results[0] || [];
+    totalMedia = results[1] || 0;
+    totalTech = results[2] || 0;
+  } catch (err) {
+    console.warn("[ServicesPage] DB load fallback active:", err);
+  }
+
+  if (!services || services.length === 0) {
+    services = FALLBACK_ALL_SERVICES.filter((s) => {
+      if (activeGroup !== "ALL" && s.group !== activeGroup) return false;
+      if (query && !s.title.toLowerCase().includes(query) && !s.shortDesc.toLowerCase().includes(query)) return false;
+      return true;
+    });
+    totalMedia = FALLBACK_ALL_SERVICES.filter((s) => s.group === "MEDIA").length;
+    totalTech = FALLBACK_ALL_SERVICES.filter((s) => s.group === "TECH").length;
+  }
+
   const totalAll = totalMedia + totalTech;
 
   return (

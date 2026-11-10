@@ -10,13 +10,18 @@ export async function generateMetadata({ params }: { params: { code: string } })
 }
 
 export default async function QuotationPage({ params }: { params: { code: string } }) {
-  const quotation = await prisma.quotation.findUnique({
-    where: { code: params.code },
-    include: {
-      customer: true,
-      items: true,
-    },
-  });
+  let quotation: any = null;
+  try {
+    quotation = await prisma.quotation.findUnique({
+      where: { code: params.code },
+      include: {
+        customer: true,
+        items: true,
+      },
+    });
+  } catch (err) {
+    console.warn("[QuotationPage] DB fetch fallback active:", err);
+  }
 
   if (!quotation) {
     notFound();

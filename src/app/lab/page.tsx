@@ -24,20 +24,25 @@ export const dynamic = "force-dynamic";
 export default async function LabPage({
   searchParams,
 }: {
-  searchParams: Promise<{ stage?: string }>;
+  searchParams?: Promise<{ stage?: string }> | { stage?: string };
 }) {
-  const resolvedParams = await searchParams;
+  const resolvedParams = searchParams ? await Promise.resolve(searchParams) : {};
   const activeStage = resolvedParams?.stage || "ALL";
 
-  const products = await prisma.labProduct.findMany({
-    where: {
-      status: "PUBLISHED",
-      deletedAt: null,
-      ...(activeStage !== "ALL" ? { productStage: activeStage } : {}),
-    },
-    include: { category: true },
-    orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-  });
+  let products: any[] = [];
+  try {
+    products = await prisma.labProduct.findMany({
+      where: {
+        status: "PUBLISHED",
+        deletedAt: null,
+        ...(activeStage !== "ALL" ? { productStage: activeStage } : {}),
+      },
+      include: { category: true },
+      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+    });
+  } catch (err) {
+    console.warn("[LabPage] DB fetch fallback active:", err);
+  }
 
   return (
     <div className="pt-32 pb-24 px-6 bg-[#0A0A0A] text-white relative">
