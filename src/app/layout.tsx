@@ -52,6 +52,23 @@ export const metadata: Metadata = {
       "We Create. We Build. We Transform. Nền tảng Digital Agency cao cấp kết hợp nghệ thuật thị giác Luxury Dark, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
     images: ["/images/og-image.jpg"],
   },
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { url: "/android-chrome-192x192.png", sizes: "192x192", rel: "icon" },
+      { url: "/android-chrome-512x512.png", sizes: "512x512", rel: "icon" },
+    ],
+  },
+  manifest: "/manifest.json",
   verification: {
     google: "google65e91d408d51fefb",
     other: {
@@ -125,6 +142,18 @@ export default async function RootLayout({
   return (
     <html lang="vi" className="dark">
       <head>
+        {/* Favicon & App Icons */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#007BA7" />
+        <meta name="msapplication-TileColor" content="#007BA7" />
+        <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
+        {/* OpenGraph Image */}
         <meta
           property="og:image"
           content="https://nguyenangency.vercel.app/images/og-image.jpg"
