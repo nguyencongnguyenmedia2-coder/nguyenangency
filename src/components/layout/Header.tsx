@@ -47,30 +47,30 @@ export default function Header({
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#292929] py-3.5 shadow-2xl"
-          : "bg-transparent py-6"
+          ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#292929] py-2.5 shadow-2xl"
+          : "bg-transparent py-5"
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
         {/* Logo Image */}
-        <Link href="/" className="flex items-center group">
+        <Link href="/" className="flex items-center group shrink-0">
           <div className="relative transition-all duration-300 group-hover:scale-[1.03] group-hover:brightness-110">
             {/* Desktop: full logo */}
             <Image
               src="/images/logo.png"
               alt="NGUYÊN AGENCY"
-              width={180}
-              height={60}
-              className="hidden sm:block h-10 w-auto object-contain"
+              width={260}
+              height={87}
+              className="hidden sm:block h-14 w-auto object-contain drop-shadow-md"
               priority
             />
-            {/* Mobile: compact logo (crop to icon portion) */}
+            {/* Mobile: compact logo */}
             <Image
               src="/images/logo.png"
               alt="NGUYÊN AGENCY"
-              width={100}
-              height={34}
-              className="sm:hidden h-8 w-auto object-contain"
+              width={150}
+              height={50}
+              className="sm:hidden h-10 w-auto object-contain drop-shadow-md"
               priority
             />
           </div>
