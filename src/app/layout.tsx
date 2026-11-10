@@ -5,7 +5,6 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/motion/CustomCursor";
 import SmoothScrollProvider from "@/components/motion/SmoothScrollProvider";
 import ScrollProgressIndicator from "@/components/motion/ScrollProgressIndicator";
-import TelegramFloatingButton from "@/components/layout/TelegramFloatingButton";
 import MascotSupportAssistant from "@/components/mascot/MascotSupportAssistant";
 import { getPublicSiteSettings } from "@/lib/site-settings";
 
@@ -149,7 +148,6 @@ export default async function RootLayout({
             linkedinUrl={settings.linkedinUrl}
             behanceUrl={settings.behanceUrl}
           />
-          <TelegramFloatingButton />
           <MascotSupportAssistant settings={settings} />
         </SmoothScrollProvider>
       </body>

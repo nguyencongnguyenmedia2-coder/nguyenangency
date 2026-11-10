@@ -43,10 +43,173 @@ interface ChatMessage {
   showLeadForm?: boolean;
 }
 
+function parseInlineSpans(text: string): React.ReactNode[] {
+  // Regex matches bold **text** or code `code`
+  const regex = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+  const parts = text.split(regex);
+
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      const boldText = part.slice(2, -2);
+      return (
+        <strong key={index} className="font-bold text-white tracking-wide">
+          {boldText}
+        </strong>
+      );
+    }
+    if (part.startsWith("`") && part.endsWith("`")) {
+      const codeText = part.slice(1, -1);
+      return (
+        <span
+          key={index}
+          className="inline-flex items-center px-2 py-0.5 my-0.5 rounded-md bg-[#007BA7]/20 border border-[#007BA7]/40 text-[#38BDF8] font-mono text-[11px] font-bold shadow-sm select-all"
+        >
+          {codeText}
+        </span>
+      );
+    }
+    // Clean any stray asterisks or backticks just in case
+    const cleanText = part.replace(/\*\*/g, "").replace(/`/g, "");
+    return <span key={index}>{cleanText}</span>;
+  });
+}
+
+function renderSuccessConfirmationCard(text: string) {
+  // Extract info
+  const leadMatch = text.match(/LEAD-[A-Za-z0-9_-]+/);
+  const bookingMatch = text.match(/NA-[A-Za-z0-9_-]+/);
+  const nameMatch = text.match(/Cảm ơn\s+\*\*?([^*!\n]+)\*\*?!/i);
+  const serviceMatch = text.match(/dịch vụ\s+\*\*?([^*.\n]+)\*\*?/i);
+
+  const customerName = nameMatch ? nameMatch[1].trim() : "Quý khách";
+  const serviceName = serviceMatch ? serviceMatch[1].trim() : "Dịch vụ NGUYÊN AGENCY";
+  const leadCode = leadMatch ? leadMatch[0] : "";
+  const bookingCode = bookingMatch ? bookingMatch[0] : "";
+
+  return (
+    <div className="space-y-3.5">
+      {/* Header Banner */}
+      <div className="flex items-center gap-3 pb-3 border-b border-[#2A2A38]">
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500/25 to-[#007BA7]/20 border border-emerald-500/40 flex items-center justify-center text-lg shadow-inner shrink-0">
+          🎉
+        </div>
+        <div>
+          <div className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+            <span>Tiếp Nhận Thành Công</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+          </div>
+          <div className="text-[11px] text-[#A1A1AA] mt-0.5">
+            Hồ sơ tư vấn đã chuyển đến chuyên viên phụ trách
+          </div>
+        </div>
+      </div>
+
+      {/* Greeting info */}
+      <p className="text-xs text-[#E4E4E7] leading-relaxed">
+        Cảm ơn <span className="font-bold text-white">{customerName}</span>! Hồ sơ của bạn đã được chuyển đến chuyên viên phụ trách dịch vụ{" "}
+        <span className="font-semibold text-[#38BDF8]">{serviceName}</span>.
+      </p>
+
+      {/* Codes Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+        {leadCode && (
+          <div className="p-2.5 rounded-xl bg-[#0D0D12] border border-[#2A2A38] hover:border-[#007BA7]/50 transition-colors flex flex-col">
+            <span className="text-[9px] font-mono uppercase tracking-wider text-[#71717A] mb-1">
+              Mã Lead CRM
+            </span>
+            <span className="font-mono text-xs font-bold text-[#38BDF8] tracking-wider select-all">
+              {leadCode}
+            </span>
+          </div>
+        )}
+        {bookingCode && (
+          <div className="p-2.5 rounded-xl bg-[#0D0D12] border border-[#2A2A38] hover:border-[#FF2D95]/50 transition-colors flex flex-col">
+            <span className="text-[9px] font-mono uppercase tracking-wider text-[#71717A] mb-1">
+              Mã Đặt Lịch
+            </span>
+            <span className="font-mono text-xs font-bold text-[#FF2D95] tracking-wider select-all">
+              {bookingCode}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* SLA / Commitment Note */}
+      <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-start gap-2.5 text-[11px] text-emerald-300">
+        <Clock className="w-3.5 h-3.5 shrink-0 mt-0.5 text-emerald-400" />
+        <span className="leading-relaxed">
+          Đội ngũ chuyên gia NGUYÊN AGENCY sẽ liên hệ với bạn trong vòng <strong className="text-white font-bold">15 - 30 phút</strong>.
+        </span>
+      </div>
+
+      <div className="text-[11px] text-[#A1A1AA] pt-0.5 flex items-center justify-between">
+        <span>Chúc bạn một ngày tràn đầy năng lượng!</span>
+        <span className="text-sm">🦅</span>
+      </div>
+    </div>
+  );
+}
+
+function renderBotMessageContent(text: string) {
+  if (
+    text.includes("TIẾP NHẬN YÊU CẦU THÀNH CÔNG") ||
+    (text.includes("Mã Lead CRM") && text.includes("Mã Đặt Lịch"))
+  ) {
+    return renderSuccessConfirmationCard(text);
+  }
+
+  const lines = text.split("\n");
+
+  return (
+    <div className="space-y-2">
+      {lines.map((line, idx) => {
+        const trimmed = line.trim();
+        if (!trimmed) {
+          return <div key={idx} className="h-1" />;
+        }
+
+        // Bullet point lines
+        if (trimmed.startsWith("•") || trimmed.startsWith("-")) {
+          const content = trimmed.replace(/^[•\-]\s*/, "");
+          return (
+            <div key={idx} className="flex items-start gap-2.5 pl-0.5 py-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#007BA7] shrink-0 mt-1.5 shadow-[0_0_8px_rgba(0,123,167,0.8)]" />
+              <div className="flex-1 text-xs text-[#E4E4E7] leading-relaxed">
+                {parseInlineSpans(content)}
+              </div>
+            </div>
+          );
+        }
+
+        // Title / Header line (begins with emoji or ends with colon)
+        const isHeader =
+          /^[🎨📢💻⚡🧪💰💬✨🦅🎉]/.test(trimmed) && trimmed.endsWith(":");
+        if (isHeader) {
+          return (
+            <div
+              key={idx}
+              className="text-xs font-bold text-white tracking-wide pb-1.5 mb-1 border-b border-white/10 flex items-center gap-1.5"
+            >
+              {parseInlineSpans(trimmed)}
+            </div>
+          );
+        }
+
+        // Standard text line
+        return (
+          <div key={idx} className="text-xs text-[#E4E4E7] leading-relaxed">
+            {parseInlineSpans(trimmed)}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string; href: string } }> = {
   branding: {
     reply:
-      "🎨 **Dịch Vụ Thiết Kế Thương Hiệu Độc Bản (Luxury Branding):**\n" +
+      "🎨 Dịch Vụ Thiết Kế Thương Hiệu Độc Bản (Luxury Branding):\n" +
       "• Định hình bản sắc thị giác, logo vector độc quyền, bộ quy chuẩn Brand Guidelines 120+ trang.\n" +
       "• Thiết kế ấn phẩm POSM, bao bì sang trọng, profile doanh nghiệp.\n" +
       "• Thời gian hoàn thành: 2 - 3 tuần.\n" +
@@ -55,7 +218,7 @@ const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string
   },
   marketing: {
     reply:
-      "📢 **Dịch Vụ Truyền Thông & Digital Marketing:**\n" +
+      "📢 Dịch Vụ Truyền Thông & Digital Marketing:\n" +
       "• Chiến lược truyền thông đa kênh, sản xuất Video Motion 3D CGI, TVC điện ảnh.\n" +
       "• Tối ưu phễu chuyển đổi quảng cáo Meta Ads, Google Ads và tăng trưởng doanh thu.\n" +
       "• Báo cáo Attribution tự động mỗi ngày minh bạch 100%.",
@@ -63,7 +226,7 @@ const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string
   },
   web3d: {
     reply:
-      "💻 **Thiết Kế & Lập Trình Website 3D Three.js (Flagship):**\n" +
+      "💻 Thiết Kế & Lập Trình Website 3D Three.js (Flagship):\n" +
       "• Tiên phong ứng dụng WebGL / Three.js tạo không gian 3D tương tác chân thực chuẩn Luxury Brand.\n" +
       "• Tối ưu hiệu năng 60 FPS mượt mà trên cả máy tính lẫn điện thoại.\n" +
       "• Bàn giao 100% mã nguồn, chuẩn SEO quốc tế và tốc độ tải trang dưới 1.2s.",
@@ -71,7 +234,7 @@ const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string
   },
   saas: {
     reply:
-      "⚡ **Lập Trình Web App & Hệ Thống SaaS Doanh Nghiệp:**\n" +
+      "⚡ Lập Trình Web App & Hệ Thống SaaS Doanh Nghiệp:\n" +
       "• Kiến trúc Next.js Serverless cao cấp, cơ sở dữ liệu phân tán bảo mật chuẩn ISO.\n" +
       "• Tích hợp CRM nội bộ, quản trị đơn hàng, xuất hóa đơn tự động và phân quyền RBAC.\n" +
       "• Khả năng chịu tải hàng triệu người dùng đồng thời.",
@@ -79,15 +242,15 @@ const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string
   },
   lab: {
     reply:
-      "🧪 **Phòng Nghiên Cứu NGUYÊN LAB (AI & Công Cụ Số):**\n" +
+      "🧪 Phòng Nghiên Cứu NGUYÊN LAB (AI & Công Cụ Số):\n" +
       "• Nghiên cứu và thương mại hóa các mô hình Generative AI, Fine-tune LLM chuyên biệt.\n" +
-      "• Trợ lý AI tự động hóa chăm sóc khách hàng 24/7, tích hợp Telegram Bot Hub.\n" +
+      "• Trợ lý AI tự động hóa chăm sóc khách hàng 24/7.\n" +
       "• Các sản phẩm phần mềm SaaS độc quyền do đội ngũ kỹ sư NGUYÊN LAB phát triển.",
     link: { text: "Ghé thăm phòng LAB số", href: "/lab" },
   },
   pricing: {
     reply:
-      "💰 **Bảng Giá & Quy Trình Đầu Tư Minh Bạch:**\n" +
+      "💰 Bảng Giá & Quy Trình Đầu Tư Minh Bạch:\n" +
       "• Dịch vụ Branding: từ 30M VNĐ.\n" +
       "• Dịch vụ Website 3D / Web App: từ 45M - 60M VNĐ.\n" +
       "• Thanh toán 3 đợt linh hoạt (40% - 40% - 20%). Bàn giao 100% mã nguồn và bảo hành kỹ thuật 12 tháng.\n" +
@@ -96,12 +259,11 @@ const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string
   },
   consultant: {
     reply:
-      "💬 **Kết Nối Trực Tiếp Với Đội Ngũ Chuyên Gia:**\n" +
-      "• Hotline 24/7: **+84 908 889 999**\n" +
-      "• Telegram Bot: **@nguyenangency_bot**\n" +
-      "• Email: **contact@nguyenagency.vn**\n" +
+      "💬 Kết Nối Trực Tiếp Với Đội Ngũ Chuyên Gia:\n" +
+      "• Hotline 24/7: 0908 889 999\n" +
+      "• Email nhận yêu cầu: contact@nguyenagency.vn\n" +
       "• Địa chỉ: Landmark 81 Sky Tower, Bình Thạnh, TP. Hồ Chí Minh.\n" +
-      "Hoặc bạn có thể để lại thông tin ngay bên dưới để chuyên viên liên hệ trong 15 phút!",
+      "Hoặc bạn có thể gửi yêu cầu báo giá ngay trong ô bên dưới để chuyên viên liên hệ trong 15 phút!",
     link: { text: "Trang liên hệ chính thức", href: "/contact" },
   },
 };
@@ -153,10 +315,10 @@ export default function MascotSupportAssistant({ settings }: MascotProps) {
         id: "msg_init_1",
         sender: "bot",
         text:
-          "Xin chào! Mình là **" +
+          "Xin chào! Mình là " +
           mascotName +
-          "** – Trợ lý đại bàng kỹ thuật số của NGUYÊN AGENCY. 🦅\n\n" +
-          "Mình có thể giải đáp thông tin về **24 dịch vụ MEDIA & TECH**, bảng giá, dự án tiêu biểu hoặc tiếp nhận yêu cầu báo giá ngay cho bạn.",
+          " – Trợ lý đại bàng số của NGUYÊN AGENCY. 🦅\n\n" +
+          "Mình có thể giải đáp chi tiết về 24 dịch vụ MEDIA & TECH, công nghệ Three.js, bảng giá đầu tư hoặc tiếp nhận yêu cầu báo giá cho bạn.",
         time: "Vừa xong",
       },
     ]);
@@ -301,10 +463,10 @@ export default function MascotSupportAssistant({ settings }: MascotProps) {
             id: `msg_confirm_${Date.now()}`,
             sender: "bot",
             text:
-              `🎉 **TIẾP NHẬN YÊU CẦU THÀNH CÔNG!**\n\n` +
-              `Cảm ơn **${formName || "quý khách"}**! Hồ sơ tư vấn của bạn đã được chuyển đến chuyên viên phụ trách dịch vụ **${formService}**.\n\n` +
-              `• **Mã Lead CRM:** \`${data.leadCode}\`\n` +
-              `• **Mã Đặt Lịch:** \`${data.bookingCode}\`\n\n` +
+              `🎉 TIẾP NHẬN YÊU CẦU THÀNH CÔNG!\n\n` +
+              `Cảm ơn ${formName || "quý khách"}! Hồ sơ tư vấn của bạn đã được chuyển đến chuyên viên phụ trách dịch vụ ${formService}.\n\n` +
+              `• Mã Lead CRM: \`${data.leadCode}\`\n` +
+              `• Mã Đặt Lịch: \`${data.bookingCode}\`\n\n` +
               `Đội ngũ NGUYÊN AGENCY sẽ liên hệ với bạn trong vòng 15 - 30 phút theo thông tin bạn đã gửi. Chúc bạn một ngày tràn đầy năng lượng! 🦅`,
             time: "Vừa xong",
           },
@@ -545,16 +707,18 @@ export default function MascotSupportAssistant({ settings }: MascotProps) {
                     )}
 
                     <div
-                      className={`max-w-[85%] rounded-2xl p-3.5 leading-relaxed ${
+                      className={`max-w-[88%] rounded-2xl p-4 leading-relaxed shadow-lg transition-all ${
                         isBot
-                          ? "bg-[#16161D] border border-[#262633] text-[#E4E4E7]"
-                          : "bg-gradient-to-r from-[#007BA7] to-[#005f82] text-white ml-auto"
+                          ? "bg-[#14141D] border border-[#262638] text-[#E4E4E7] rounded-tl-sm hover:border-[#007BA7]/40 shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+                          : "bg-gradient-to-r from-[#007BA7] to-[#005f82] text-white ml-auto rounded-tr-sm shadow-md"
                       }`}
                     >
-                      <div className="whitespace-pre-line font-sans text-xs">
-                        {msg.text}
-                      </div>
-                      <span className="text-[9px] font-mono text-white/40 block mt-1.5 text-right">
+                      {isBot ? (
+                        renderBotMessageContent(msg.text)
+                      ) : (
+                        <div className="text-xs leading-relaxed font-sans">{msg.text}</div>
+                      )}
+                      <span className="text-[9px] font-mono text-white/40 block mt-2 text-right">
                         {msg.time}
                       </span>
                     </div>
