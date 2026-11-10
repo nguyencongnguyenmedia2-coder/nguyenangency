@@ -51,25 +51,25 @@ const DEFAULT_SETTINGS_SEED = [
   },
   {
     key: "hotline",
-    value: "+84 908 889 999",
+    value: "+84 344 979 307",
     group: "CONTACT",
     description: "Số điện thoại Hotline tư vấn 24/7 hiển thị trên website",
   },
   {
     key: "office_address",
-    value: "Landmark 81 Sky Tower, 720A Điện Biên Phủ, Phường 22, Bình Thạnh, TP. Hồ Chí Minh",
+    value: "TP. Quảng Ngãi - TP. Hồ Chí Minh",
     group: "CONTACT",
     description: "Địa chỉ trụ sở chính hiển thị tại Footer và trang Liên hệ",
   },
   {
     key: "zalo_url",
-    value: "https://zalo.me",
+    value: "https://zalo.me/0344979307",
     group: "SOCIAL",
     description: "Liên kết Zalo Official Account",
   },
   {
     key: "facebook_url",
-    value: "https://facebook.com",
+    value: "https://www.facebook.com/nguyenads7",
     group: "SOCIAL",
     description: "Liên kết Fanpage Facebook chính thức",
   },
@@ -182,14 +182,14 @@ export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
       rawMap["hotline"] ||
       rawMap["site_hotline"] ||
       rawMap["phone"] ||
-      "+84 908 889 999",
+      "+84 344 979 307",
     officeAddress:
       rawMap["office_address"] ||
       rawMap["site_address"] ||
       rawMap["address"] ||
-      "Landmark 81 Sky Tower, 720A Điện Biên Phủ, Phường 22, Bình Thạnh, TP. Hồ Chí Minh",
-    zaloUrl: rawMap["zalo_url"] || "https://zalo.me",
-    facebookUrl: rawMap["facebook_url"] || "https://facebook.com",
+      "TP. Quảng Ngãi - TP. Hồ Chí Minh",
+    zaloUrl: rawMap["zalo_url"] || "https://zalo.me/0344979307",
+    facebookUrl: rawMap["facebook_url"] || "https://www.facebook.com/nguyenads7",
     linkedinUrl: rawMap["linkedin_url"] || "https://linkedin.com",
     behanceUrl: rawMap["behance_url"] || "https://behance.net",
     telegramBotUsername:

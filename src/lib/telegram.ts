@@ -566,11 +566,13 @@ export async function handleTelegramUpdate(update: TelegramUpdate): Promise<{
         [
           '📞 LIÊN HỆ TƯ VẤN TRỰC TIẾP – NGUYÊN AGENCY',
           '',
-          '• Hotline / Zalo: 0987 654 321',
-          '• Email: hello@nguyenagency.com',
-          '• Trụ sở: Tầng 18, Lim Tower 3, Quận 1, TP. Hồ Chí Minh',
+          '• Hotline / Zalo 24/7: +84 344 979 307',
+          '• Email: contact@nguyenagency.vn',
+          '• Trụ sở: TP. Quảng Ngãi - TP. Hồ Chí Minh',
+          '• Zalo: https://zalo.me/0344979307',
+          '• Facebook: https://www.facebook.com/nguyenads7',
           '',
-          'Bạn có thể bấm "Đặt dịch vụ" bên dưới để chuyên gia của chúng tôi liên hệ lại trong vòng 15 phút!',
+          'Tiếp đón đối tác theo lịch hẹn trước tại Executive Studio Suite. Bạn có thể bấm "Đặt dịch vụ" bên dưới để chuyên gia của chúng tôi liên hệ lại trong vòng 15 - 30 phút!',
         ].join('\n'),
         {
           inline_keyboard: [
@@ -911,9 +913,11 @@ export async function handleTelegramUpdate(update: TelegramUpdate): Promise<{
         chatId,
         [
           '📞 THÔNG TIN LIÊN HỆ – NGUYÊN AGENCY',
-          '• Hotline: 0987 654 321',
-          '• Email: hello@nguyenagency.com',
-          '• Địa chỉ: Tầng 18, Lim Tower 3, Quận 1, TP.HCM',
+          '• Hotline / Zalo: +84 344 979 307',
+          '• Email: contact@nguyenagency.vn',
+          '• Địa chỉ: TP. Quảng Ngãi - TP. Hồ Chí Minh (Tiếp đón tại Executive Studio Suite)',
+          '• Zalo: https://zalo.me/0344979307',
+          '• Facebook: https://www.facebook.com/nguyenads7',
           '• Đặt dịch vụ trực tiếp trên Bot: gõ /booking',
         ].join('\n'),
         getMainMenuKeyboard()

@@ -23,10 +23,10 @@ export default function Footer({
   brandTagline = "VƯỢT CHUẨN SỐ HÓA",
   brandDescription = "Premium Creative Digital Agency tiên phong kết hợp giữa nghệ thuật thị giác đương đại, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
   contactEmail = "contact@nguyenagency.vn",
-  hotline = "+84 908 889 999",
-  officeAddress = "Landmark 81 Sky Tower, TP. Hồ Chí Minh",
-  zaloUrl = "https://zalo.me",
-  facebookUrl = "https://facebook.com",
+  hotline = "+84 344 979 307",
+  officeAddress = "TP. Quảng Ngãi - TP. Hồ Chí Minh",
+  zaloUrl = "https://zalo.me/0344979307",
+  facebookUrl = "https://www.facebook.com/nguyenads7",
   linkedinUrl = "https://linkedin.com",
   behanceUrl = "https://behance.net",
 }: FooterProps) {
@@ -68,28 +68,43 @@ export default function Footer({
               {brandDescription}
             </p>
 
-            <div className="flex flex-col gap-2.5 text-xs text-[#71717A] pt-2">
-              <div className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-[#007BA7] shrink-0" />
-                <span>{officeAddress}</span>
+            <div className="flex flex-col gap-4 text-xs text-[#71717A] pt-2">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#007BA7] shrink-0 mt-0.5" />
+                <div className="flex flex-col">
+                  <span className="font-semibold text-white/90">{officeAddress}</span>
+                  <span className="text-[11px] text-[#71717A] mt-0.5">
+                    Tiếp đón đối tác theo lịch hẹn trước tại Executive Studio Suite.
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#FF2D95] shrink-0" />
-                <a
-                  href={`mailto:${contactEmail}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {contactEmail}
-                </a>
+              <div className="flex items-start gap-2.5">
+                <Mail className="w-4 h-4 text-[#FF2D95] shrink-0 mt-0.5" />
+                <div className="flex flex-col">
+                  <a
+                    href={`mailto:${contactEmail}`}
+                    className="font-semibold text-white/90 hover:text-[#FF2D95] transition-colors font-mono"
+                  >
+                    {contactEmail}
+                  </a>
+                  <span className="text-[11px] text-[#71717A] mt-0.5">
+                    Phản hồi email chuyên nghiệp kèm NDA bảo mật thông tin.
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#007BA7] shrink-0" />
-                <a
-                  href={`tel:${hotline.replace(/\s+/g, "")}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {hotline}
-                </a>
+              <div className="flex items-start gap-2.5">
+                <Phone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="flex flex-col">
+                  <a
+                    href={`tel:${hotline.replace(/\s+/g, "")}`}
+                    className="font-semibold text-white/90 hover:text-emerald-400 transition-colors font-mono text-sm"
+                  >
+                    {hotline}
+                  </a>
+                  <span className="text-[11px] text-[#71717A] mt-0.5">
+                    Hỗ trợ trao đổi trực tiếp qua Telegram, Zalo Official & WhatsApp.
+                  </span>
+                </div>
               </div>
             </div>
           </div>

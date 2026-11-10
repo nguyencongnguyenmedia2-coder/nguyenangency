@@ -143,7 +143,7 @@ function ContactContent() {
                   </span>
                 </div>
                 <p className="text-sm font-bold text-white">
-                  Landmark 81 Sky Tower, 720A Điện Biên Phủ, Phường 22, Bình Thạnh, TP. Hồ Chí Minh
+                  TP. Quảng Ngãi - TP. Hồ Chí Minh
                 </p>
                 <p className="text-xs text-[#71717A]">
                   Tiếp đón đối tác theo lịch hẹn trước tại Executive Studio Suite.
@@ -176,14 +176,34 @@ function ContactContent() {
                   </span>
                 </div>
                 <a
-                  href="tel:+84908889999"
+                  href="tel:+84344979307"
                   className="text-lg font-black text-white hover:text-emerald-400 transition-colors block font-mono"
                 >
-                  +84 908 889 999
+                  +84 344 979 307
                 </a>
                 <p className="text-xs text-[#71717A]">
                   Hỗ trợ trao đổi trực tiếp qua Telegram, Zalo Official & WhatsApp.
                 </p>
+
+                {/* Direct Zalo & Facebook fast connects */}
+                <div className="flex items-center gap-2 pt-2">
+                  <a
+                    href="https://zalo.me/0344979307"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 px-3 py-2 rounded-xl bg-[#0068FF]/15 border border-[#0068FF]/30 hover:border-[#0068FF] text-[#38BDF8] text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <span>Zalo Official</span>
+                  </a>
+                  <a
+                    href="https://www.facebook.com/nguyenads7"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 px-3 py-2 rounded-xl bg-[#1877F2]/15 border border-[#1877F2]/30 hover:border-[#1877F2] text-[#60A5FA] text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <span>Facebook Fanpage</span>
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -264,11 +284,10 @@ function ContactContent() {
                           key={opt}
                           type="button"
                           onClick={() => setSelectedService(opt)}
-                          className={`px-4 py-2 rounded-xl text-xs font-mono transition-all text-left ${
-                            selectedService === opt
+                          className={`px-4 py-2 rounded-xl text-xs font-mono transition-all text-left ${selectedService === opt
                               ? "bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white font-bold shadow-glow-pink"
                               : "bg-[#171717] text-[#A1A1AA] hover:text-white border border-[#292929]"
-                          }`}
+                            }`}
                         >
                           {opt}
                         </button>
@@ -287,11 +306,10 @@ function ContactContent() {
                           key={b}
                           type="button"
                           onClick={() => setSelectedBudget(b)}
-                          className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all ${
-                            selectedBudget === b
+                          className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all ${selectedBudget === b
                               ? "bg-white text-black font-bold shadow-md"
                               : "bg-[#171717] text-[#71717A] hover:text-white border border-[#292929]"
-                          }`}
+                            }`}
                         >
                           {b}
                         </button>

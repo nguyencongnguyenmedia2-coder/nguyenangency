@@ -60,7 +60,7 @@ async function main() {
       roleName: "SUPER_ADMIN",
       roleId: superAdminRole.id,
       title: "Creative & Technical Director",
-      phone: "0908889999",
+      phone: "0344979307",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
     },
   });
@@ -749,10 +749,10 @@ async function main() {
     { key: "SITE_SLOGAN", value: "BEYOND DIGITAL.", group: "GENERAL", description: "Slogan nhận diện chính" },
     { key: "SITE_SUB_SLOGAN", value: "Creative Minds. Digital Experiences. Powerful Technology.", group: "GENERAL", description: "Slogan phụ" },
     { key: "CONTACT_EMAIL", value: "contact@nguyenagency.vn", group: "CONTACT", description: "Email nhận liên hệ" },
-    { key: "CONTACT_PHONE", value: "+84 908 889 999", group: "CONTACT", description: "Hotline hỗ trợ" },
-    { key: "OFFICE_ADDRESS", value: "Landmark 81 Sky Tower, TP. Hồ Chí Minh, Việt Nam", group: "CONTACT", description: "Địa chỉ trụ sở" },
-    { key: "ZALO_URL", value: "https://zalo.me/nguyenagency", group: "SOCIAL", description: "Kênh liên hệ Zalo Official" },
-    { key: "FACEBOOK_URL", value: "https://facebook.com/nguyenagency.vn", group: "SOCIAL", description: "Fanpage Facebook" },
+    { key: "CONTACT_PHONE", value: "+84 344 979 307", group: "CONTACT", description: "Hotline hỗ trợ" },
+    { key: "OFFICE_ADDRESS", value: "TP. Quảng Ngãi - TP. Hồ Chí Minh", group: "CONTACT", description: "Địa chỉ trụ sở" },
+    { key: "ZALO_URL", value: "https://zalo.me/0344979307", group: "SOCIAL", description: "Kênh liên hệ Zalo Official" },
+    { key: "FACEBOOK_URL", value: "https://www.facebook.com/nguyenads7", group: "SOCIAL", description: "Fanpage Facebook" },
   ];
 
   for (const s of settings) {

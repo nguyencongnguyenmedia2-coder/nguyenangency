@@ -126,7 +126,7 @@ export default function AboutPage() {
                 <span className="text-xs font-mono text-[#FF2D95] uppercase block mb-1">
                   HEADQUARTERS & CREATIVE STUDIO
                 </span>
-                <p className="text-sm font-bold text-white">Landmark 81 Sky Tower, TP. Hồ Chí Minh</p>
+                <p className="text-sm font-bold text-white">TP. Quảng Ngãi - TP. Hồ Chí Minh</p>
               </div>
               <div className="flex items-center gap-2 text-xs font-mono text-[#007BA7]">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

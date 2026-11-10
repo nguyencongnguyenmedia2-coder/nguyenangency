@@ -260,9 +260,11 @@ const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string
   consultant: {
     reply:
       "💬 Kết Nối Trực Tiếp Với Đội Ngũ Chuyên Gia:\n" +
-      "• Hotline 24/7: 0908 889 999\n" +
-      "• Email nhận yêu cầu: contact@nguyenagency.vn\n" +
-      "• Địa chỉ: Landmark 81 Sky Tower, Bình Thạnh, TP. Hồ Chí Minh.\n" +
+      "• Hotline tư vấn 24/7: +84 344 979 307 (Hỗ trợ Zalo Official & WhatsApp)\n" +
+      "• Email liên hệ: contact@nguyenagency.vn (Phản hồi kèm NDA bảo mật)\n" +
+      "• Địa chỉ: TP. Quảng Ngãi - TP. Hồ Chí Minh (Tiếp đón tại Executive Studio Suite theo lịch hẹn)\n" +
+      "• Zalo: https://zalo.me/0344979307\n" +
+      "• Facebook Fanpage: https://www.facebook.com/nguyenads7\n" +
       "Hoặc bạn có thể gửi yêu cầu báo giá ngay trong ô bên dưới để chuyên viên liên hệ trong 15 phút!",
     link: { text: "Trang liên hệ chính thức", href: "/contact" },
   },
@@ -790,7 +792,7 @@ export default function MascotSupportAssistant({ settings }: MascotProps) {
                           required
                           value={formPhone}
                           onChange={(e) => setFormPhone(e.target.value)}
-                          placeholder="0908xxxxxx"
+                          placeholder="0344xxxxxx"
                           className="w-full px-3 py-2 rounded-xl bg-[#1b1b24] border border-[#2e2e3d] text-white text-xs focus:outline-none focus:border-[#007BA7]"
                         />
                       </div>

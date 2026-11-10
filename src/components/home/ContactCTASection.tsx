@@ -22,7 +22,7 @@ export default function ContactCTASection({
   const ctaText = sectionData?.ctaText || "Khởi Tạo Dự Án Ngay";
   const ctaLink = sectionData?.ctaLink || "/contact";
   const contactEmail = siteSettings?.contactEmail || "contact@nguyenagency.vn";
-  const hotline = siteSettings?.hotline || "+84 908 889 999";
+  const hotline = siteSettings?.hotline || "+84 344 979 307";
 
   return (
     <section className="py-28 px-6 bg-[#0A0A0A] relative overflow-hidden">
