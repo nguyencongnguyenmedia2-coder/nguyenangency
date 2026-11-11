@@ -7,6 +7,7 @@ import {
   updateBlogPostStatus,
 } from "@/app/actions/admin-cms-actions";
 import ImageUploadField from "@/components/admin/ImageUploadField";
+import AIWriterModal from "@/components/admin/AIWriterModal";
 import {
   Plus,
   Edit2,
@@ -19,6 +20,7 @@ import {
   Check,
   Eye,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 
 function formatJsonArrayToLines(jsonStr?: string): string {
@@ -57,6 +59,27 @@ export default function BlogManagerClient({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [statusUpdatingId, setStatusUpdatingId] = useState<string | null>(null);
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  const [formKey, setFormKey] = useState(0);
+
+  function handleApplyAI(aiData: any) {
+    let tagsArray: string[] = [];
+    if (typeof aiData.tags === "string") {
+      tagsArray = aiData.tags.split(",").map((s: string) => s.trim()).filter(Boolean);
+    } else if (Array.isArray(aiData.tags)) {
+      tagsArray = aiData.tags;
+    }
+
+    setEditingPost((prev: any) => ({
+      ...prev,
+      title: aiData.title || prev?.title || "",
+      readTime: aiData.readTime || prev?.readTime || "5 phút đọc",
+      tagsJson: tagsArray.length > 0 ? JSON.stringify(tagsArray) : prev?.tagsJson,
+      excerpt: aiData.excerpt || prev?.excerpt || "",
+      content: aiData.content || prev?.content || "",
+    }));
+    setFormKey((k) => k + 1);
+  }
 
   const [deleteTarget, setDeleteTarget] = useState<any>(null);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -146,13 +169,26 @@ export default function BlogManagerClient({
           />
         </div>
 
-        <button
-          onClick={handleOpenCreate}
-          className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white text-xs font-mono font-bold uppercase tracking-wider hover:shadow-glow-pink transition-all flex items-center justify-center gap-2 shrink-0"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Thêm Bài Viết Mới</span>
-        </button>
+        <div className="flex items-center gap-2.5 w-full sm:w-auto">
+          <button
+            onClick={() => {
+              handleOpenCreate();
+              setIsAIModalOpen(true);
+            }}
+            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#007BA7]/30 to-[#FF2D95]/30 hover:from-[#007BA7] hover:to-[#FF2D95] border border-[#007BA7]/50 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-glow-cyan shrink-0"
+          >
+            <Sparkles className="w-4 h-4 text-[#FF2D95] animate-pulse" />
+            <span>AI Soạn Thảo</span>
+          </button>
+
+          <button
+            onClick={handleOpenCreate}
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white text-xs font-mono font-bold uppercase tracking-wider hover:shadow-glow-pink transition-all flex items-center justify-center gap-2 shrink-0"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Thêm Bài Viết Mới</span>
+          </button>
+        </div>
       </div>
 
       {/* Posts Table */}
@@ -276,9 +312,19 @@ export default function BlogManagerClient({
               <X className="w-5 h-5" />
             </button>
 
-            <h3 className="text-xl font-bold text-white uppercase tracking-wide mb-6">
-              {editingPost ? "Chỉnh Sửa Bài Viết Chuyên Sâu" : "Soạn Thảo Bài Viết Mới"}
-            </h3>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pr-8">
+              <h3 className="text-xl font-bold text-white uppercase tracking-wide">
+                {editingPost ? "Chỉnh Sửa Bài Viết Chuyên Sâu" : "Soạn Thảo Bài Viết Mới"}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setIsAIModalOpen(true)}
+                className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#007BA7]/20 to-[#FF2D95]/20 hover:from-[#007BA7]/40 hover:to-[#FF2D95]/40 border border-[#007BA7]/50 text-white text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-glow-cyan w-fit"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#FF2D95] animate-pulse" />
+                <span>✨ AI Viết Bài Này</span>
+              </button>
+            </div>
 
             {errorMsg && (
               <div className="mb-4 p-3 rounded-xl bg-red-950/40 border border-red-500/40 text-xs text-red-300">
@@ -286,7 +332,7 @@ export default function BlogManagerClient({
               </div>
             )}
 
-            <form onSubmit={handleSave} className="space-y-4 text-xs">
+            <form key={formKey} onSubmit={handleSave} className="space-y-4 text-xs">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[#A1A1AA] font-mono uppercase mb-1">
@@ -461,6 +507,19 @@ export default function BlogManagerClient({
           </div>
         </div>
       )}
+      {/* AI WRITER MODAL */}
+      <AIWriterModal
+        isOpen={isAIModalOpen}
+        onClose={() => setIsAIModalOpen(false)}
+        type="blog"
+        title="Trợ Lý AI Soạn Thảo Bài Viết Blog / Tin Tức Chuẩn SEO"
+        defaultTopic={editingPost?.title || ""}
+        extraContext={{
+          currentTitle: editingPost?.title || "",
+          currentTags: editingPost?.tagsJson || "",
+        }}
+        onApply={handleApplyAI}
+      />
     </div>
   );
 }

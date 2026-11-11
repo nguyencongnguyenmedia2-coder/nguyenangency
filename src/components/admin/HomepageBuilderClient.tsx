@@ -7,6 +7,7 @@ import {
   reorderHomepageSections,
   deleteHomepageSection,
 } from "@/app/actions/admin-homepage-actions";
+import AIWriterModal from "@/components/admin/AIWriterModal";
 import {
   LayoutTemplate,
   Plus,
@@ -55,6 +56,21 @@ export default function HomepageBuilderClient({
 
   const [deleteTarget, setDeleteTarget] = useState<HomepageSectionItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  const [formKey, setFormKey] = useState(0);
+
+  function handleApplyAI(aiData: any) {
+    setEditingItem((prev: any) => ({
+      ...prev,
+      name: aiData.name || prev?.name || "",
+      title: aiData.title || prev?.title || "",
+      subtitle: aiData.subtitle || prev?.subtitle || "",
+      description: aiData.description || prev?.description || "",
+      ctaText: aiData.ctaText || prev?.ctaText || "",
+      ctaLink: aiData.ctaLink || prev?.ctaLink || "",
+    }));
+    setFormKey((k) => k + 1);
+  }
 
   function handleOpenCreate() {
     setEditingItem(null);
@@ -175,13 +191,26 @@ export default function HomepageBuilderClient({
           </span>
         </div>
 
-        <button
-          onClick={handleOpenCreate}
-          className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white text-xs font-mono font-bold uppercase tracking-wider hover:shadow-glow-pink transition-all flex items-center justify-center gap-2 shrink-0"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Thêm Section Mới</span>
-        </button>
+        <div className="flex items-center gap-2.5 w-full sm:w-auto">
+          <button
+            onClick={() => {
+              handleOpenCreate();
+              setIsAIModalOpen(true);
+            }}
+            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#007BA7]/30 to-[#FF2D95]/30 hover:from-[#007BA7] hover:to-[#FF2D95] border border-[#007BA7]/50 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-glow-cyan shrink-0"
+          >
+            <Sparkles className="w-4 h-4 text-[#FF2D95] animate-pulse" />
+            <span>AI Soạn Section</span>
+          </button>
+
+          <button
+            onClick={handleOpenCreate}
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white text-xs font-mono font-bold uppercase tracking-wider hover:shadow-glow-pink transition-all flex items-center justify-center gap-2 shrink-0"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Thêm Section Mới</span>
+          </button>
+        </div>
       </div>
 
       {/* Sections List */}
@@ -297,10 +326,20 @@ export default function HomepageBuilderClient({
               <X className="w-5 h-5" />
             </button>
 
-            <h3 className="text-xl font-black text-white uppercase tracking-tight flex items-center gap-2 mb-2">
-              <LayoutTemplate className="w-5 h-5 text-[#007BA7]" />
-              {editingItem ? "Chỉnh Sửa Section Trang Chủ" : "Tạo Section Mới Cho Trang Chủ"}
-            </h3>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2 pr-8">
+              <h3 className="text-xl font-black text-white uppercase tracking-tight flex items-center gap-2">
+                <LayoutTemplate className="w-5 h-5 text-[#007BA7]" />
+                {editingItem ? "Chỉnh Sửa Section Trang Chủ" : "Tạo Section Mới Cho Trang Chủ"}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setIsAIModalOpen(true)}
+                className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#007BA7]/20 to-[#FF2D95]/20 hover:from-[#007BA7]/40 hover:to-[#FF2D95]/40 border border-[#007BA7]/50 text-white text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-glow-cyan w-fit"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#FF2D95] animate-pulse" />
+                <span>✨ AI Viết Section Này</span>
+              </button>
+            </div>
             <p className="text-xs text-[#A1A1AA] mb-6">
               Mọi thay đổi sẽ ngay lập tức được cập nhật trực tiếp lên trang chủ NGUYÊN AGENCY.
             </p>
@@ -312,7 +351,7 @@ export default function HomepageBuilderClient({
               </div>
             )}
 
-            <form onSubmit={handleSave} className="space-y-4">
+            <form key={formKey} onSubmit={handleSave} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-mono text-[#A1A1AA] mb-1 uppercase tracking-wider">
@@ -501,6 +540,19 @@ export default function HomepageBuilderClient({
           </div>
         </div>
       )}
+      {/* AI WRITER MODAL */}
+      <AIWriterModal
+        isOpen={isAIModalOpen}
+        onClose={() => setIsAIModalOpen(false)}
+        type="homepage"
+        title="Trợ Lý AI Soạn Thảo Section Trang Chủ"
+        defaultTopic={editingItem?.title || editingItem?.name || ""}
+        extraContext={{
+          currentTitle: editingItem?.title || "",
+          currentKey: editingItem?.sectionKey || "",
+        }}
+        onApply={handleApplyAI}
+      />
     </div>
   );
 }

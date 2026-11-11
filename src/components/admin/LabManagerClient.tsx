@@ -7,6 +7,7 @@ import {
   updateLabProductStatus,
 } from "@/app/actions/admin-cms-actions";
 import ImageUploadField from "@/components/admin/ImageUploadField";
+import AIWriterModal from "@/components/admin/AIWriterModal";
 import {
   Plus,
   Edit2,
@@ -19,6 +20,7 @@ import {
   Check,
   Eye,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -51,6 +53,27 @@ export default function LabManagerClient({
   const [isDeleting, setIsDeleting] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [statusUpdatingId, setStatusUpdatingId] = useState<string | null>(null);
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  const [formKey, setFormKey] = useState(0);
+
+  function handleApplyAI(aiData: any) {
+    setEditingProd((prev: any) => ({
+      ...prev,
+      name: aiData.name || prev?.name || "",
+      productStage: aiData.productStage || prev?.productStage || "BETA",
+      version: aiData.version || prev?.version || "v1.0",
+      shortDesc: aiData.shortDesc || prev?.shortDesc || "",
+      description: aiData.description || prev?.description || "",
+      featuresJson: aiData.features
+        ? JSON.stringify(aiData.features)
+        : prev?.featuresJson,
+      techStackJson: aiData.techStack
+        ? JSON.stringify(aiData.techStack)
+        : prev?.techStackJson,
+      demoUrl: aiData.demoUrl || prev?.demoUrl || "",
+    }));
+    setFormKey((k) => k + 1);
+  }
 
   function handleCopy(text: string, id: string) {
     navigator.clipboard.writeText(text);
@@ -112,7 +135,7 @@ export default function LabManagerClient({
         {/* Create / Edit Product Form */}
         <div className="lg:col-span-5">
           <div className="p-8 rounded-3xl bg-[#121212] border border-[#292929]">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
               <h2 className="text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
                 <Plus className="w-4 h-4 text-[#FF2D95]" />
                 <span>
@@ -121,15 +144,25 @@ export default function LabManagerClient({
                     : "Thêm Sản Phẩm Mới Vào LAB"}
                 </span>
               </h2>
-              {editingProd && (
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => setEditingProd(null)}
-                  className="text-xs font-mono text-[#A1A1AA] hover:text-white"
+                  onClick={() => setIsAIModalOpen(true)}
+                  className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#007BA7]/20 to-[#FF2D95]/20 hover:from-[#007BA7]/40 hover:to-[#FF2D95]/40 border border-[#007BA7]/50 text-white text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all shadow-glow-cyan"
                 >
-                  Hủy sửa
+                  <Sparkles className="w-3.5 h-3.5 text-[#FF2D95] animate-pulse" />
+                  <span>✨ AI Soạn Thảo</span>
                 </button>
-              )}
+                {editingProd && (
+                  <button
+                    type="button"
+                    onClick={() => setEditingProd(null)}
+                    className="text-xs font-mono text-[#A1A1AA] hover:text-white px-2 py-1 rounded bg-[#171717]"
+                  >
+                    Hủy sửa
+                  </button>
+                )}
+              </div>
             </div>
 
             {errorMsg && (
@@ -139,7 +172,7 @@ export default function LabManagerClient({
             )}
 
             <form
-              key={editingProd?.id || "new"}
+              key={`${editingProd?.id || "new"}-${formKey}`}
               onSubmit={handleSave}
               className="space-y-4 text-xs"
             >
@@ -493,6 +526,19 @@ export default function LabManagerClient({
           </div>
         </div>
       )}
+      {/* AI WRITER MODAL */}
+      <AIWriterModal
+        isOpen={isAIModalOpen}
+        onClose={() => setIsAIModalOpen(false)}
+        type="lab"
+        title="Trợ Lý AI Soạn Thảo Sản Phẩm Thử Nghiệm LAB"
+        defaultTopic={editingProd?.name || ""}
+        extraContext={{
+          currentName: editingProd?.name || "",
+          currentStage: editingProd?.productStage || "BETA",
+        }}
+        onApply={handleApplyAI}
+      />
     </div>
   );
 }
