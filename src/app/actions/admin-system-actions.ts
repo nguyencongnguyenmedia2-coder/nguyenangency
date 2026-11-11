@@ -2,7 +2,25 @@
 
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { checkAdminPermission, logActivity, safeRevalidatePath } from "./admin-common";
+import { checkAdminPermission, logActivity, safeRevalidatePath, revalidateAllPublicRoutes } from "./admin-common";
+
+// ==========================================
+// 0. CACHE MANAGEMENT
+// ==========================================
+
+/**
+ * Force revalidate all public-facing pages.
+ * Admin can call this from the Settings page when data appears stale.
+ */
+export async function forceRevalidateAllPages() {
+  await checkAdminPermission();
+  revalidateAllPublicRoutes();
+  return {
+    success: true,
+    message: "✅ Đã làm mới cache toàn bộ website. Dữ liệu mới nhất sẽ hiển thị sau vài giây.",
+    timestamp: new Date().toISOString(),
+  };
+}
 
 // ==========================================
 // 1. QUOTATIONS CRUD

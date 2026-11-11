@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { checkAdminPermission, logActivity, safeRevalidatePath } from "./admin-common";
+import { checkAdminPermission, logActivity, safeRevalidatePath, revalidateAllPublicRoutes } from "./admin-common";
 import {
   syncRecordToSupabase,
   deleteRecordFromSupabase,
@@ -239,15 +239,7 @@ export async function saveService(formData: FormData) {
       });
     }
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/services");
-    safeRevalidatePath(`/services/${targetSlug}`);
-    if (previousSlug && previousSlug !== targetSlug) {
-      safeRevalidatePath(`/services/${previousSlug}`);
-    }
-    safeRevalidatePath("/pricing");
-    safeRevalidatePath("/contact");
-    safeRevalidatePath("/admin/services");
+    revalidateAllPublicRoutes([`/services/${targetSlug}`, ...(previousSlug && previousSlug !== targetSlug ? [`/services/${previousSlug}`] : []), "/admin/services"]);
 
     const savedSvc = await prisma.service.findFirst({
       where: { slug: targetSlug },
@@ -311,11 +303,7 @@ export async function updateServiceStatus(id: string, rawStatus: string) {
       is_featured: updated.isFeatured,
     });
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/services");
-    safeRevalidatePath(`/services/${updated.slug}`);
-    safeRevalidatePath("/contact");
-    safeRevalidatePath("/admin/services");
+    revalidateAllPublicRoutes([`/services/${updated.slug}`, "/admin/services"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error updating service status:", error);
@@ -380,11 +368,7 @@ export async function deleteService(id: string) {
       });
     }
 
-    safeRevalidatePath("/services");
-    safeRevalidatePath(`/services/${s.slug}`);
-    safeRevalidatePath("/admin/services");
-    safeRevalidatePath("/contact");
-    safeRevalidatePath("/");
+    revalidateAllPublicRoutes([`/services/${s.slug}`, "/admin/services"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error deleting service:", error);
@@ -553,13 +537,7 @@ export async function savePortfolio(formData: FormData) {
       });
     }
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/portfolio");
-    if (targetSlug) safeRevalidatePath(`/portfolio/${targetSlug}`);
-    if (previousSlug && previousSlug !== targetSlug) {
-      safeRevalidatePath(`/portfolio/${previousSlug}`);
-    }
-    safeRevalidatePath("/admin/portfolio");
+    revalidateAllPublicRoutes([`/portfolio/${targetSlug}`, ...(previousSlug && previousSlug !== targetSlug ? [`/portfolio/${previousSlug}`] : []), "/admin/portfolio"]);
     return { success: true, slug: targetSlug };
   } catch (error: any) {
     console.error("Error saving portfolio:", error);
@@ -586,10 +564,7 @@ export async function updatePortfolioStatus(id: string, rawStatus: string) {
       details: `Đổi trạng thái dự án "${updated.title}" -> ${status}`,
     });
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/portfolio");
-    safeRevalidatePath(`/portfolio/${updated.slug}`);
-    safeRevalidatePath("/admin/portfolio");
+    revalidateAllPublicRoutes([`/portfolio/${updated.slug}`, "/admin/portfolio"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error updating portfolio status:", error);
@@ -615,10 +590,7 @@ export async function deletePortfolio(id: string) {
       details: `Xóa dự án portfolio ${p.title}`,
     });
 
-    safeRevalidatePath("/portfolio");
-    safeRevalidatePath(`/portfolio/${p.slug}`);
-    safeRevalidatePath("/admin/portfolio");
-    safeRevalidatePath("/");
+    revalidateAllPublicRoutes([`/portfolio/${p.slug}`, "/admin/portfolio"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error deleting portfolio:", error);
@@ -773,13 +745,7 @@ export async function saveLabProduct(formData: FormData) {
       });
     }
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/lab");
-    if (targetSlug) safeRevalidatePath(`/lab/${targetSlug}`);
-    if (previousSlug && previousSlug !== targetSlug) {
-      safeRevalidatePath(`/lab/${previousSlug}`);
-    }
-    safeRevalidatePath("/admin/lab");
+    revalidateAllPublicRoutes([`/lab/${targetSlug}`, ...(previousSlug && previousSlug !== targetSlug ? [`/lab/${previousSlug}`] : []), "/admin/lab"]);
     return { success: true, slug: targetSlug };
   } catch (error: any) {
     console.error("Error saving lab product:", error);
@@ -806,10 +772,7 @@ export async function updateLabProductStatus(id: string, rawStatus: string) {
       details: `Đổi trạng thái sản phẩm LAB "${updated.name}" -> ${status}`,
     });
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/lab");
-    safeRevalidatePath(`/lab/${updated.slug}`);
-    safeRevalidatePath("/admin/lab");
+    revalidateAllPublicRoutes([`/lab/${updated.slug}`, "/admin/lab"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error updating lab product status:", error);
@@ -838,10 +801,7 @@ export async function deleteLabProduct(id: string) {
       details: `Xóa sản phẩm LAB ${prod.name}`,
     });
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/lab");
-    safeRevalidatePath(`/lab/${prod.slug}`);
-    safeRevalidatePath("/admin/lab");
+    revalidateAllPublicRoutes([`/lab/${prod.slug}`, "/admin/lab"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error deleting lab product:", error);
@@ -975,13 +935,7 @@ export async function saveBlogPost(formData: FormData) {
       });
     }
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/blog");
-    if (targetSlug) safeRevalidatePath(`/blog/${targetSlug}`);
-    if (previousSlug && previousSlug !== targetSlug) {
-      safeRevalidatePath(`/blog/${previousSlug}`);
-    }
-    safeRevalidatePath("/admin/blog");
+    revalidateAllPublicRoutes([`/blog/${targetSlug}`, ...(previousSlug && previousSlug !== targetSlug ? [`/blog/${previousSlug}`] : []), "/admin/blog"]);
     return { success: true, slug: targetSlug };
   } catch (error: any) {
     console.error("Error saving blog post:", error);

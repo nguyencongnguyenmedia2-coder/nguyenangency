@@ -83,6 +83,7 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
   const ctaLink = sectionData?.ctaLink || "/services";
 
   let featuredServices: any[] = [];
+  let dbError = false;
   try {
     featuredServices = await prisma.service.findMany({
       where: {
@@ -97,12 +98,13 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
       ],
     });
   } catch (err) {
-    console.warn("[ServicesBentoSection] DB fetch fallback active:", err);
-  }
-
-  if (!featuredServices || featuredServices.length === 0) {
+    console.warn("[ServicesBentoSection] DB fetch failed:", err);
+    dbError = true;
+    // Use fallback only when DB is completely unreachable (not when empty)
     featuredServices = FALLBACK_FEATURED_SERVICES;
   }
+
+  // Only use fallback when DB is unreachable – NOT when Admin simply hasn't added services yet
 
   return (
     <section className="py-28 px-6 bg-[#0A0A0A] border-b border-[#1F1F23] relative overflow-hidden">

@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { checkAdminPermission, logActivity, safeRevalidatePath } from "./admin-common";
+import { checkAdminPermission, logActivity, safeRevalidatePath, revalidateAllPublicRoutes } from "./admin-common";
 
 export async function saveHomepageSection(formData: FormData) {
   const session = await checkAdminPermission();
@@ -76,8 +76,7 @@ export async function saveHomepageSection(formData: FormData) {
       });
     }
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/admin/homepage");
+    revalidateAllPublicRoutes(["/admin/homepage"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error saving homepage section:", error);
@@ -103,8 +102,7 @@ export async function toggleHomepageSection(id: string, isActive: boolean) {
       details: `${isActive ? "Bật" : "Tắt"} hiển thị section trang chủ: ${updated.name}`,
     });
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/admin/homepage");
+    revalidateAllPublicRoutes(["/admin/homepage"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error toggling homepage section:", error);
@@ -132,8 +130,7 @@ export async function reorderHomepageSections(items: { id: string; order: number
       details: `Sắp xếp lại thứ tự ${items.length} section trên trang chủ`,
     });
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/admin/homepage");
+    revalidateAllPublicRoutes(["/admin/homepage"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error reordering homepage sections:", error);
@@ -159,8 +156,7 @@ export async function deleteHomepageSection(id: string) {
       details: `Xóa section trang chủ: ${sec.name}`,
     });
 
-    safeRevalidatePath("/");
-    safeRevalidatePath("/admin/homepage");
+    revalidateAllPublicRoutes(["/admin/homepage"]);
     return { success: true };
   } catch (error: any) {
     console.error("Error deleting homepage section:", error);
