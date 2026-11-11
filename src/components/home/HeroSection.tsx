@@ -247,15 +247,16 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
               {/* Backlight Neon Halos */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/20 via-[#007BA7]/15 to-[#FF2D95]/20 rounded-full blur-[90px] pointer-events-none animate-mascot-aura" />
 
-              {/* Full High-res Mascot with Holographic HUD Panels & Laser Pedestal */}
+              {/* Full High-res Mascot with Holographic HUD Panels & Laser Pedestal - NO BLACK BACKGROUND */}
               <div className="relative z-10 w-full h-full animate-mascot-float flex items-center justify-center">
                 <Image
-                  src="/images/mascot-character-full.png"
+                  src="/images/mascot-character-transparent.png"
                   alt="NGUYÊN AGENCY AI Mascot & Hologram Solutions"
                   width={984}
                   height={1024}
                   priority
                   className="w-full h-auto object-contain drop-shadow-[0_20px_60px_rgba(0,163,255,0.45)]"
+                  style={{ mixBlendMode: "screen" }}
                 />
               </div>
             </div>
