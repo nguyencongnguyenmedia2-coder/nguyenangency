@@ -1,9 +1,17 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowUpRight, Sparkles, ShieldCheck, Cpu, Layers, Globe } from "lucide-react";
+import Image from "next/image";
+import {
+  ArrowUpRight,
+  Monitor,
+  Megaphone,
+  Layers,
+  Play,
+  X,
+} from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -11,100 +19,70 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// 3D Cyber Wave & Particle Canvas (Chim bay đã được xóa 100%)
 const Hero3DScene = dynamic(() => import("@/components/3d/Hero3DScene"), {
   ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <div className="w-14 h-14 rounded-full border border-[#007BA7]/40 border-t-[#FF2D95] animate-spin" />
-    </div>
-  ),
+  loading: () => null,
 });
 
 const MARQUEE_ITEMS = [
-  "CHIẾN LƯỢC & BỘ NHẬN DIỆN THƯƠNG HIỆU",
-  "KIẾN TRÚC ĐỒ HỌA 3D WEBGL & MOTION",
-  "ỨNG DỤNG DOANH NGHIỆP MAY ĐO CHUYÊN SÂU",
-  "TRỢ LÝ AI & TỰ ĐỘNG HÓA DOANH NGHIỆP",
-  "MARKETING HIỆU SUẤT & CHUYỂN ĐỔI CAO",
-  "HỆ THỐNG THIẾT KẾ & TRẢI NGHIỆM UI/UX ĐỘC BẢN",
-  "ỨNG DỤNG DI ĐỘNG CAO CẤP (IOS & ANDROID)",
-  "HẠ TẦNG ĐÁM MÂY TỐC ĐỘ CAO & DEVOPS CHUẨN MỰC",
+  "THIẾT KẾ WEBSITE CHUẨN SEO",
+  "MARKETING ONLINE & HIỆU SUẤT",
+  "GIẢI PHÁP AI & AUTOMATION",
+  "ĐỒ HỌA 3D WEBGL TƯƠNG TÁC",
+  "BỘ NHẬN DIỆN THƯƠNG HIỆU ĐỘC BẢN",
+  "HẠ TẦNG CLOUD TỐC ĐỘ CAO",
+  "ỨNG DỤNG DOANH NGHIỆP MAY ĐO",
+  "TĂNG TRƯỞNG & CHUYỂN ĐỔI SỐ BỀN VỮNG",
 ];
 
 export default function HeroSection({ sectionData }: { sectionData?: any }) {
-  const subtitle = sectionData?.subtitle || "01 • KIẾN TẠO • PHÁT TRIỂN • CHUYỂN HÓA";
-  const title = sectionData?.title || "VƯỢT CHUẨN SỐ HÓA.";
+  const subtitle =
+    sectionData?.subtitle || "Digital Creative & Tech Solutions";
+  const title = sectionData?.title || "VƯỢT CHUẨN SỐ HOÁ";
   const description =
     sectionData?.description ||
-    "Hệ sinh thái Sáng tạo, Công nghệ & R&D hàng đầu. Chúng tôi kiến tạo vị thế thương hiệu độc bản bằng trải nghiệm 3D tương tác, hệ thống phần mềm chuẩn Enterprise và giải pháp AI thế hệ mới.";
-  const ctaText = sectionData?.ctaText || "Khám Phá Dự Án";
-  const ctaLink = sectionData?.ctaLink || "/portfolio";
+    "Đối tác sáng tạo & công nghệ, đồng hành cùng doanh nghiệp xây dựng thương hiệu, tăng trưởng và chuyển đổi số bền vững.";
+  const ctaText = sectionData?.ctaText || "Khám phá dịch vụ";
+  const ctaLink = sectionData?.ctaLink || "/services";
 
-  const [mount3D, setMount3D] = React.useState(false);
+  const [mount3D, setMount3D] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-  React.useEffect(() => {
-    // Defer heavy 3D WebGL bundle until after main thread completes critical paint
+  useEffect(() => {
     if ("requestIdleCallback" in window) {
-      const id = (window as any).requestIdleCallback(() => setMount3D(true), { timeout: 1200 });
+      const id = (window as any).requestIdleCallback(
+        () => setMount3D(true),
+        { timeout: 1000 }
+      );
       return () => (window as any).cancelIdleCallback(id);
     } else {
-      const timer = setTimeout(() => setMount3D(true), 400);
+      const timer = setTimeout(() => setMount3D(true), 350);
       return () => clearTimeout(timer);
     }
   }, []);
 
   const containerRef = useRef<HTMLElement>(null);
-  const pillRef = useRef<HTMLDivElement>(null);
-  const title1Ref = useRef<HTMLSpanElement>(null);
-  const title2Ref = useRef<HTMLSpanElement>(null);
-  const descRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const metricsRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out", clearProps: "transform" },
-      });
-
-      tl.fromTo(
-        pillRef.current,
-        { opacity: 0, y: -18 },
-        { opacity: 1, y: 0, duration: 0.75, delay: 0.15 }
-      )
-        .fromTo(
-          title1Ref.current,
-          { opacity: 0, y: 36 },
-          { opacity: 1, y: 0, duration: 0.95 },
-          "-=0.5"
-        )
-        .fromTo(
-          title2Ref.current,
-          { opacity: 0, y: 36 },
-          { opacity: 1, y: 0, duration: 0.95 },
-          "-=0.7"
-        )
-        .fromTo(
-          descRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.6"
-        )
-        .fromTo(
-          ctaRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.55"
-        )
-        .fromTo(
-          metricsRef.current,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.85 },
-          "-=0.5"
-        );
+      gsap.fromTo(
+        leftColRef.current,
+        { opacity: 0, x: -35 },
+        { opacity: 1, x: 0, duration: 0.9, ease: "power3.out", delay: 0.1 }
+      );
+      gsap.fromTo(
+        rightColRef.current,
+        { opacity: 0, scale: 0.92, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: "power3.out", delay: 0.25 }
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -114,152 +92,226 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
     <section
       id="hero-section"
       ref={containerRef}
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#0A0A0A] bg-architectural-grid border-b border-[#1F1F23]"
+      className="relative w-full min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#050508] border-b border-[#1A1A22]"
     >
-      {/* 3D WebGL Canvas Layer - Deferred */}
+      {/* 3D WebGL Background Layer (Clean particle wave, no birds) */}
       {mount3D && <Hero3DScene />}
 
-      {/* Atmospheric Radial Gradients & Readability Vignette */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 w-[500px] h-[500px] bg-[#007BA7]/14 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 w-[500px] h-[500px] bg-[#FF2D95]/12 rounded-full blur-[150px] pointer-events-none" />
+      {/* Atmospheric Neon Gradients */}
+      <div className="absolute top-1/4 left-1/6 -translate-x-1/2 w-[520px] h-[520px] bg-[#00E5FF]/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/6 translate-x-1/2 w-[550px] h-[550px] bg-[#FF2D95]/12 rounded-full blur-[170px] pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 50% 45%, rgba(10,10,10,0.18) 0%, rgba(10,10,10,0.35) 70%, rgba(10,10,10,0.75) 100%)",
+            "radial-gradient(circle at 60% 40%, transparent 20%, rgba(5,5,8,0.5) 70%, rgba(5,5,8,0.95) 100%)",
         }}
       />
 
       {/* Top Spacer for Fixed Header */}
-      <div className="h-24 md:h-28 shrink-0" />
+      <div className="h-20 sm:h-24 md:h-28 shrink-0" />
 
-      {/* Main Center Hero Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col items-center justify-center text-center py-8">
-        {/* Status & Tagline Pill */}
-        <div
-          ref={pillRef}
-          className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#121215]/90 border border-[#292929] mb-7 backdrop-blur-md shadow-[0_0_30px_rgba(0,123,167,0.12)]"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#007BA7] animate-ping" />
-          <Sparkles className="w-3.5 h-3.5 text-[#FF2D95]" />
-          <span className="text-[11px] font-mono tracking-[0.22em] text-[#D4D4D8] uppercase">
-            {subtitle}
-          </span>
-        </div>
-
-        {/* Brand Master Title */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.4rem] font-black tracking-tight leading-[1.04] mb-6 max-w-5xl">
-          <span ref={title1Ref} className="block text-gradient-silver drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)]">
-            NGUYÊN AGENCY.
-          </span>
-          <span ref={title2Ref} className="block text-gradient-brand mt-1.5">
-            {title}
-          </span>
-        </h1>
-
-        {/* Editorial Lead Copy */}
-        <p
-          ref={descRef}
-          className="text-sm sm:text-base md:text-lg text-[#A1A1AA] max-w-2xl font-normal leading-relaxed mb-9 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
-        >
-          {description}
-        </p>
-
-        {/* Primary & Secondary CTAs */}
-        <div ref={ctaRef} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-          <Link
-            href={ctaLink}
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white font-semibold text-xs uppercase tracking-[0.18em] transition-all duration-300 hover:shadow-[0_0_32px_rgba(255,45,149,0.45)] hover:-translate-y-0.5 flex items-center justify-center gap-2.5 group"
+      {/* Main 2-Column Hero Content Grid (Matching Image 3) */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex items-center py-6 md:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
+          {/* LEFT COLUMN: Typography, Cards, CTAs */}
+          <div
+            ref={leftColRef}
+            className="lg:col-span-7 flex flex-col items-start text-left z-20"
           >
-            <span>{ctaText}</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+            {/* 1. Pill Badge */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#0D1117]/90 border border-[#00E5FF]/40 mb-5 sm:mb-6 backdrop-blur-md shadow-[0_0_25px_rgba(0,229,255,0.2)]">
+              <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-[#00A3FF] to-[#FF2D95] p-0.5 flex items-center justify-center shadow-sm">
+                <span className="text-[11px] font-black italic text-white leading-none">
+                  N
+                </span>
+              </div>
+              <span className="font-bold text-white text-xs tracking-wider">
+                NGUYÊN AGENCY
+              </span>
+              <span className="text-[#52525B]">|</span>
+              <span className="text-[11px] sm:text-xs text-[#A1A1AA] font-medium">
+                {subtitle}
+              </span>
+            </div>
 
-          <Link
-            href="/contact"
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#121214]/90 border border-[#292929] hover:border-[#007BA7] text-[#E4E4E7] hover:text-white font-semibold text-xs uppercase tracking-[0.18em] transition-all duration-300 hover:bg-[#18181C] flex items-center justify-center gap-2"
+            {/* 2. Main Headline */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl xl:text-[4.2rem] font-black tracking-tight leading-[1.08] mb-4 text-white uppercase">
+              <span className="block drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)]">
+                NGUYÊN AGENCY
+              </span>
+              <span className="relative inline-block mt-1">
+                <span className="bg-gradient-to-r from-[#00E5FF] via-[#00A3FF] to-[#FF2D95] bg-clip-text text-transparent">
+                  {title}
+                </span>
+                {/* Curved magenta brush stroke underline under SỐ HOÁ */}
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 sm:h-4 text-[#FF2D95] opacity-90 pointer-events-none"
+                  viewBox="0 0 300 20"
+                  fill="none"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M 5,14 Q 150,2 295,12"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h1>
+
+            {/* 3. Subtitle Paragraph */}
+            <p className="text-xs sm:text-sm md:text-base text-[#D4D4D8] max-w-xl font-normal leading-relaxed mb-6 sm:mb-7 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+              {description}
+            </p>
+
+            {/* 4. 3 Feature Cards (Website, Marketing, AI & Automation) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full mb-7 sm:mb-8">
+              {/* Card 1: Thiết kế Website */}
+              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
+                  <Monitor className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
+                    Thiết kế Website
+                  </h4>
+                  <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
+                    Chuẩn SEO - Hiệu quả
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: Marketing Online */}
+              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
+                  <Megaphone className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
+                    Marketing Online
+                  </h4>
+                  <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
+                    Tăng nhận diện - Thu hút khách
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3: Giải pháp AI & Automation */}
+              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
+                  <Layers className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
+                    Giải pháp AI & Automation
+                  </h4>
+                  <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
+                    Tối ưu vận hành - Bứt phá hiệu suất
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* 5. CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
+              <Link
+                href={ctaLink}
+                className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-[#00A3FF] via-[#007BA7] to-[#FF2D95] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_32px_rgba(255,45,149,0.5)] hover:scale-105 flex items-center justify-center gap-2 group"
+              >
+                <span>{ctaText}</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => setIsVideoOpen(true)}
+                className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#121217]/90 hover:bg-[#1A1A22] border border-white/20 hover:border-white/40 text-white font-semibold text-xs tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 backdrop-blur-md"
+              >
+                <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-white">
+                  <Play className="w-2.5 h-2.5 fill-current ml-0.5" />
+                </div>
+                <span>Xem video giới thiệu</span>
+              </button>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: 3D Mascot Character on Glowing Laser Pedestal */}
+          <div
+            ref={rightColRef}
+            className="lg:col-span-5 relative flex items-center justify-center mt-4 lg:mt-0"
           >
-            <span>Khởi Tạo Dự Án</span>
-          </Link>
-        </div>
-      </div>
+            {/* Mascot Container with Floating Animation */}
+            <div className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[540px] aspect-square flex items-center justify-center">
+              {/* Backlight Neon Halos */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/25 via-[#007BA7]/20 to-[#FF2D95]/25 rounded-full blur-[80px] pointer-events-none animate-mascot-aura" />
 
-      {/* Bottom Telemetry Strip & Infinite Capability Ticker */}
-      <div ref={metricsRef} className="relative z-10 w-full mt-auto">
-        <div className="max-w-7xl mx-auto px-6 pb-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-            <div className="p-4 rounded-2xl bg-[#121214]/85 border border-[#242429] hover:border-[#007BA7]/40 transition-colors backdrop-blur-md flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#007BA7]/10 border border-[#007BA7]/25 flex items-center justify-center text-[#007BA7] shrink-0">
-                <Layers className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <span className="text-[10px] font-mono tracking-wider text-[#71717A] uppercase block">
-                  HỆ SINH THÁI DỊCH VỤ
-                </span>
-                <span className="text-sm md:text-base font-bold text-white font-mono">
-                  24 Giải Pháp Chuyên Sâu
-                </span>
-              </div>
-            </div>
+              {/* Glowing Floor Pedestal Rings (Blue & Pink) */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[75%] h-[24%] rounded-[100%] bg-gradient-to-r from-[#00E5FF]/40 via-[#007BA7]/60 to-[#FF2D95]/40 blur-md pointer-events-none" />
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[65%] h-[18%] rounded-[100%] border-2 border-[#00E5FF] shadow-[0_0_35px_rgba(0,229,255,0.8),inset_0_0_20px_rgba(0,229,255,0.6)] pointer-events-none" />
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[52%] h-[14%] rounded-[100%] border border-[#FF2D95] shadow-[0_0_25px_rgba(255,45,149,0.7)] pointer-events-none" />
 
-            <div className="p-4 rounded-2xl bg-[#121214]/85 border border-[#242429] hover:border-[#007BA7]/40 transition-colors backdrop-blur-md flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#007BA7]/10 border border-[#007BA7]/25 flex items-center justify-center text-[#38BDF8] shrink-0">
-                <Cpu className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <span className="text-[10px] font-mono tracking-wider text-[#71717A] uppercase block">
-                  HIỆU NĂNG ĐỒ HỌA
-                </span>
-                <span className="text-sm md:text-base font-bold text-[#38BDF8] font-mono">
-                  60 FPS WebGL / Three.js
-                </span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-[#121214]/85 border border-[#242429] hover:border-[#FF2D95]/40 transition-colors backdrop-blur-md flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#FF2D95]/10 border border-[#FF2D95]/25 flex items-center justify-center text-[#FF2D95] shrink-0">
-                <Globe className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <span className="text-[10px] font-mono tracking-wider text-[#71717A] uppercase block">
-                  DỰ ÁN THỰC CHIẾN
-                </span>
-                <span className="text-sm md:text-base font-bold text-[#FF2D95] font-mono">
-                  50+ Doanh Nghiệp Hàng Đầu
-                </span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-[#121214]/85 border border-[#242429] hover:border-emerald-500/40 transition-colors backdrop-blur-md flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <span className="text-[10px] font-mono tracking-wider text-[#71717A] uppercase block">
-                  CAM KẾT VẬN HÀNH
-                </span>
-                <span className="text-sm md:text-base font-bold text-emerald-400 font-mono">
-                  99.9% SLA & Bảo Mật
-                </span>
+              {/* High-res Mascot Graphic */}
+              <div className="relative z-10 w-full h-full animate-mascot-float flex items-center justify-center">
+                <Image
+                  src="/images/hero-mascot-feathered.png"
+                  alt="NGUYÊN AGENCY AI Mascot"
+                  width={544}
+                  height={534}
+                  priority
+                  className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.45)]"
+                />
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Architectural Capability Marquee Strip */}
-        <div className="w-full border-t border-[#1F1F23] bg-[#0D0D10]/90 py-3.5 overflow-hidden">
-          <div className="animate-marquee flex items-center">
-            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, idx) => (
-              <div key={idx} className="flex items-center shrink-0">
-                <span className="text-[11px] font-mono tracking-[0.22em] text-[#71717A] uppercase px-6">
-                  {item}
-                </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#007BA7] to-[#FF2D95]" />
-              </div>
-            ))}
-          </div>
+      {/* Architectural Capability Marquee Strip */}
+      <div className="relative z-20 w-full border-t border-[#1F1F26] bg-[#0A0A0E]/95 py-3 overflow-hidden">
+        <div className="animate-marquee flex items-center">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, idx) => (
+            <div key={idx} className="flex items-center shrink-0">
+              <span className="text-[11px] font-mono tracking-[0.2em] text-[#8E8E93] uppercase px-6">
+                {item}
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#00E5FF] to-[#FF2D95]" />
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Video Intro Modal */}
+      {isVideoOpen && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="relative w-full max-w-4xl bg-[#0D0D12] border border-[#26262F] rounded-3xl p-6 shadow-2xl overflow-hidden">
+            <div className="flex items-center justify-between pb-4 border-b border-[#202028] mb-4">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#00E5FF] animate-ping" />
+                <h3 className="text-white font-bold font-mono text-sm uppercase">
+                  NGUYÊN AGENCY • Brand Showcase Video
+                </h3>
+              </div>
+              <button
+                onClick={() => setIsVideoOpen(false)}
+                className="p-1.5 rounded-xl text-[#71717A] hover:text-white hover:bg-[#1A1A22] transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black border border-[#222]">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="NGUYÊN AGENCY Reel"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
