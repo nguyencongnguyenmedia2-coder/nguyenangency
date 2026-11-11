@@ -44,7 +44,7 @@ export function DetailBreadcrumbs({ items }: { items: BreadcrumbItem[] }) {
       position: idx + 1,
       name: item.label,
       ...(item.href
-        ? { item: `https://nguyenagency.vn${item.href}` }
+        ? { item: `https://nguyenangency.vercel.app${item.href}` }
         : {}),
     })),
   };

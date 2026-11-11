@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "Web Application",
     "Next.js Developer",
   ],
-  authors: [{ name: "NGUYÊN AGENCY", url: "https://nguyenagency.vn" }],
+  authors: [{ name: "NGUYÊN AGENCY", url: "https://nguyenangency.vercel.app" }],
   creator: "NGUYÊN AGENCY",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://nguyenangency.vercel.app"
@@ -119,7 +119,7 @@ export default async function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": settings.brandName || "NGUYÊN AGENCY",
-    "url": "https://nguyenagency.vn",
+    "url": "https://nguyenangency.vercel.app",
     "logo": "https://nguyenangency.vercel.app/images/og-image.jpg",
     "image": "https://nguyenangency.vercel.app/images/og-image.jpg",
     "description": settings.brandDescription,

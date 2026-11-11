@@ -51,7 +51,7 @@ export async function generateMetadata({
 
   const title = `${item.metaTitle || item.title} – Case Study | NGUYÊN AGENCY`;
   const description = item.metaDescription || item.shortDesc;
-  const canonicalUrl = `https://nguyenagency.vn/portfolio/${item.slug}`;
+  const canonicalUrl = `https://nguyenangency.vercel.app/portfolio/${item.slug}`;
 
   return {
     title,
@@ -193,7 +193,7 @@ export default async function PortfolioDetailPage({
     creator: {
       "@type": "Organization",
       name: "NGUYÊN AGENCY",
-      url: "https://nguyenagency.vn",
+      url: "https://nguyenangency.vercel.app",
     },
     ...(hasValidLiveUrl ? { url: item.liveUrl } : {}),
   };

@@ -54,7 +54,7 @@ export async function generateMetadata({
     service.category?.name || service.group
   }`;
   const description = service.metaDescription || service.shortDesc;
-  const canonicalUrl = `https://nguyenagency.vn/services/${service.slug}`;
+  const canonicalUrl = `https://nguyenangency.vercel.app/services/${service.slug}`;
   const ogImage =
     service.thumbnail ||
     "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80";
@@ -251,7 +251,7 @@ export default async function ServiceDetailPage({
     provider: {
       "@type": "Organization",
       name: "NGUYÊN AGENCY",
-      url: "https://nguyenagency.vn",
+      url: "https://nguyenangency.vercel.app",
     },
     serviceType: service.category?.name || service.group,
     areaServed: "VN",
