@@ -82,15 +82,7 @@ export async function POST(req: NextRequest) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // 1. Save locally to public/uploads/<safeFolder>/<uniqueFileName>
-    const uploadDir = path.join(process.cwd(), "public", "uploads", safeFolder);
-    await mkdir(uploadDir, { recursive: true });
-    const fullLocalPath = path.join(uploadDir, uniqueFileName);
-    await writeFile(fullLocalPath, buffer);
-
-    const localUrl = `/uploads/${safeFolder}/${uniqueFileName}`;
-
-    // 2. Also upload to Supabase Storage bucket `nguyen-agency-media`
+    // 1. Upload to Supabase Storage bucket `nguyen-agency-media` (Cloud Storage - persistent across serverless instances)
     const storagePath = `${safeFolder}/${uniqueFileName}`;
     const supaRes = await uploadToSupabaseBucket(
       "nguyen-agency-media",
@@ -99,9 +91,26 @@ export async function POST(req: NextRequest) {
       mimeType
     );
 
-    // Prefer localUrl for guaranteed immediate Next.js static serving + store supabaseUrl if available
+    // 2. Best-effort local filesystem cache (only works on local dev or writable /tmp, won't crash on read-only Vercel)
+    let localUrl = `/uploads/${safeFolder}/${uniqueFileName}`;
+    try {
+      const uploadDir = path.join(process.cwd(), "public", "uploads", safeFolder);
+      await mkdir(uploadDir, { recursive: true });
+      const fullLocalPath = path.join(uploadDir, uniqueFileName);
+      await writeFile(fullLocalPath, buffer);
+    } catch (fsErr) {
+      // Ignored on serverless environments where /var/task is read-only
+      console.warn("[Upload] Local filesystem write skipped (serverless environment):", fsErr);
+    }
+
+    // Always prefer cloud Supabase Public URL if uploaded, fallback to local URL
     const finalUrl = supaRes.publicUrl || localUrl;
     const supabasePublicUrl = supaRes.publicUrl || null;
+
+    if (!supaRes.success && !finalUrl.startsWith("http")) {
+      // If Supabase upload failed and filesystem is read-only, inform user
+      console.warn("[Upload] Supabase upload error:", supaRes.error);
+    }
 
     const assetTitle = titleRaw || file.name;
     const type = mimeType.startsWith("video")

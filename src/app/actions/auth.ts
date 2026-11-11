@@ -19,29 +19,41 @@ export async function loginUser(formData: FormData) {
     email === "admin@nguyenagency.vn" &&
     (password === "Nguyen@2026" || password === "admin123")
   ) {
+    let adminUserId = "cmw21ab3q0005524rrpnorhuj";
+    try {
+      const existingAdmin = await prisma.user.findUnique({
+        where: { email: "admin@nguyenagency.vn" },
+        select: { id: true, name: true },
+      });
+      if (existingAdmin) {
+        adminUserId = existingAdmin.id;
+        await prisma.user.update({
+          where: { id: existingAdmin.id },
+          data: { lastLoginAt: new Date() },
+        });
+      } else {
+        const createdAdmin = await prisma.user.create({
+          data: {
+            id: adminUserId,
+            email: "admin@nguyenagency.vn",
+            name: "Nguyên Director (Super Admin)",
+            passwordHash: "$2a$10$abcdefghijklmnopqrstuv",
+            roleName: "SUPER_ADMIN",
+            isActive: true,
+          },
+        });
+        adminUserId = createdAdmin.id;
+      }
+    } catch (err) {
+      console.warn("[Auth bypass] User update warning:", err);
+    }
+
     await setSessionCookie({
-      userId: "usr_super_admin_01",
+      userId: adminUserId,
       email: "admin@nguyenagency.vn",
       name: "Nguyên Director (Super Admin)",
       role: "SUPER_ADMIN",
     });
-
-    try {
-      await prisma.user.upsert({
-        where: { email: "admin@nguyenagency.vn" },
-        update: { lastLoginAt: new Date() },
-        create: {
-          id: "usr_super_admin_01",
-          email: "admin@nguyenagency.vn",
-          name: "Nguyên Director (Super Admin)",
-          passwordHash: "$2a$10$abcdefghijklmnopqrstuv",
-          roleName: "SUPER_ADMIN",
-          isActive: true,
-        },
-      });
-    } catch {
-      // Bỏ qua lỗi DB nếu SQLite đang ở chế độ read-only trên Lambda
-    }
 
     return { success: true, redirectUrl: redirectTo || "/admin" };
   }
