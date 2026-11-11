@@ -155,14 +155,18 @@ export default async function HomePage() {
               />
             );
           default:
-            // Render custom dynamic section created by Admin
+            // Render custom dynamic section created by Admin (with optional image)
             return (
               <section
                 key={sec.id}
                 className="py-24 px-6 bg-[#0A0A0A] border-b border-[#292929] text-white"
               >
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-                  <div className="max-w-2xl space-y-4">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 items-center gap-8">
+                  <div
+                    className={`${
+                      sec.mediaUrl ? "lg:col-span-7" : "lg:col-span-12"
+                    } space-y-5`}
+                  >
                     {sec.subtitle && (
                       <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#007BA7] block">
                         {sec.subtitle}
@@ -172,18 +176,30 @@ export default async function HomePage() {
                       {sec.title}
                     </h2>
                     {sec.description && (
-                      <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                      <p className="text-sm sm:text-base text-[#A1A1AA] leading-relaxed max-w-2xl">
                         {sec.description}
                       </p>
                     )}
+                    {sec.ctaText && sec.ctaLink && (
+                      <div className="pt-2">
+                        <a
+                          href={sec.ctaLink}
+                          className="inline-block px-6 py-3.5 rounded-full bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white text-xs font-mono font-bold uppercase tracking-wider shrink-0"
+                        >
+                          {sec.ctaText}
+                        </a>
+                      </div>
+                    )}
                   </div>
-                  {sec.ctaText && sec.ctaLink && (
-                    <a
-                      href={sec.ctaLink}
-                      className="px-6 py-3.5 rounded-full bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white text-xs font-mono font-bold uppercase tracking-wider shrink-0"
-                    >
-                      {sec.ctaText}
-                    </a>
+                  {sec.mediaUrl && (
+                    <div className="lg:col-span-5 flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={sec.mediaUrl}
+                        alt={sec.title}
+                        className="w-full max-w-md h-auto rounded-2xl object-contain"
+                      />
+                    </div>
                   )}
                 </div>
               </section>

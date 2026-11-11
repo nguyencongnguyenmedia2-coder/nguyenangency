@@ -19,7 +19,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// 3D Cyber Wave & Particle Canvas (Chim bay đã được xóa 100%)
+// 3D Cyber Wave & Particle Canvas
 const Hero3DScene = dynamic(() => import("@/components/3d/Hero3DScene"), {
   ssr: false,
   loading: () => null,
@@ -36,15 +36,80 @@ const MARQUEE_ITEMS = [
   "TĂNG TRƯỞNG & CHUYỂN ĐỔI SỐ BỀN VỮNG",
 ];
 
+const DEFAULT_CARDS = [
+  {
+    title: "Thiết kế Website",
+    desc: "Chuẩn SEO - Hiệu quả",
+  },
+  {
+    title: "Marketing Online",
+    desc: "Tăng nhận diện - Thu hút khách",
+  },
+  {
+    title: "Giải pháp AI & Automation",
+    desc: "Tối ưu vận hành - Bứt phá hiệu suất",
+  },
+];
+
+function parseHeroContent(raw?: string | null) {
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    return typeof parsed === "object" && parsed !== null ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function getEmbedYoutubeUrl(url: string): string {
+  if (!url) return "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1";
+  try {
+    if (url.includes("youtube.com/watch")) {
+      const u = new URL(url);
+      const v = u.searchParams.get("v");
+      if (v) return `https://www.youtube-nocookie.com/embed/${v}?autoplay=1`;
+    }
+    if (url.includes("youtu.be/")) {
+      const id = url.split("youtu.be/")[1]?.split("?")[0];
+      if (id) return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+    }
+  } catch {
+    // ignore
+  }
+  return url;
+}
+
 export default function HeroSection({ sectionData }: { sectionData?: any }) {
+  const custom = parseHeroContent(sectionData?.content);
+
+  const badgeBrand = custom.badgeBrand || "NGUYÊN AGENCY";
   const subtitle =
     sectionData?.subtitle || "Digital Creative & Tech Solutions";
+  const brandHeadline = custom.brandHeadline || "NGUYÊN AGENCY";
   const title = sectionData?.title || "VƯỢT CHUẨN SỐ HOÁ";
   const description =
     sectionData?.description ||
     "Đối tác sáng tạo & công nghệ, đồng hành cùng doanh nghiệp xây dựng thương hiệu, tăng trưởng và chuyển đổi số bền vững.";
   const ctaText = sectionData?.ctaText || "Khám phá dịch vụ";
   const ctaLink = sectionData?.ctaLink || "/services";
+
+  const videoBtnText = custom.videoBtnText || "Xem video giới thiệu";
+  const videoUrl =
+    custom.videoUrl ||
+    "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1";
+
+  const heroImage =
+    sectionData?.mediaUrl && sectionData.mediaUrl.trim() !== ""
+      ? sectionData.mediaUrl.trim()
+      : "/images/mascot-character-transparent.png";
+
+  const blendMode: "screen" | "normal" =
+    custom.blendMode === "normal" ? "normal" : "screen";
+
+  const cards =
+    Array.isArray(custom.cards) && custom.cards.length === 3
+      ? custom.cards
+      : DEFAULT_CARDS;
 
   const [mount3D, setMount3D] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -81,12 +146,21 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
       gsap.fromTo(
         rightColRef.current,
         { opacity: 0, scale: 0.92, y: 30 },
-        { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: "power3.out", delay: 0.25 }
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1.1,
+          ease: "power3.out",
+          delay: 0.25,
+        }
       );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
+
+  const cardIcons = [Monitor, Megaphone, Layers];
 
   return (
     <section
@@ -94,7 +168,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
       ref={containerRef}
       className="relative w-full min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#050508] border-b border-[#1A1A22]"
     >
-      {/* 3D WebGL Background Layer (Clean particle wave, no birds) */}
+      {/* 3D WebGL Background Layer */}
       {mount3D && <Hero3DScene />}
 
       {/* Atmospheric Neon Gradients */}
@@ -111,7 +185,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
       {/* Top Spacer for Fixed Header */}
       <div className="h-20 sm:h-24 md:h-28 shrink-0" />
 
-      {/* Main 2-Column Hero Content Grid (Matching Image 3) */}
+      {/* Main 2-Column Hero Content Grid */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex items-center py-6 md:py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
           {/* LEFT COLUMN: Typography, Cards, CTAs */}
@@ -127,7 +201,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
                 </span>
               </div>
               <span className="font-bold text-white text-xs tracking-wider">
-                NGUYÊN AGENCY
+                {badgeBrand}
               </span>
               <span className="text-[#52525B]">|</span>
               <span className="text-[11px] sm:text-xs text-[#A1A1AA] font-medium">
@@ -138,13 +212,13 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
             {/* 2. Main Headline */}
             <h1 className="text-3xl sm:text-5xl md:text-6xl xl:text-[4.2rem] font-black tracking-tight leading-[1.08] mb-4 text-white uppercase">
               <span className="block drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)]">
-                NGUYÊN AGENCY
+                {brandHeadline}
               </span>
               <span className="relative inline-block mt-1">
                 <span className="bg-gradient-to-r from-[#00E5FF] via-[#00A3FF] to-[#FF2D95] bg-clip-text text-transparent">
                   {title}
                 </span>
-                {/* Curved magenta brush stroke underline under SỐ HOÁ */}
+                {/* Curved magenta brush stroke underline */}
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 sm:h-4 text-[#FF2D95] opacity-90 pointer-events-none"
                   viewBox="0 0 300 20"
@@ -166,52 +240,29 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
               {description}
             </p>
 
-            {/* 4. 3 Feature Cards (Website, Marketing, AI & Automation) */}
+            {/* 4. 3 Feature Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full mb-7 sm:mb-8">
-              {/* Card 1: Thiết kế Website */}
-              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
-                  <Monitor className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
-                    Thiết kế Website
-                  </h4>
-                  <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
-                    Chuẩn SEO - Hiệu quả
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 2: Marketing Online */}
-              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
-                  <Megaphone className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
-                    Marketing Online
-                  </h4>
-                  <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
-                    Tăng nhận diện - Thu hút khách
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 3: Giải pháp AI & Automation */}
-              <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
-                  <Layers className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
-                    Giải pháp AI & Automation
-                  </h4>
-                  <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
-                    Tối ưu vận hành - Bứt phá hiệu suất
-                  </p>
-                </div>
-              </div>
+              {cards.map((card: { title: string; desc: string }, idx: number) => {
+                const IconComp = cardIcons[idx % cardIcons.length];
+                return (
+                  <div
+                    key={idx}
+                    className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
+                      <IconComp className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
+                        {card.title}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
             {/* 5. CTA Buttons */}
@@ -232,32 +283,41 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
                 <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-white">
                   <Play className="w-2.5 h-2.5 fill-current ml-0.5" />
                 </div>
-                <span>Xem video giới thiệu</span>
+                <span>{videoBtnText}</span>
               </button>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: 3D Mascot Character with Full Hologram HUD Panels & Pedestal */}
+          {/* RIGHT COLUMN: 3D Mascot Character / Custom Uploaded Image */}
           <div
             ref={rightColRef}
             className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0"
           >
-            {/* Mascot Container with Floating Animation */}
             <div className="relative w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px] aspect-[984/1024] flex items-center justify-center">
               {/* Backlight Neon Halos */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/20 via-[#007BA7]/15 to-[#FF2D95]/20 rounded-full blur-[90px] pointer-events-none animate-mascot-aura" />
 
-              {/* Full High-res Mascot with Holographic HUD Panels & Laser Pedestal - NO BLACK BACKGROUND */}
+              {/* Mascot / Custom Banner Graphic */}
               <div className="relative z-10 w-full h-full animate-mascot-float flex items-center justify-center">
-                <Image
-                  src="/images/mascot-character-transparent.png"
-                  alt="NGUYÊN AGENCY AI Mascot & Hologram Solutions"
-                  width={984}
-                  height={1024}
-                  priority
-                  className="w-full h-auto object-contain drop-shadow-[0_20px_60px_rgba(0,163,255,0.45)]"
-                  style={{ mixBlendMode: "screen" }}
-                />
+                {heroImage.startsWith("/") ? (
+                  <Image
+                    src={heroImage}
+                    alt={title}
+                    width={984}
+                    height={1024}
+                    priority
+                    className="w-full h-auto object-contain drop-shadow-[0_20px_60px_rgba(0,163,255,0.45)]"
+                    style={{ mixBlendMode: blendMode }}
+                  />
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={heroImage}
+                    alt={title}
+                    className="w-full h-auto max-h-[540px] object-contain drop-shadow-[0_20px_60px_rgba(0,163,255,0.45)]"
+                    style={{ mixBlendMode: blendMode }}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -286,7 +346,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-[#00E5FF] animate-ping" />
                 <h3 className="text-white font-bold font-mono text-sm uppercase">
-                  NGUYÊN AGENCY • Brand Showcase Video
+                  NGUYÊN AGENCY • {videoBtnText}
                 </h3>
               </div>
               <button
@@ -297,13 +357,22 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
               </button>
             </div>
             <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black border border-[#222]">
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="NGUYÊN AGENCY Reel"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              {videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm") ? (
+                <video
+                  src={videoUrl}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <iframe
+                  className="w-full h-full"
+                  src={getEmbedYoutubeUrl(videoUrl)}
+                  title="NGUYÊN AGENCY Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              )}
             </div>
           </div>
         </div>
