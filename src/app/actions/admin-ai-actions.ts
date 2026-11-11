@@ -386,3 +386,4 @@ export async function generateCMSContent(params: GenerateParams) {
     notice: "Đang sử dụng bộ máy sinh nội dung độc quyền NGUYÊN Agency. Bạn có thể cài đặt Google Gemini API Key để mở khóa AI động cao cấp.",
   };
 }
+
