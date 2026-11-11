@@ -140,8 +140,9 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="vi" className="dark">
+    <html lang="vi" className="dark" style={{ backgroundColor: "#0A0A0A", colorScheme: "dark" }}>
       <head>
+        <style dangerouslySetInnerHTML={{ __html: `html,body{background-color:#0A0A0A!important;color:#FFFFFF;}` }} />
         {/* Favicon & App Icons */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -153,6 +154,7 @@ export default async function RootLayout({
         <meta name="theme-color" content="#007BA7" />
         <meta name="msapplication-TileColor" content="#007BA7" />
         <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
+        <meta name="color-scheme" content="dark" />
         {/* OpenGraph Image */}
         <meta
           property="og:image"
