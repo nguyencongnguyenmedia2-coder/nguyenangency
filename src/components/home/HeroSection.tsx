@@ -40,6 +40,19 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
   const ctaText = sectionData?.ctaText || "Khám Phá Dự Án";
   const ctaLink = sectionData?.ctaLink || "/portfolio";
 
+  const [mount3D, setMount3D] = React.useState(false);
+
+  React.useEffect(() => {
+    // Defer heavy 3D WebGL bundle until after main thread completes critical paint
+    if ("requestIdleCallback" in window) {
+      const id = (window as any).requestIdleCallback(() => setMount3D(true), { timeout: 1200 });
+      return () => (window as any).cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(() => setMount3D(true), 400);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   const containerRef = useRef<HTMLElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
   const title1Ref = useRef<HTMLSpanElement>(null);
@@ -103,8 +116,8 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
       ref={containerRef}
       className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#0A0A0A] bg-architectural-grid border-b border-[#1F1F23]"
     >
-      {/* 3D WebGL Canvas Layer */}
-      <Hero3DScene />
+      {/* 3D WebGL Canvas Layer - Deferred */}
+      {mount3D && <Hero3DScene />}
 
       {/* Atmospheric Radial Gradients & Readability Vignette */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 w-[500px] h-[500px] bg-[#007BA7]/14 rounded-full blur-[150px] pointer-events-none" />

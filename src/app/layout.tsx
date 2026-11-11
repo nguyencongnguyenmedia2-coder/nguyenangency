@@ -2,11 +2,19 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import CustomCursor from "@/components/motion/CustomCursor";
 import SmoothScrollProvider from "@/components/motion/SmoothScrollProvider";
 import ScrollProgressIndicator from "@/components/motion/ScrollProgressIndicator";
-import MascotSupportAssistant from "@/components/mascot/MascotSupportAssistant";
+import dynamic from "next/dynamic";
 import { getPublicSiteSettings, type PublicSiteSettings } from "@/lib/site-settings";
+
+const MascotSupportAssistant = dynamic(
+  () => import("@/components/mascot/MascotSupportAssistant"),
+  { ssr: false }
+);
+const CustomCursor = dynamic(
+  () => import("@/components/motion/CustomCursor"),
+  { ssr: false }
+);
 
 export const revalidate = 60;
 
