@@ -137,7 +137,7 @@ export default function HomepageBuilderClient({
         subtitle: "01 • KIẾN TẠO. PHÁT TRIỂN. CHUYỂN HÓA.",
         description:
           "Đối tác sáng tạo & công nghệ, đồng hành cùng doanh nghiệp xây dựng thương hiệu, tăng trưởng và chuyển đổi số bền vững.",
-        mediaUrl: "/images/mascot-character-transparent.png",
+        mediaUrl: "/images/mascot-character-transparent-v2.png",
         ctaText: "XEM DỰ ÁN",
         ctaLink: "/portfolio",
         order: 1,
@@ -370,7 +370,7 @@ export default function HomepageBuilderClient({
           const previewImg =
             sec.mediaUrl ||
             (sec.sectionKey === "HERO"
-              ? "/images/mascot-character-transparent.png"
+              ? "/images/mascot-character-transparent-v2.png"
               : null);
 
           return (
@@ -612,11 +612,11 @@ export default function HomepageBuilderClient({
                   defaultValue={
                     editingItem?.mediaUrl ||
                     (isHeroModal
-                      ? "/images/mascot-character-transparent.png"
+                      ? "/images/mascot-character-transparent-v2.png"
                       : "")
                   }
                   folder="homepage"
-                  placeholder="/images/mascot-character-transparent.png hoặc tải file từ máy..."
+                  placeholder="/images/mascot-character-transparent-v2.png hoặc tải file từ máy..."
                 />
 
                 {isHeroModal && (
@@ -627,22 +627,22 @@ export default function HomepageBuilderClient({
                       </label>
                       <select
                         name="hero_blendMode"
-                        defaultValue={heroCustom.blendMode || "screen"}
+                        defaultValue={heroCustom.blendMode || "normal"}
                         className="w-full px-3 py-2 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
                       >
-                        <option value="screen">
-                          Tự động xóa nền đen (Screen Blend - Khuyên dùng)
-                        </option>
                         <option value="normal">
-                          Giữ nguyên gốc (Normal - Dùng cho ảnh PNG đã tách nền)
+                          Chuẩn sắc nét (Normal - Khuyên dùng cho ảnh PNG trong suốt)
+                        </option>
+                        <option value="screen">
+                          Tự động hòa trộn nền đen (Screen Blend)
                         </option>
                       </select>
                     </div>
                     <div className="flex items-end">
                       <p className="text-[11px] text-[#71717A] leading-relaxed">
-                        💡 Mẹo: Nếu bạn tải lên ảnh có nền màu đen, chế độ{" "}
-                        <strong className="text-[#00E5FF]">Tự động xóa nền đen</strong>{" "}
-                        sẽ giúp nhân vật hòa vào nền sao mà không bị khung vuông đen.
+                        💡 Mẹo: Ảnh Mascot mặc định đã được tách nền trong suốt 100% không viền đen. Bạn cũng có thể chọn{" "}
+                        <strong className="text-[#00E5FF]">Screen Blend</strong>{" "}
+                        nếu tải lên ảnh có nền đen thuần.
                       </p>
                     </div>
                   </div>

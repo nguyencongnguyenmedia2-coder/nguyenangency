@@ -98,13 +98,23 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
     custom.videoUrl ||
     "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1";
 
-  const heroImage =
+  let heroImage =
     sectionData?.mediaUrl && sectionData.mediaUrl.trim() !== ""
       ? sectionData.mediaUrl.trim()
-      : "/images/mascot-character-transparent.png";
+      : "/images/mascot-character-transparent-v2.png";
+
+  if (
+    heroImage === "/images/mascot-character-transparent.png" ||
+    heroImage === "/images/mascot-character-full.png" ||
+    heroImage === "/images/mascot-character-full.jpg" ||
+    heroImage === "/images/hero-mascot.jpg" ||
+    (heroImage.endsWith(".jpg") && heroImage.includes("mascot"))
+  ) {
+    heroImage = "/images/mascot-character-transparent-v2.png";
+  }
 
   const blendMode: "screen" | "normal" =
-    custom.blendMode === "normal" ? "normal" : "screen";
+    custom.blendMode === "screen" ? "screen" : "normal";
 
   const cards =
     Array.isArray(custom.cards) && custom.cards.length === 3
