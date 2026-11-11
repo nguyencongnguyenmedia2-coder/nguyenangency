@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
       mimeType
     );
 
-    // 2. Best-effort local filesystem cache (only works on local dev or writable /tmp, won't crash on read-only Vercel)
+    // 2. Best-effort local filesystem cache (only works on local dev, safely ignored on Vercel)
     let localUrl = `/uploads/${safeFolder}/${uniqueFileName}`;
     try {
       const uploadDir = path.join(process.cwd(), "public", "uploads", safeFolder);
@@ -103,14 +103,17 @@ export async function POST(req: NextRequest) {
       console.warn("[Upload] Local filesystem write skipped (serverless environment):", fsErr);
     }
 
-    // Always prefer cloud Supabase Public URL if uploaded, fallback to local URL
+    if (!supaRes.success && !supaRes.publicUrl) {
+      console.error("[Upload] Supabase upload failed:", supaRes.error);
+      return NextResponse.json(
+        { ok: false, error: `Lỗi tải file lên đám mây: ${supaRes.error || "Không thể upload"}` },
+        { status: 500 }
+      );
+    }
+
+    // Must use persistent cloud Supabase Public URL so that any client or Vercel instance can display it immediately
     const finalUrl = supaRes.publicUrl || localUrl;
     const supabasePublicUrl = supaRes.publicUrl || null;
-
-    if (!supaRes.success && !finalUrl.startsWith("http")) {
-      // If Supabase upload failed and filesystem is read-only, inform user
-      console.warn("[Upload] Supabase upload error:", supaRes.error);
-    }
 
     const assetTitle = titleRaw || file.name;
     const type = mimeType.startsWith("video")
