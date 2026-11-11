@@ -20,7 +20,7 @@ export const metadata = {
     "Trọn bộ dịch vụ truyền thông sáng tạo MEDIA và giải pháp phần mềm công nghệ cao TECH đạt chuẩn quốc tế.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 const FALLBACK_ALL_SERVICES = [
   {

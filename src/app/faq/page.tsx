@@ -8,7 +8,7 @@ export const metadata = {
     "Giải đáp toàn bộ thắc mắc về quy trình ký kết, công nghệ 3D Three.js, chi phí và chuyển giao mã nguồn tại NGUYÊN AGENCY.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function FAQPage() {
   let faqs: any[] = [];

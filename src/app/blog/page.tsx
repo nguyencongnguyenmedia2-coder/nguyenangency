@@ -10,7 +10,7 @@ export const metadata = {
   description: "Góc nhìn chuyên sâu về nghệ thuật thị giác, thiết kế 3D WebGL và kiến trúc hệ thống hiện đại.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function BlogPage() {
   let posts: any[] = [];

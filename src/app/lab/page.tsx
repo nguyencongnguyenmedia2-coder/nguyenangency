@@ -19,7 +19,7 @@ export const metadata = {
     "Trung tâm nghiên cứu sản phẩm số, công nghệ Generative AI, 3D Web Tools và nền tảng SaaS của NGUYÊN LAB.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function LabPage({
   searchParams,

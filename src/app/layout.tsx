@@ -8,7 +8,7 @@ import ScrollProgressIndicator from "@/components/motion/ScrollProgressIndicator
 import MascotSupportAssistant from "@/components/mascot/MascotSupportAssistant";
 import { getPublicSiteSettings, type PublicSiteSettings } from "@/lib/site-settings";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "NGUYÊN AGENCY – BEYOND DIGITAL | Premium Creative Digital Agency",

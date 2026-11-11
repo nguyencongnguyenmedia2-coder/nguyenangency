@@ -10,7 +10,7 @@ export const metadata = {
     "Bộ sưu tập các dự án kỹ thuật số, nhận diện thương hiệu độc bản và ứng dụng Web 3D tiêu biểu do NGUYÊN AGENCY thực hiện.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function PortfolioPage({
   searchParams,

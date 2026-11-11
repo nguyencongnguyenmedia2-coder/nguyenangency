@@ -10,7 +10,7 @@ export const metadata = {
     "Bảng giá các gói dịch vụ Branding, Thiết kế 3D Website, Web Application và Phần mềm chuyển giao mã nguồn trọn gói.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function PricingPage() {
   let packages: any[] = [];

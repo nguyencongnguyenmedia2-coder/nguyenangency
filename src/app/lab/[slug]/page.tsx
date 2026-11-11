@@ -27,7 +27,7 @@ import {
   ReadingProgressBar,
 } from "@/components/common/DetailInteractiveTools";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 function isValidHttpUrl(val?: string | null): boolean {
   if (!val) return false;

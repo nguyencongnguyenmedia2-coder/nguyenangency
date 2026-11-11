@@ -14,7 +14,7 @@ import LatestBlogSection from "@/components/home/LatestBlogSection";
 import FAQSection from "@/components/home/FAQSection";
 import ContactCTASection from "@/components/home/ContactCTASection";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function HomePage() {
   let homepageSections: any[] = [];
@@ -26,8 +26,6 @@ export default async function HomePage() {
   let siteSettings: any = null;
 
   try {
-    await ensureHomepageSections();
-
     const results = await Promise.all([
       prisma.homepageSection.findMany({
         where: { isActive: true },
