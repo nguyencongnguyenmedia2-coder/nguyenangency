@@ -237,30 +237,25 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: 3D Mascot Character on Glowing Laser Pedestal */}
+          {/* RIGHT COLUMN: 3D Mascot Character with Full Hologram HUD Panels & Pedestal */}
           <div
             ref={rightColRef}
-            className="lg:col-span-5 relative flex items-center justify-center mt-4 lg:mt-0"
+            className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0"
           >
             {/* Mascot Container with Floating Animation */}
-            <div className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[540px] aspect-square flex items-center justify-center">
+            <div className="relative w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px] aspect-[984/1024] flex items-center justify-center">
               {/* Backlight Neon Halos */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/25 via-[#007BA7]/20 to-[#FF2D95]/25 rounded-full blur-[80px] pointer-events-none animate-mascot-aura" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/20 via-[#007BA7]/15 to-[#FF2D95]/20 rounded-full blur-[90px] pointer-events-none animate-mascot-aura" />
 
-              {/* Glowing Floor Pedestal Rings (Blue & Pink) */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[75%] h-[24%] rounded-[100%] bg-gradient-to-r from-[#00E5FF]/40 via-[#007BA7]/60 to-[#FF2D95]/40 blur-md pointer-events-none" />
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[65%] h-[18%] rounded-[100%] border-2 border-[#00E5FF] shadow-[0_0_35px_rgba(0,229,255,0.8),inset_0_0_20px_rgba(0,229,255,0.6)] pointer-events-none" />
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[52%] h-[14%] rounded-[100%] border border-[#FF2D95] shadow-[0_0_25px_rgba(255,45,149,0.7)] pointer-events-none" />
-
-              {/* High-res Mascot Graphic */}
+              {/* Full High-res Mascot with Holographic HUD Panels & Laser Pedestal */}
               <div className="relative z-10 w-full h-full animate-mascot-float flex items-center justify-center">
                 <Image
-                  src="/images/hero-mascot-feathered.png"
-                  alt="NGUYÊN AGENCY AI Mascot"
-                  width={544}
-                  height={534}
+                  src="/images/mascot-character-full.png"
+                  alt="NGUYÊN AGENCY AI Mascot & Hologram Solutions"
+                  width={984}
+                  height={1024}
                   priority
-                  className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.45)]"
+                  className="w-full h-auto object-contain drop-shadow-[0_20px_60px_rgba(0,163,255,0.45)]"
                 />
               </div>
             </div>
