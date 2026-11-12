@@ -109,7 +109,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
   const subtitle =
     sectionData?.subtitle || "Digital Creative & Tech Solutions";
   const brandHeadline = custom.brandHeadline || "NGUYÊN AGENCY";
-  const title = sectionData?.title || "VƯỢT CHUẨN SỐ HOÁ";
+  const title = sectionData?.title || "NÂNG TẦM THƯƠNG HIỆU";
   const description =
     sectionData?.description ||
     "Đối tác sáng tạo & công nghệ, đồng hành cùng doanh nghiệp xây dựng thương hiệu, tăng trưởng và chuyển đổi số bền vững với hệ sinh thái 24 giải pháp toàn diện.";

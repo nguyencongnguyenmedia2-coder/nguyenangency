@@ -7,22 +7,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://nguyenangency.vercel.app";
 
-  // Static marketing routes
+  // Static marketing & target SEO landing routes
   const staticRoutes = [
-    "",
-    "/about",
-    "/services",
-    "/portfolio",
-    "/lab",
-    "/pricing",
-    "/blog",
-    "/contact",
-    "/faq",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    { path: "", priority: 1.0, changeFrequency: "daily" as const },
+    { path: "/nguyen-cong-nguyen", priority: 0.95, changeFrequency: "weekly" as const },
+    { path: "/thiet-ke-website-quang-ngai", priority: 0.95, changeFrequency: "weekly" as const },
+    { path: "/media-quang-ngai", priority: 0.95, changeFrequency: "weekly" as const },
+    { path: "/digital-marketing-quang-ngai", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/thiet-ke-logo", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/ai-automation", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/du-an", priority: 0.85, changeFrequency: "weekly" as const },
+    { path: "/lien-he", priority: 0.85, changeFrequency: "weekly" as const },
+    { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/services", priority: 0.85, changeFrequency: "weekly" as const },
+    { path: "/portfolio", priority: 0.85, changeFrequency: "weekly" as const },
+    { path: "/lab", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "/pricing", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "/contact", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
+  ].map((item) => ({
+    url: `${baseUrl}${item.path}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    changeFrequency: item.changeFrequency,
+    priority: item.priority,
   }));
 
   try {

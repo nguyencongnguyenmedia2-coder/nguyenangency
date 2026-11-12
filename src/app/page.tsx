@@ -14,7 +14,48 @@ import LatestBlogSection from "@/components/home/LatestBlogSection";
 import FAQSection from "@/components/home/FAQSection";
 import ContactCTASection from "@/components/home/ContactCTASection";
 
+import type { Metadata } from "next";
+import {
+  getWebsiteAndOrganizationSchema,
+  getLocalBusinessSchema,
+  getPersonSchema,
+  SITE_URL,
+} from "@/lib/seo-schemas";
+
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+  description:
+    "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+    description:
+      "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+    url: SITE_URL,
+    siteName: "NGUYÊN AGENCY",
+    locale: "vi_VN",
+    type: "website",
+    images: [
+      {
+        url: `${SITE_URL}/images/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+    description:
+      "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+    images: [`${SITE_URL}/images/og-image.jpg`],
+  },
+};
 
 export default async function HomePage() {
   let homepageSections: any[] = [];
@@ -98,8 +139,31 @@ export default async function HomePage() {
     }));
   }
 
+  const organizationSchemas = getWebsiteAndOrganizationSchema();
+  const localBusinessSchema = getLocalBusinessSchema();
+  const personSchema = getPersonSchema();
+
   return (
     <div className="flex flex-col">
+      {/* Search Engine Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchemas),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personSchema),
+        }}
+      />
       {homepageSections.map((sec) => {
         switch (sec.sectionKey) {
           case "HERO":

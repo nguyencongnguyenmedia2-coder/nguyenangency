@@ -120,16 +120,15 @@ export default function Footer({
               Hệ Sinh Thái Dịch Vụ
             </h4>
             <div className="flex flex-col gap-2.5 text-xs text-[#A1A1AA]">
-              <Link href="/services" className="hover:text-white transition-colors">Tất Cả 24 Dịch Vụ</Link>
-              <Link href="/services?group=TECH" className="hover:text-[#00E5FF] transition-colors">Thiết Kế Website 3D WebGL</Link>
-              <Link href="/services?group=TECH" className="hover:text-[#00E5FF] transition-colors">Ứng Dụng Web & Nền Tảng SaaS</Link>
-              <Link href="/services?group=MEDIA" className="hover:text-[#FF2D95] transition-colors">Nhận Diện Thương Hiệu Độc Bản</Link>
-              <Link href="/services?group=MEDIA" className="hover:text-[#FF2D95] transition-colors">Sản Xuất TVC & Motion 3D CGI</Link>
-              <Link href="/lab" className="hover:text-[#A855F7] transition-colors flex items-center gap-1.5">
-                <span>Phòng Nghiên Cứu LAB</span>
-                <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#A855F7]/20 text-[#A855F7] font-mono font-bold">AI R&D</span>
+              <Link href="/thiet-ke-website-quang-ngai" className="hover:text-[#00E5FF] transition-colors">Thiết Kế Website Quảng Ngãi</Link>
+              <Link href="/media-quang-ngai" className="hover:text-[#FF2D95] transition-colors">Media & TVC Quảng Ngãi</Link>
+              <Link href="/digital-marketing-quang-ngai" className="hover:text-[#00E5FF] transition-colors">Digital Marketing Quảng Ngãi</Link>
+              <Link href="/thiet-ke-logo" className="hover:text-[#FF2D95] transition-colors">Thiết Kế Logo & Thương Hiệu</Link>
+              <Link href="/ai-automation" className="hover:text-[#A855F7] transition-colors flex items-center gap-1.5">
+                <span>AI Automation & LAB</span>
+                <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#A855F7]/20 text-[#A855F7] font-mono font-bold">R&D</span>
               </Link>
-              <Link href="/portfolio" className="hover:text-white transition-colors">Hồ Sơ Năng Lực & Case Studies</Link>
+              <Link href="/du-an" className="hover:text-white transition-colors">Hồ Sơ Năng Lực & Dự Án</Link>
               <Link href="/pricing" className="hover:text-white transition-colors">Bảng Giá Trọn Gói Dự Án</Link>
             </div>
           </div>
@@ -141,11 +140,12 @@ export default function Footer({
               Doanh Nghiệp
             </h4>
             <div className="flex flex-col gap-2.5 text-xs text-[#A1A1AA]">
+              <Link href="/nguyen-cong-nguyen" className="hover:text-[#00E5FF] transition-colors font-semibold">Nguyễn Công Nguyên</Link>
               <Link href="/about" className="hover:text-white transition-colors">Về NGUYÊN AGENCY</Link>
-              <Link href="/about" className="hover:text-white transition-colors">Đội Ngũ Chuyên Gia</Link>
+              <Link href="/du-an" className="hover:text-white transition-colors">Dự Án Đã Thực Hiện</Link>
               <Link href="/blog" className="hover:text-white transition-colors">Góc Nhìn Chuyên Môn</Link>
               <Link href="/faq" className="hover:text-white transition-colors">Câu Hỏi Thường Gặp (FAQ)</Link>
-              <Link href="/contact" className="hover:text-white transition-colors">Liên Hệ & Khởi Tạo Dự Án</Link>
+              <Link href="/lien-he" className="hover:text-white transition-colors">Liên Hệ Quảng Ngãi</Link>
               <Link href="/admin/login" className="hover:text-white transition-colors font-mono text-[11px] text-[#71717A]">
                 Cổng Quản Trị CMS
               </Link>

@@ -19,27 +19,25 @@ const CustomCursor = dynamic(
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "NGUYÊN AGENCY – BEYOND DIGITAL | Premium Creative Digital Agency",
+  title: {
+    default: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+    template: "%s | Nguyên Agency",
+  },
   description:
-    "We Create. We Build. We Transform. Nền tảng Digital Agency cao cấp kết hợp nghệ thuật thị giác Luxury Dark, công nghệ 3D Three.js và kiến trúc Next.js.",
-  keywords: [
-    "NGUYÊN AGENCY",
-    "Digital Agency Vietnam",
-    "3D Creative Agency",
-    "Three.js Agency",
-    "Luxury Branding",
-    "Web Application",
-    "Next.js Developer",
-  ],
-  authors: [{ name: "NGUYÊN AGENCY", url: "https://nguyenangency.vercel.app" }],
-  creator: "NGUYÊN AGENCY",
+    "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+  authors: [{ name: "Nguyễn Công Nguyên", url: "https://nguyenangency.vercel.app" }],
+  creator: "Nguyễn Công Nguyên",
+  publisher: "NGUYÊN AGENCY",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://nguyenangency.vercel.app"
   ),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "NGUYÊN AGENCY – BEYOND DIGITAL | VƯỢT CHUẨN SỐ HÓA",
+    title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
     description:
-      "We Create. We Build. We Transform. Nền tảng Digital Agency cao cấp kết hợp nghệ thuật thị giác Luxury Dark, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
+      "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
     url: "https://nguyenangency.vercel.app",
     siteName: "NGUYÊN AGENCY",
     images: [
@@ -47,7 +45,7 @@ export const metadata: Metadata = {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "NGUYÊN AGENCY – VƯỢT CHUẨN SỐ HÓA",
+        alt: "Nguyên Agency – Nguyễn Công Nguyên Media Quảng Ngãi",
       },
     ],
     locale: "vi_VN",
@@ -55,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NGUYÊN AGENCY – BEYOND DIGITAL",
+    title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
     description:
-      "We Create. We Build. We Transform. Nền tảng Digital Agency cao cấp kết hợp nghệ thuật thị giác Luxury Dark, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
+      "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
     images: ["/images/og-image.jpg"],
   },
   icons: {
@@ -90,7 +88,7 @@ export const metadata: Metadata = {
 
 const DEFAULT_SETTINGS: PublicSiteSettings = {
   brandName: "NGUYÊN AGENCY",
-  brandTagline: "VƯỢT CHUẨN SỐ HÓA",
+  brandTagline: "NÂNG TẦM THƯƠNG HIỆU",
   brandDescription: "Premium Creative Digital Agency tiên phong kết hợp giữa nghệ thuật thị giác đương đại, công nghệ 3D Three.js và kiến trúc phần mềm tốc độ cao.",
   contactEmail: "contact@nguyenagency.vn",
   hotline: "+84 344 979 307",
@@ -136,7 +134,8 @@ export default async function RootLayout({
     "address": {
       "@type": "PostalAddress",
       "streetAddress": settings.officeAddress,
-      "addressLocality": "Hồ Chí Minh",
+      "addressLocality": "Quảng Ngãi",
+      "addressRegion": "Quảng Ngãi",
       "addressCountry": "VN",
     },
     "sameAs": [
