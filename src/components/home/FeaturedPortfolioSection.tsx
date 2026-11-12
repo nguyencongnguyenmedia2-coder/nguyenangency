@@ -151,6 +151,8 @@ export default function FeaturedPortfolioSection({
                         src={item.thumbnail}
                         alt={item.title}
                         fill
+                        loading="lazy"
+                        quality={80}
                         className="object-cover pt-8 transition-transform duration-700 ease-out group-hover:scale-105"
                         sizes="(max-width: 1024px) 100vw, 60vw"
                       />
@@ -270,6 +272,8 @@ export default function FeaturedPortfolioSection({
                       src={item.thumbnail}
                       alt={item.title}
                       fill
+                      loading="lazy"
+                      quality={80}
                       className="object-cover pt-6 transition-transform duration-700 ease-out group-hover:scale-105"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />

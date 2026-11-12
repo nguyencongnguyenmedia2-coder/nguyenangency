@@ -311,7 +311,8 @@ export default async function PortfolioDetailPage({
               alt={item.title}
               fill
               priority
-              sizes="100vw"
+              quality={85}
+              sizes="(max-width: 1280px) 100vw, 1280px"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent" />
@@ -628,6 +629,8 @@ export default async function PortfolioDetailPage({
                       src={nextProject.thumbnail}
                       alt={nextProject.title}
                       fill
+                      loading="lazy"
+                      quality={80}
                       sizes="(max-width: 1024px) 100vw, 60vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />

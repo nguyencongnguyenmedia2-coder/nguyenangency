@@ -470,7 +470,8 @@ export default async function LabProductDetailPage({
                 alt={prod.name}
                 fill
                 priority
-                sizes="100vw"
+                quality={85}
+                sizes="(max-width: 1280px) 100vw, 1280px"
                 className="object-cover"
               />
             </div>
@@ -791,7 +792,9 @@ export default async function LabProductDetailPage({
                             src={rel.thumbnail}
                             alt={rel.name}
                             fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
+                            loading="lazy"
+                            quality={80}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </div>

@@ -68,9 +68,10 @@ export default function LatestBlogSection({
                         src={cover}
                         alt={post.title}
                         fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        loading="lazy"
+                        quality={80}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        unoptimized
                       />
                       <div className="absolute top-3.5 left-3.5">
                         <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-[#0A0A0A]/85 backdrop-blur-md text-[#38BDF8] border border-[#007BA7]/40">

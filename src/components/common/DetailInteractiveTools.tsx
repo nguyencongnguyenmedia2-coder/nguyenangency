@@ -362,6 +362,8 @@ export function InteractiveGallery({
                   src={primaryImage}
                   alt={`${title} ${deviceMode} mockup`}
                   fill
+                  loading="lazy"
+                  quality={80}
                   sizes="(max-width: 768px) 100vw, 80vw"
                   className="object-cover"
                 />
@@ -408,10 +410,12 @@ export function InteractiveGallery({
                   src={imgUrl}
                   alt={`${title} visual ${idx + 1}`}
                   fill
+                  loading="lazy"
+                  quality={80}
                   sizes={
                     isFullSpan
-                      ? "100vw"
-                      : "(max-width: 768px) 100vw, 50vw"
+                      ? "(max-width: 1280px) 100vw, 1280px"
+                      : "(max-width: 768px) 100vw, 600px"
                   }
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />

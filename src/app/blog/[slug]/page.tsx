@@ -280,7 +280,8 @@ export default async function BlogPostDetailPage({
                 alt={post.title}
                 fill
                 priority
-                sizes="100vw"
+                quality={85}
+                sizes="(max-width: 1280px) 100vw, 1280px"
                 className="object-cover"
               />
             </div>
@@ -415,7 +416,9 @@ export default async function BlogPostDetailPage({
                             src={rel.thumbnail}
                             alt={rel.title}
                             fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
+                            loading="lazy"
+                            quality={80}
+                            sizes="(max-width: 768px) 100vw, 380px"
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </div>

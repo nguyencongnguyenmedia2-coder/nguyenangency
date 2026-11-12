@@ -160,8 +160,10 @@ export default function NguyenCongNguyenPage() {
                 src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80"
                 alt="Nguyễn Công Nguyên – Founder Nguyên Agency"
                 fill
-                className="object-cover"
                 priority
+                quality={85}
+                sizes="(max-width: 1024px) 100vw, 500px"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#06070B] via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-black/75 backdrop-blur-md border border-white/[0.08]">

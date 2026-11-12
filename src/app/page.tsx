@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import prisma from "@/lib/prisma";
 import { ensureHomepageSections, DEFAULT_HOMEPAGE_SECTIONS } from "@/lib/homepage-init";
 import { getPublicSiteSettings } from "@/lib/site-settings";
@@ -257,10 +258,13 @@ export default async function HomePage() {
                   </div>
                   {sec.mediaUrl && (
                     <div className="lg:col-span-5 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={sec.mediaUrl}
                         alt={sec.title}
+                        width={640}
+                        height={400}
+                        loading="lazy"
+                        quality={80}
                         className="w-full max-w-md h-auto rounded-2xl object-contain"
                       />
                     </div>

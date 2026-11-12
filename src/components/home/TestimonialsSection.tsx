@@ -130,6 +130,8 @@ export default async function TestimonialsSection({
                         src={item.avatar}
                         alt={item.clientName}
                         fill
+                        sizes="48px"
+                        loading="lazy"
                         className="object-cover"
                       />
                     </div>

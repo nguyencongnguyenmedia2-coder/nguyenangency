@@ -52,6 +52,7 @@ export default function Footer({
                 alt="NGUYÊN AGENCY"
                 width={260}
                 height={87}
+                loading="lazy"
                 className="h-14 w-auto object-contain transition-all duration-300 group-hover:brightness-110 drop-shadow-[0_4px_20px_rgba(0,163,255,0.25)]"
               />
             </Link>

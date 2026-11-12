@@ -229,6 +229,9 @@ export default async function BlogPage({
                   src={featuredPost.thumbnail}
                   alt={featuredPost.title}
                   fill
+                  priority
+                  quality={85}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#0D0F17] via-transparent to-transparent opacity-90" />
@@ -301,6 +304,9 @@ export default async function BlogPage({
                     src={post.thumbnail}
                     alt={post.title}
                     fill
+                    loading="lazy"
+                    quality={80}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0D0F17] via-transparent to-transparent opacity-80" />

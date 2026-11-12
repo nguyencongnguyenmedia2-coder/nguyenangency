@@ -306,6 +306,9 @@ export default async function PortfolioPage({
                     src={item.thumbnail}
                     alt={item.title}
                     fill
+                    loading="lazy"
+                    quality={80}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0D0F17] via-transparent to-transparent opacity-80" />

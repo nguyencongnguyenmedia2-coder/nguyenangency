@@ -180,7 +180,7 @@ export default async function ServicesPage({
 
         {/* Services Grid (All 16:9 aspect ratio thumbnails) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {filteredServices.map((service) => {
+          {filteredServices.map((service, index) => {
             const isMedia = service.group === "MEDIA";
             const accentColor = isMedia ? "#FF2D95" : "#00E5FF";
 
@@ -196,13 +196,16 @@ export default async function ServicesPage({
                 />
 
                 <div>
-                  {/* Thumbnail 16:9 standard */}
+                  {/* Thumbnail 16:9 standard with lazy loading and optimized sizes */}
                   <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#121622] border border-white/10 mb-5">
                     <Image
                       src={service.thumbnail}
                       alt={service.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index < 3}
+                      loading={index < 3 ? "eager" : "lazy"}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
+                      quality={80}
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>

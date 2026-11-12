@@ -445,6 +445,7 @@ export default async function ServiceDetailPage({
               alt={`${official.title} - ${official.titleVn} | NGUYÊN AGENCY`}
               fill
               priority
+              quality={85}
               sizes="(max-width: 1280px) 100vw, 1280px"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
@@ -911,7 +912,9 @@ export default async function ServiceDetailPage({
                         src={related.thumbnail}
                         alt={related.title}
                         fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        loading="lazy"
+                        quality={80}
+                        sizes="(max-width: 768px) 100vw, 380px"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>

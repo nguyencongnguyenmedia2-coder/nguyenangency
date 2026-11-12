@@ -124,16 +124,17 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
   let heroImage =
     sectionData?.mediaUrl && sectionData.mediaUrl.trim() !== ""
       ? sectionData.mediaUrl.trim()
-      : "/images/mascot-character-transparent-v2.png";
+      : "/images/mascot-character-transparent-v2.webp";
 
   if (
     heroImage === "/images/mascot-character-transparent.png" ||
+    heroImage === "/images/mascot-character-transparent-v2.png" ||
     heroImage === "/images/mascot-character-full.png" ||
     heroImage === "/images/mascot-character-full.jpg" ||
     heroImage === "/images/hero-mascot.jpg" ||
     (heroImage.endsWith(".jpg") && heroImage.includes("mascot"))
   ) {
-    heroImage = "/images/mascot-character-transparent-v2.png";
+    heroImage = "/images/mascot-character-transparent-v2.webp";
   }
 
   const blendMode: "screen" | "normal" =
@@ -373,25 +374,16 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
 
               {/* Mascot Graphic with Clean Transparency */}
               <div className="relative z-10 w-full h-full animate-mascot-float flex items-center justify-center">
-                {heroImage.startsWith("/") ? (
-                  <Image
-                    src={heroImage}
-                    alt={title}
-                    width={1000}
-                    height={1040}
-                    priority
-                    className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.35)]"
-                    style={{ mixBlendMode: blendMode }}
-                  />
-                ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={heroImage}
-                    alt={title}
-                    className="w-full h-auto max-h-[540px] object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.35)]"
-                    style={{ mixBlendMode: blendMode }}
-                  />
-                )}
+                <Image
+                  src={heroImage}
+                  alt={title}
+                  width={1000}
+                  height={1040}
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 560px"
+                  className="w-full h-auto max-h-[540px] object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.35)]"
+                  style={{ mixBlendMode: blendMode }}
+                />
               </div>
             </div>
           </div>
