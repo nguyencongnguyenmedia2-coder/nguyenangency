@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { OFFICIAL_24_SERVICES } from "../src/data/services-data";
 
 const prisma = new PrismaClient();
 
@@ -126,117 +127,98 @@ async function main() {
     },
   });
 
-  // Seed 24 Services (12 Media + 12 Tech)
-  const mediaServicesData = [
-    { title: "Branding & Identity", slug: "branding-identity", shortDesc: "Chiến lược và hệ thống nhận diện thương hiệu chuẩn mực toàn cầu." },
-    { title: "Logo Design", slug: "logo-design", shortDesc: "Thiết kế biểu tượng thương hiệu độc bản, mang ngôn ngữ hình học tương lai." },
-    { title: "Graphic Design", slug: "graphic-design", shortDesc: "Ấn phẩm đồ họa cao cấp cho truyền thông kỹ thuật số và in ấn chuyên nghiệp." },
-    { title: "Banner Design", slug: "banner-design", shortDesc: "Banner quảng cáo tương tác đa nền tảng tối ưu tỷ lệ chuyển đổi." },
-    { title: "Poster Design", slug: "poster-design", shortDesc: "Poster nghệ thuật thị giác cho sự kiện và chiến dịch ra mắt sản phẩm." },
-    { title: "Menu Design", slug: "menu-design", shortDesc: "Thiết kế menu cao cấp trải nghiệm thị giác tinh tế cho F&B luxury." },
-    { title: "Social Media Design", slug: "social-media-design", shortDesc: "Hệ thống visual feed chuẩn hóa định vị thương hiệu trên social." },
-    { title: "Advertising Creative", slug: "advertising-creative", shortDesc: "Ý tưởng sáng tạo đột phá cho các chiến dịch quảng cáo đa kênh." },
-    { title: "Video Production", slug: "video-production", shortDesc: "Sản xuất video TVC, corporate cinematic chuẩn phim điện ảnh." },
-    { title: "AI Video Production", slug: "ai-video-production", shortDesc: "Ứng dụng Generative AI tạo video quảng cáo siêu thực với chi phí tối ưu." },
-    { title: "Digital Marketing", slug: "digital-marketing", shortDesc: "Chiến lược tăng trưởng tích hợp Performance Marketing và Data Analytics." },
-    { title: "Content Creation", slug: "content-creation", shortDesc: "Nội dung kể chuyện thương hiệu sâu sắc, chạm cảm xúc khách hàng mục tiêu." },
-  ];
+  // Seed 24 Official Services (12 Media + 12 Tech)
+  console.log("Seeding 24 official services from services-data.ts...");
+  for (const s of OFFICIAL_24_SERVICES) {
+    const isMedia = s.group === "MEDIA";
+    const catId = isMedia ? mediaCat.id : techCat.id;
 
-  for (let i = 0; i < mediaServicesData.length; i++) {
-    const s = mediaServicesData[i];
     await prisma.service.upsert({
       where: { slug: s.slug },
-      update: {},
+      update: {
+        title: s.title,
+        group: s.group,
+        categoryId: catId,
+        tagline: s.titleVn,
+        shortDesc: s.shortDesc,
+        description: s.intro,
+        metaTitle: s.seoTitle,
+        metaDescription: s.metaDescription,
+        thumbnail: s.thumbnail,
+        benefitsJson: JSON.stringify(s.proposedItems),
+        featuresJson: JSON.stringify(s.deliverables),
+        processJson: JSON.stringify(s.process),
+        order: s.order,
+      },
       create: {
         title: s.title,
         slug: s.slug,
-        group: "MEDIA",
-        categoryId: mediaCat.id,
-        tagline: "Định vị vị thế khác biệt của thương hiệu",
+        group: s.group,
+        categoryId: catId,
+        tagline: s.titleVn,
         shortDesc: s.shortDesc,
-        description: `${s.shortDesc} NGUYÊN AGENCY kết hợp giữa tư duy nghệ thuật đương đại và công nghệ tiên tiến để tạo nên giải pháp thương hiệu không chỉ đẹp mà còn thúc đẩy tăng trưởng vượt trội.`,
-        thumbnail: `https://images.unsplash.com/photo-${1550745165 + i * 10000}-9bc0b252726f?auto=format&fit=crop&w=1200&q=80`,
-        icon: "Sparkles",
-        benefitsJson: JSON.stringify([
-          "Tăng 300% nhận diện thương hiệu trên thị trường",
-          "Bộ tài liệu Brand Guidelines chi tiết 120+ trang",
-          "Tối ưu đa nền tảng từ kỹ thuật số đến in ấn vật lý",
-        ]),
-        featuresJson: JSON.stringify([
-          "Nghiên cứu thị trường và đối thủ",
-          "Moodboard và định hướng nghệ thuật",
-          "Thiết kế 3 concept độc bản",
-          "Bàn giao trọn bộ file vector gốc và mockup 3D",
-        ]),
-        processJson: JSON.stringify([
-          { step: "01", name: "Discover", desc: "Thấu hiểu giá trị cốt lõi và bài toán thương hiệu" },
-          { step: "02", name: "Strategy", desc: "Định vị thông điệp và ngôn ngữ thị giác" },
-          { step: "03", name: "Design", desc: "Thiết kế concept và tinh chỉnh chi tiết" },
-          { step: "04", name: "Deliver", desc: "Bàn giao guidelines và giám sát ứng dụng" },
-        ]),
-        estimatedTime: "2 - 3 tuần",
-        startingPrice: 35000000,
-        priceLabel: "Từ 35.000.000 VNĐ",
-        isFeatured: i < 4,
-        order: i + 1,
+        description: s.intro,
+        metaTitle: s.seoTitle,
+        metaDescription: s.metaDescription,
+        thumbnail: s.thumbnail,
+        icon: isMedia ? "Palette" : "Cpu",
+        benefitsJson: JSON.stringify(s.proposedItems),
+        featuresJson: JSON.stringify(s.deliverables),
+        processJson: JSON.stringify(s.process),
+        estimatedTime: isMedia ? "3 - 10 ngày" : "2 - 6 tuần",
+        startingPrice: isMedia ? 5000000 : 15000000,
+        priceLabel: isMedia ? "Báo giá theo gói" : "Tư vấn & Báo giá",
+        isFeatured: s.order <= 4,
+        order: s.order,
+        status: "PUBLISHED",
       },
     });
-  }
 
-  const techServicesData = [
-    { title: "Business Website", slug: "business-website", shortDesc: "Website doanh nghiệp chuẩn mực quốc tế với hiệu năng siêu tốc." },
-    { title: "Corporate Website", slug: "corporate-website", shortDesc: "Cổng thông tin tập đoàn đa ngôn ngữ bảo mật cao." },
-    { title: "Landing Page", slug: "landing-page", shortDesc: "Landing Page 3D tương tác tối đa tỷ lệ chuyển đổi đơn hàng." },
-    { title: "E-commerce Website", slug: "ecommerce-website", shortDesc: "Nền tảng thương mại điện tử trải nghiệm mua sắm mượt mà không độ trễ." },
-    { title: "Web Application", slug: "web-application", shortDesc: "Ứng dụng web phức tạp kiến trúc SaaS hiện đại, khả năng mở rộng không giới hạn." },
-    { title: "Mobile Application", slug: "mobile-application", shortDesc: "Ứng dụng di động iOS/Android bản ngữ với trải nghiệm người dùng tự nhiên." },
-    { title: "CRM System", slug: "crm-system", shortDesc: "Hệ thống quản lý quan hệ khách hàng và quy trình bán hàng chuyên sâu." },
-    { title: "Management Software", slug: "management-software", shortDesc: "Phần mềm ERP và vận hành nội bộ tùy chỉnh theo quy mô công ty." },
-    { title: "Custom Software", slug: "custom-software", shortDesc: "Phần mềm theo yêu cầu giải quyết chính xác bài toán nghiệp vụ phức tạp." },
-    { title: "AI Integration", slug: "ai-integration", shortDesc: "Tích hợp LLM, Computer Vision và AI tự động hóa vào quy trình kinh doanh." },
-    { title: "Website Maintenance", slug: "website-maintenance", shortDesc: "Dịch vụ bảo trì, giám sát uptime 99.9% và tối ưu bảo mật liên tục." },
-    { title: "UI/UX Design", slug: "ui-ux-design", shortDesc: "Thiết kế trải nghiệm người dùng chuẩn mực, nghiên cứu hành vi sâu sắc." },
-  ];
-
-  for (let i = 0; i < techServicesData.length; i++) {
-    const s = techServicesData[i];
-    await prisma.service.upsert({
-      where: { slug: s.slug },
-      update: {},
-      create: {
-        title: s.title,
-        slug: s.slug,
-        group: "TECH",
-        categoryId: techCat.id,
-        tagline: "Kiến trúc công nghệ vững chắc – Tốc độ đỉnh cao",
-        shortDesc: s.shortDesc,
-        description: `${s.shortDesc} Xây dựng bằng Next.js App Router, Three.js, PostgreSQL và Prisma mang đến khả năng chịu tải hàng triệu request và độ phản hồi tính bằng mili-giây.`,
-        thumbnail: `https://images.unsplash.com/photo-${1518770660439 + i * 20000}-4636190af475?auto=format&fit=crop&w=1200&q=80`,
-        icon: "Cpu",
-        benefitsJson: JSON.stringify([
-          "Điểm Google PageSpeed 95+ trên cả Mobile & Desktop",
-          "Kiến trúc Serverless Auto-scaling linh hoạt",
-          "Bảo mật chuẩn OWASP Top 10 và mã hóa SSL/TLS 1.3",
-        ]),
-        featuresJson: JSON.stringify([
-          "Next.js App Router & React 18",
-          "CMS quản trị trực quan độc lập",
-          "Tích hợp thanh toán trực tuyến & CRM",
-          "Bảo hành kỹ thuật trọn đời",
-        ]),
-        processJson: JSON.stringify([
-          { step: "01", name: "Audit & Architecture", desc: "Phân tích yêu cầu và thiết kế cấu trúc database" },
-          { step: "02", name: "UI/UX Prototyping", desc: "Thiết kế wireframe & interactive prototype trên Figma" },
-          { step: "03", name: "Agile Coding", desc: "Lập trình backend, frontend và hiệu ứng 3D/GSAP" },
-          { step: "04", name: "QA & Deployment", desc: "Kiểm thử bảo mật, benchmark tốc độ và triển khai production" },
-        ]),
-        estimatedTime: "3 - 6 tuần",
-        startingPrice: 65000000,
-        priceLabel: "Từ 65.000.000 VNĐ",
-        isFeatured: i < 4,
-        order: i + 1,
-      },
-    });
+    // Also support alias slug if exists (e.g., ecommerce-website)
+    if (s.aliases && s.aliases.length > 0) {
+      for (const alias of s.aliases) {
+        await prisma.service.upsert({
+          where: { slug: alias },
+          update: {
+            title: s.title,
+            group: s.group,
+            categoryId: catId,
+            tagline: s.titleVn,
+            shortDesc: s.shortDesc,
+            description: s.intro,
+            metaTitle: s.seoTitle,
+            metaDescription: s.metaDescription,
+            thumbnail: s.thumbnail,
+            benefitsJson: JSON.stringify(s.proposedItems),
+            featuresJson: JSON.stringify(s.deliverables),
+            processJson: JSON.stringify(s.process),
+            order: s.order,
+          },
+          create: {
+            title: s.title,
+            slug: alias,
+            group: s.group,
+            categoryId: catId,
+            tagline: s.titleVn,
+            shortDesc: s.shortDesc,
+            description: s.intro,
+            metaTitle: s.seoTitle,
+            metaDescription: s.metaDescription,
+            thumbnail: s.thumbnail,
+            icon: isMedia ? "Palette" : "Cpu",
+            benefitsJson: JSON.stringify(s.proposedItems),
+            featuresJson: JSON.stringify(s.deliverables),
+            processJson: JSON.stringify(s.process),
+            estimatedTime: isMedia ? "3 - 10 ngày" : "2 - 6 tuần",
+            startingPrice: isMedia ? 5000000 : 15000000,
+            priceLabel: isMedia ? "Báo giá theo gói" : "Tư vấn & Báo giá",
+            isFeatured: false,
+            order: s.order + 100,
+            status: "PUBLISHED",
+          },
+        });
+      }
+    }
   }
 
   // 4. Portfolio Projects

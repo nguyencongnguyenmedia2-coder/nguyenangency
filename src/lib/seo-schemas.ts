@@ -221,3 +221,4 @@ export function getFAQSchema(faqs: { question: string; answer: string }[]) {
     })),
   };
 }
+
