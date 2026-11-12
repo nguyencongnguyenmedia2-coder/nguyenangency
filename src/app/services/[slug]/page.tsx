@@ -169,9 +169,8 @@ export default async function ServiceDetailPage({
   if (galleryList.length === 0) {
     galleryList = [
       bannerImage,
-      `/uploads/services/${folder}/gallery-1.jpg`,
-      `/uploads/services/${folder}/gallery-2.jpg`,
-      `/uploads/services/${folder}/gallery-3.jpg`,
+      official.thumbnail,
+      official.coverImage || official.thumbnail,
     ].filter(Boolean);
   }
 
