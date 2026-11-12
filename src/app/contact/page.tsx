@@ -14,6 +14,9 @@ import {
   ShieldCheck,
   Calendar,
   Clock,
+  ArrowRight,
+  MessageSquare,
+  Lock,
 } from "lucide-react";
 
 const FALLBACK_SERVICES = [
@@ -31,7 +34,7 @@ function ContactContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serviceOptions, setServiceOptions] = useState<string[]>(FALLBACK_SERVICES);
   const [selectedService, setSelectedService] = useState(initialService);
-  const [selectedBudget, setSelectedBudget] = useState("50M - 100M VNĐ");
+  const [selectedBudget, setSelectedBudget] = useState("30M - 80M VNĐ");
 
   const [responseState, setResponseState] = useState<{
     success?: boolean;
@@ -59,11 +62,11 @@ function ContactContent() {
   }, [searchParams]);
 
   const budgetOptions = [
-    "10M - 30M VNĐ",
-    "30M - 80M VNĐ",
-    "80M - 200M VNĐ",
-    "200M - 500M VNĐ",
-    "> 500M VNĐ (Enterprise)",
+    "15M - 35M VNĐ",
+    "35M - 70M VNĐ",
+    "70M - 150M VNĐ",
+    "150M - 300M VNĐ",
+    "> 300M VNĐ (Enterprise)",
   ];
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -85,105 +88,104 @@ function ContactContent() {
     process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME || "nguyenangency_bot";
 
   return (
-    <div className="pt-32 pb-24 px-6 bg-[#0A0A0A] text-white">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <div className="pt-32 pb-24 px-6 bg-[#06070B] text-white relative min-h-screen">
+      {/* Background Gradients */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-r from-[#00E5FF]/10 via-[#FF2D95]/10 to-transparent blur-[140px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_60%,transparent_100%)] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Header */}
         <div className="max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#171717] border border-[#292929]">
-            <Sparkles className="w-3.5 h-3.5 text-[#007BA7]" />
-            <span className="text-xs font-mono tracking-widest text-white uppercase">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-[#00E5FF]" />
+            <span className="text-[11px] font-mono tracking-widest text-[#00E5FF] uppercase font-bold">
               INITIATE COLLABORATION • UNIFIED BOOKING ENGINE
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight leading-[1.08]">
             KHỞI ĐỘNG DỰ ÁN & <br />
-            <span className="text-gradient-brand">ĐẶT DỊCH VỤ CHUYÊN GIA.</span>
+            <span className="bg-gradient-to-r from-[#00E5FF] via-[#FF2D95] to-[#A855F7] bg-clip-text text-transparent">
+              ĐẶT DỊCH VỤ CHUYÊN GIA.
+            </span>
           </h1>
 
-          <p className="text-base md:text-lg text-[#A1A1AA] leading-relaxed">
-            Mọi yêu cầu đặt dịch vụ từ Website và Telegram Bot được đồng bộ thời gian thực vào hệ thống CRM & thông báo tức thì tới đội ngũ Giám đốc Dự án của NGUYÊN AGENCY.
+          <p className="text-base sm:text-lg text-[#94A3B8] leading-relaxed">
+            Mọi yêu cầu đặt dịch vụ từ Website và Telegram Bot được đồng bộ thời gian thực vào CRM và thông báo tức thì tới Giám đốc Dự án của NGUYÊN AGENCY. Phản hồi trong 15 phút.
           </p>
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left Column: Direct Info + Telegram Fast Track */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-            <div className="space-y-5">
-              {/* Telegram Bot Direct Card */}
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-[#007BA7]/20 to-[#121212] border border-[#007BA7]/50 space-y-3">
-                <div className="flex items-center gap-2.5 text-[#38BDF8]">
+            <div className="space-y-4">
+              {/* Telegram Bot Direct Fast Track Card */}
+              <div className="p-7 rounded-3xl bg-gradient-to-br from-[#00E5FF]/15 via-[#0D0F17] to-[#FF2D95]/10 border border-[#00E5FF]/40 space-y-4 shadow-[0_10px_30px_rgba(0,229,255,0.1)] backdrop-blur-xl">
+                <div className="flex items-center gap-2.5 text-[#00E5FF]">
                   <Send className="w-5 h-5 shrink-0" />
-                  <span className="text-xs font-mono uppercase tracking-wider font-bold">
-                    ĐẶT DỊCH VỤ QUA TELEGRAM BOT (24/7)
+                  <span className="text-xs font-mono uppercase tracking-wider font-black">
+                    ĐẶT DỊCH VỤ NHANH QUA TELEGRAM BOT (24/7)
                   </span>
                 </div>
-                <p className="text-xs text-[#E4E4E7] leading-relaxed">
-                  Trải nghiệm trợ lý đặt dịch vụ tự động 10 bước, nhận mã theo dõi{" "}
-                  <code className="text-[#38BDF8]">#NA-YYYYMMDD-XXX</code> và kiểm tra tiến độ dự án bằng lệnh{" "}
-                  <code className="text-[#FF2D95]">/mybookings</code>.
+                <p className="text-xs text-[#E2E8F0] leading-relaxed">
+                  Trải nghiệm trợ lý đặt dịch vụ tự động, nhận mã theo dõi{" "}
+                  <code className="text-[#00E5FF] font-mono font-bold">#NA-YYYYMMDD-XXX</code> và tra cứu tiến độ thực thi dự án tức thì bằng lệnh{" "}
+                  <code className="text-[#FF2D95] font-mono font-bold">/mybookings</code>.
                 </p>
                 <a
                   href={`https://t.me/${botUsername}?start=contact`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#007BA7] hover:bg-[#008fc2] text-white text-xs font-mono font-bold uppercase tracking-wider transition-all"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00E5FF] to-[#007BA7] hover:brightness-110 text-black text-xs font-mono font-black uppercase tracking-wider transition-all shadow-md"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Mở Telegram Bot Ngay</span>
                 </a>
               </div>
 
-              <div className="p-6 rounded-3xl bg-[#121212] border border-[#292929] space-y-3">
-                <div className="flex items-center gap-3 text-[#007BA7]">
+              {/* Office Locations */}
+              <div className="p-6 rounded-3xl bg-[#0D0F17]/80 border border-white/[0.08] space-y-3 backdrop-blur-xl">
+                <div className="flex items-center gap-3 text-[#00E5FF]">
                   <MapPin className="w-5 h-5 shrink-0" />
                   <span className="text-xs font-mono uppercase tracking-wider font-bold">
-                    TRỤ SỞ CHÍNH
+                    VĂN PHÒNG & EXECUTIVE STUDIO
                   </span>
                 </div>
-                <p className="text-sm font-bold text-white">
-                  TP. Quảng Ngãi - TP. Hồ Chí Minh
-                </p>
-                <p className="text-xs text-[#71717A]">
-                  Tiếp đón đối tác theo lịch hẹn trước tại Executive Studio Suite.
-                </p>
+                <div className="space-y-2 text-xs">
+                  <div>
+                    <span className="text-white font-bold block text-sm">TP. Quảng Ngãi</span>
+                    <span className="text-[#94A3B8]">Trụ sở sáng tạo & Studio sản xuất hình ảnh</span>
+                  </div>
+                  <div className="pt-2 border-t border-white/[0.06]">
+                    <span className="text-white font-bold block text-sm">TP. Hồ Chí Minh</span>
+                    <span className="text-[#94A3B8]">Văn phòng đại diện & Tiếp đón đối tác doanh nghiệp</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="p-6 rounded-3xl bg-[#121212] border border-[#292929] space-y-3">
+              {/* Direct Communication Channels */}
+              <div className="p-6 rounded-3xl bg-[#0D0F17]/80 border border-white/[0.08] space-y-4 backdrop-blur-xl">
                 <div className="flex items-center gap-3 text-[#FF2D95]">
-                  <Mail className="w-5 h-5 shrink-0" />
-                  <span className="text-xs font-mono uppercase tracking-wider font-bold">
-                    EMAIL LIÊN HỆ
-                  </span>
-                </div>
-                <a
-                  href="mailto:contact@nguyenagency.vn"
-                  className="text-sm font-bold text-white hover:text-[#FF2D95] transition-colors block font-mono"
-                >
-                  contact@nguyenagency.vn
-                </a>
-                <p className="text-xs text-[#71717A]">
-                  Phản hồi email chuyên nghiệp kèm NDA bảo mật thông tin.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-3xl bg-[#121212] border border-[#292929] space-y-3">
-                <div className="flex items-center gap-3 text-emerald-400">
                   <Phone className="w-5 h-5 shrink-0" />
                   <span className="text-xs font-mono uppercase tracking-wider font-bold">
-                    HOTLINE TƯ VẤN 24/7
+                    HOTLINE TƯ VẤN TRỰC TIẾP 24/7
                   </span>
                 </div>
-                <a
-                  href="tel:+84344979307"
-                  className="text-lg font-black text-white hover:text-emerald-400 transition-colors block font-mono"
-                >
-                  +84 344 979 307
-                </a>
-                <p className="text-xs text-[#71717A]">
-                  Hỗ trợ trao đổi trực tiếp qua Telegram, Zalo Official & WhatsApp.
-                </p>
+                <div>
+                  <a
+                    href="tel:+84344979307"
+                    className="text-2xl font-black text-white hover:text-[#00E5FF] transition-colors block font-mono"
+                  >
+                    +84 344 979 307
+                  </a>
+                  <a
+                    href="mailto:contact@nguyenagency.vn"
+                    className="text-xs font-mono text-[#94A3B8] hover:text-[#FF2D95] transition-colors block mt-1"
+                  >
+                    contact@nguyenagency.vn
+                  </a>
+                </div>
 
                 {/* Direct Zalo & Facebook fast connects */}
                 <div className="flex items-center gap-2 pt-2">
@@ -191,7 +193,7 @@ function ContactContent() {
                     href="https://zalo.me/0344979307"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 px-3 py-2 rounded-xl bg-[#0068FF]/15 border border-[#0068FF]/30 hover:border-[#0068FF] text-[#38BDF8] text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
+                    className="flex-1 px-3 py-2.5 rounded-xl bg-blue-500/10 border border-blue-500/30 hover:border-blue-400 text-blue-400 text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <span>Zalo Official</span>
                   </a>
@@ -199,7 +201,7 @@ function ContactContent() {
                     href="https://www.facebook.com/nguyenads7"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 px-3 py-2 rounded-xl bg-[#1877F2]/15 border border-[#1877F2]/30 hover:border-[#1877F2] text-[#60A5FA] text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
+                    className="flex-1 px-3 py-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 hover:border-indigo-400 text-indigo-400 text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <span>Facebook Fanpage</span>
                   </a>
@@ -208,40 +210,40 @@ function ContactContent() {
             </div>
 
             {/* SLA Commitment */}
-            <div className="p-6 rounded-3xl bg-[#171717] border border-[#292929] space-y-3">
+            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] space-y-3 backdrop-blur-xl">
               <div className="flex items-center gap-2 text-white">
-                <ShieldCheck className="w-4 h-4 text-[#007BA7]" />
+                <ShieldCheck className="w-4 h-4 text-[#00E5FF]" />
                 <span className="text-xs font-mono font-bold uppercase">
-                  CAM KẾT DỊCH VỤ (SLA)
+                  CAM KẾT DỊCH VỤ (SLA) & BẢO MẬT
                 </span>
               </div>
-              <ul className="text-xs text-[#A1A1AA] space-y-1.5 list-disc pl-4">
-                <li>Thông báo thời gian thực tới Giám đốc Dự án ngay khi gửi yêu cầu.</li>
-                <li>Lập Scope of Work và Báo giá chi tiết miễn phí.</li>
-                <li>Ký thỏa thuận bảo mật NDA trước khi tiếp cận dữ liệu.</li>
+              <ul className="text-xs text-[#94A3B8] space-y-2 list-disc pl-4">
+                <li>Phản hồi chính thức qua điện thoại/Zalo trong vòng 15 phút.</li>
+                <li>Lập Scope of Work chi tiết & Báo giá không chi phí ẩn trong 24h.</li>
+                <li>Ký kết văn bản bảo mật thông tin (NDA) trước khi trao đổi nghiệp vụ sâu.</li>
               </ul>
             </div>
           </div>
 
           {/* Right Column: Interactive Booking & Brief Form */}
           <div className="lg:col-span-7">
-            <div className="p-8 md:p-12 rounded-3xl bg-[#121212] border border-[#292929] relative">
+            <div className="p-8 sm:p-12 rounded-3xl bg-[#0D0F17]/90 border border-white/[0.1] relative backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.7)]">
               {responseState?.success ? (
                 <div className="py-12 text-center space-y-6 animate-fade-in">
-                  <div className="w-16 h-16 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-white">
+                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
                     ĐẶT DỊCH VỤ THÀNH CÔNG!
                   </h3>
-                  <p className="text-sm text-[#A1A1AA] max-w-md mx-auto leading-relaxed">
+                  <p className="text-sm text-[#94A3B8] max-w-md mx-auto leading-relaxed">
                     {responseState.message}
                   </p>
-                  <div className="p-5 rounded-2xl bg-[#171717] border border-[#007BA7]/40 max-w-xs mx-auto">
-                    <span className="text-[10px] font-mono text-[#71717A] uppercase block mb-1">
+                  <div className="p-5 rounded-2xl bg-black/60 border border-[#00E5FF]/40 max-w-xs mx-auto">
+                    <span className="text-[10px] font-mono text-white/50 uppercase block mb-1">
                       MÃ ĐẶT DỊCH VỤ (BOOKING CODE)
                     </span>
-                    <strong className="text-xl font-mono text-[#38BDF8]">
+                    <strong className="text-xl font-mono text-[#00E5FF]">
                       {responseState.code}
                     </strong>
                   </div>
@@ -249,10 +251,19 @@ function ContactContent() {
                     <button
                       type="button"
                       onClick={() => setResponseState(null)}
-                      className="px-6 py-2.5 rounded-full text-xs font-mono text-[#A1A1AA] hover:text-white border border-[#292929] transition-colors"
+                      className="px-6 py-2.5 rounded-full text-xs font-mono text-white/70 hover:text-white border border-white/[0.1] hover:bg-white/[0.05] transition-colors"
                     >
                       Gửi thêm yêu cầu khác
                     </button>
+                    <a
+                      href={`https://t.me/${botUsername}?start=${responseState.code}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-2.5 rounded-full text-xs font-mono font-bold bg-[#00E5FF] text-black hover:brightness-110 transition-all flex items-center gap-1.5"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Tra cứu tiến độ trên Bot</span>
+                    </a>
                   </div>
                 </div>
               ) : (
@@ -267,15 +278,15 @@ function ContactContent() {
                   />
 
                   {responseState?.error && (
-                    <div className="p-4 rounded-2xl bg-red-950/40 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+                    <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
                       <span>{responseState.error}</span>
                     </div>
                   )}
 
                   {/* 1. Service Selection */}
                   <div className="space-y-3">
-                    <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] tracking-wider">
+                    <label className="block text-[11px] font-mono uppercase text-white/60 tracking-wider">
                       01 • DỊCH VỤ QUÝ KHÁCH QUAN TÂM *
                     </label>
                     <div className="flex flex-wrap gap-2">
@@ -284,10 +295,11 @@ function ContactContent() {
                           key={opt}
                           type="button"
                           onClick={() => setSelectedService(opt)}
-                          className={`px-4 py-2 rounded-xl text-xs font-mono transition-all text-left ${selectedService === opt
-                              ? "bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white font-bold shadow-glow-pink"
-                              : "bg-[#171717] text-[#A1A1AA] hover:text-white border border-[#292929]"
-                            }`}
+                          className={`px-4 py-2 rounded-xl text-xs font-mono transition-all text-left ${
+                            selectedService === opt
+                              ? "bg-gradient-to-r from-[#00E5FF] to-[#FF2D95] text-black font-black shadow-[0_0_15px_rgba(255,45,149,0.35)]"
+                              : "bg-white/[0.04] text-[#94A3B8] hover:text-white hover:bg-white/[0.08] border border-white/[0.08]"
+                          }`}
                         >
                           {opt}
                         </button>
@@ -297,7 +309,7 @@ function ContactContent() {
 
                   {/* 2. Budget Range */}
                   <div className="space-y-3 pt-1">
-                    <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] tracking-wider">
+                    <label className="block text-[11px] font-mono uppercase text-white/60 tracking-wider">
                       02 • NGÂN SÁCH DỰ KIẾN (VNĐ) *
                     </label>
                     <div className="flex flex-wrap gap-2">
@@ -306,10 +318,11 @@ function ContactContent() {
                           key={b}
                           type="button"
                           onClick={() => setSelectedBudget(b)}
-                          className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all ${selectedBudget === b
-                              ? "bg-white text-black font-bold shadow-md"
-                              : "bg-[#171717] text-[#71717A] hover:text-white border border-[#292929]"
-                            }`}
+                          className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all ${
+                            selectedBudget === b
+                              ? "bg-white text-black font-black shadow-md"
+                              : "bg-white/[0.04] text-[#94A3B8] hover:text-white hover:bg-white/[0.08] border border-white/[0.08]"
+                          }`}
                         >
                           {b}
                         </button>
@@ -320,7 +333,7 @@ function ContactContent() {
                   {/* 3. Client Info */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                     <div>
-                      <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1">
+                      <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5">
                         HỌ VÀ TÊN *
                       </label>
                       <input
@@ -328,11 +341,11 @@ function ContactContent() {
                         name="name"
                         required
                         placeholder="Nguyễn Văn A"
-                        className="w-full px-4 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-[#00E5FF] transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1">
+                      <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5">
                         SỐ ĐIỆN THOẠI / ZALO *
                       </label>
                       <input
@@ -340,32 +353,32 @@ function ContactContent() {
                         name="phone"
                         required
                         placeholder="0987 654 321"
-                        className="w-full px-4 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-[#00E5FF] transition-colors"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1">
+                      <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5">
                         EMAIL DOANH NGHIỆP
                       </label>
                       <input
                         type="email"
                         name="email"
                         placeholder="contact@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-[#00E5FF] transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1">
+                      <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5">
                         TÊN DOANH NGHIỆP / THƯƠNG HIỆU
                       </label>
                       <input
                         type="text"
                         name="company"
                         placeholder="Tập đoàn / Công ty ABC"
-                        className="w-full px-4 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-[#00E5FF] transition-colors"
                       />
                     </div>
                   </div>
@@ -373,72 +386,72 @@ function ContactContent() {
                   {/* 4. Project Title & Preferred Timeline */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="sm:col-span-1">
-                      <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1">
+                      <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5">
                         TÊN DỰ ÁN
                       </label>
                       <input
                         type="text"
                         name="projectTitle"
                         placeholder="VD: Rebranding & Web 3D"
-                        className="w-full px-4 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-[#00E5FF] transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1 flex items-center gap-1">
-                        <Calendar className="w-3 h-3 text-[#007BA7]" />
+                      <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5 flex items-center gap-1">
+                        <Calendar className="w-3 h-3 text-[#00E5FF]" />
                         <span>THỜI GIAN BẮT ĐẦU</span>
                       </label>
                       <select
                         name="preferredStartDate"
-                        className="w-full px-3.5 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                        className="w-full px-3.5 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs focus:outline-none focus:border-[#00E5FF] transition-colors"
                       >
-                        <option value="Triển khai ngay tuần này">Triển khai ngay tuần này</option>
-                        <option value="Trong vòng 2 - 4 tuần tới">Trong 2 - 4 tuần tới</option>
-                        <option value="Trong quý tới">Trong quý tới</option>
-                        <option value="Linh hoạt theo tư vấn">Linh hoạt theo tư vấn</option>
+                        <option value="Triển khai ngay tuần này" className="bg-[#0D0F17]">Triển khai ngay tuần này</option>
+                        <option value="Trong vòng 2 - 4 tuần tới" className="bg-[#0D0F17]">Trong 2 - 4 tuần tới</option>
+                        <option value="Trong quý tới" className="bg-[#0D0F17]">Trong quý tới</option>
+                        <option value="Linh hoạt theo tư vấn" className="bg-[#0D0F17]">Linh hoạt theo tư vấn</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1 flex items-center gap-1">
+                      <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5 flex items-center gap-1">
                         <Clock className="w-3 h-3 text-[#FF2D95]" />
                         <span>KHUNG GIỜ LIÊN HỆ</span>
                       </label>
                       <select
                         name="preferredContactTime"
-                        className="w-full px-3.5 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                        className="w-full px-3.5 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs focus:outline-none focus:border-[#00E5FF] transition-colors"
                       >
-                        <option value="Giờ hành chính (08:30 - 17:30)">Giờ hành chính</option>
-                        <option value="Buổi sáng (09:00 - 11:30)">Buổi sáng (09:00 - 11:30)</option>
-                        <option value="Buổi chiều (14:00 - 17:00)">Buổi chiều (14:00 - 17:00)</option>
-                        <option value="Buổi tối (Sau 18:00)">Buổi tối (Sau 18:00)</option>
+                        <option value="Giờ hành chính (08:30 - 17:30)" className="bg-[#0D0F17]">Giờ hành chính</option>
+                        <option value="Buổi sáng (09:00 - 11:30)" className="bg-[#0D0F17]">Buổi sáng (09:00 - 11:30)</option>
+                        <option value="Buổi chiều (14:00 - 17:00)" className="bg-[#0D0F17]">Buổi chiều (14:00 - 17:00)</option>
+                        <option value="Buổi tối (Sau 18:00)" className="bg-[#0D0F17]">Buổi tối (Sau 18:00)</option>
                       </select>
                     </div>
                   </div>
 
                   {/* 5. Message / Scope */}
                   <div>
-                    <label className="block text-[11px] font-mono uppercase text-[#A1A1AA] mb-1">
+                    <label className="block text-[11px] font-mono uppercase text-white/60 mb-1.5">
                       MÔ TẢ BÀI TOÁN & YÊU CẦU DỰ ÁN *
                     </label>
                     <textarea
                       name="message"
                       rows={4}
                       required
-                      placeholder="Mô tả mục tiêu của bạn (VD: Cần thiết kế website 3D Three.js cho thương hiệu thời trang cao cấp, tối ưu tốc độ và kết nối thanh toán...)"
-                      className="w-full px-4 py-3 rounded-xl bg-[#171717] border border-[#292929] text-white text-xs focus:outline-none focus:border-[#007BA7]"
+                      placeholder="Mô tả mục tiêu của bạn (VD: Cần thiết kế website 3D Three.js cho thương hiệu thời trang cao cấp, tối ưu tốc độ và kết nối cổng thanh toán...)"
+                      className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-[#00E5FF] transition-colors"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#007BA7] to-[#FF2D95] text-white font-mono text-xs font-bold uppercase tracking-widest hover:shadow-glow-pink transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-4 rounded-full bg-gradient-to-r from-[#00E5FF] to-[#FF2D95] text-black font-mono text-xs font-black uppercase tracking-widest hover:shadow-[0_0_30px_rgba(255,45,149,0.5)] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     <Send className="w-4 h-4" />
                     <span>
                       {isSubmitting
-                        ? "Đang đồng bộ & gửi thông báo..."
-                        : "Đặt Dịch Vụ & Nhận Báo Giá"}
+                        ? "Đang đồng bộ CRM & gửi thông báo..."
+                        : "Đặt Dịch Vụ & Nhận Báo Giá Ngay"}
                     </span>
                   </button>
                 </form>
@@ -455,7 +468,7 @@ export default function ContactPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-zinc-400 font-mono text-xs uppercase tracking-widest">
+        <div className="min-h-screen bg-[#06070B] flex items-center justify-center text-zinc-400 font-mono text-xs uppercase tracking-widest">
           Đang khởi tạo hệ thống liên hệ...
         </div>
       }
