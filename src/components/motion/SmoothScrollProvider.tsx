@@ -24,11 +24,10 @@ export default function SmoothScrollProvider({
     }
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.0,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.0,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
@@ -38,7 +37,7 @@ export default function SmoothScrollProvider({
     };
 
     gsap.ticker.add(updateTicker);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Ensure ScrollTrigger calculates positions accurately after initial layout
     const refreshTimer = window.setTimeout(() => {

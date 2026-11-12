@@ -101,8 +101,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["corporate-website", "landing-page", "e-commerce-website", "website-maintenance"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467100302-b95b267f-992f-4d6f-9815-3729272a6794.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467100302-b95b267f-992f-4d6f-9815-3729272a6794.png",
+    thumbnail: "/images/services/business-website.webp",
+    coverImage: "/images/services/business-website.webp",
   },
 
   // -------------------------------------------------------------
@@ -175,8 +175,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["logo-design", "graphic-design", "corporate-website", "advertising-creative"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467285238-09f29d30-24fd-458b-9b4c-949049f621b4.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467285238-09f29d30-24fd-458b-9b4c-949049f621b4.png",
+    thumbnail: "/images/services/branding-identity.webp",
+    coverImage: "/images/services/branding-identity.webp",
   },
 
   // -------------------------------------------------------------
@@ -251,8 +251,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "branding-identity", "management-software", "website-maintenance"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467323218-2d522889-5531-4f1a-802e-3e663b67be80.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467323218-2d522889-5531-4f1a-802e-3e663b67be80.png",
+    thumbnail: "/images/services/corporate-website.webp",
+    coverImage: "/images/services/corporate-website.webp",
   },
 
   // -------------------------------------------------------------
@@ -326,8 +326,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["branding-identity", "graphic-design", "poster-design", "menu-design"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467361674-354038ef-3fbe-43fe-a89c-e523f91a441c.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467361674-354038ef-3fbe-43fe-a89c-e523f91a441c.png",
+    thumbnail: "/images/services/logo-design.webp",
+    coverImage: "/images/services/logo-design.webp",
   },
 
   // -------------------------------------------------------------
@@ -401,8 +401,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "advertising-creative", "digital-marketing", "e-commerce-website"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467432296-9cf0b83a-be6c-472a-846e-ac294e3df8cf.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467432296-9cf0b83a-be6c-472a-846e-ac294e3df8cf.png",
+    thumbnail: "/images/services/landing-page.webp",
+    coverImage: "/images/services/landing-page.webp",
   },
 
   // -------------------------------------------------------------
@@ -474,8 +474,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["branding-identity", "banner-design", "poster-design", "social-media-design"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467400702-a3c13222-0ec7-44fe-b597-f8906e4bb0a3.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467400702-a3c13222-0ec7-44fe-b597-f8906e4bb0a3.png",
+    thumbnail: "/images/services/graphic-design.webp",
+    coverImage: "/images/services/graphic-design.webp",
   },
 
   // -------------------------------------------------------------
@@ -550,8 +550,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "landing-page", "crm-system", "digital-marketing"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467947204-877fce9c-c454-4a02-9486-055d640b303f.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467947204-877fce9c-c454-4a02-9486-055d640b303f.png",
+    thumbnail: "/images/services/e-commerce-website.webp",
+    coverImage: "/images/services/e-commerce-website.webp",
   },
 
   // -------------------------------------------------------------
@@ -623,8 +623,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "poster-design", "advertising-creative", "social-media-design"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467861207-527a0c1e-36e7-48c9-97a8-c2316ca55989.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467861207-527a0c1e-36e7-48c9-97a8-c2316ca55989.png",
+    thumbnail: "/images/services/banner-design.webp",
+    coverImage: "/images/services/banner-design.webp",
   },
 
   // -------------------------------------------------------------
@@ -698,8 +698,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["management-software", "custom-software", "crm-system", "ai-integration"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467754197-dbd3c83d-21bb-4353-9692-d55a568fa981.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467754197-dbd3c83d-21bb-4353-9692-d55a568fa981.png",
+    thumbnail: "/images/services/web-application.webp",
+    coverImage: "/images/services/web-application.webp",
   },
 
   // -------------------------------------------------------------
@@ -771,8 +771,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "banner-design", "advertising-creative", "video-production"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467813811-51c949af-1aa3-4e50-b33a-51d11e88f134.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467813811-51c949af-1aa3-4e50-b33a-51d11e88f134.png",
+    thumbnail: "/images/services/poster-design.webp",
+    coverImage: "/images/services/poster-design.webp",
   },
 
   // -------------------------------------------------------------
@@ -846,8 +846,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["web-application", "e-commerce-website", "crm-system", "ui-ux-design"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468208862-80e4e7a6-5a30-4b9c-8b12-5a9ec469eb17.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468208862-80e4e7a6-5a30-4b9c-8b12-5a9ec469eb17.png",
+    thumbnail: "/images/services/mobile-application.webp",
+    coverImage: "/images/services/mobile-application.webp",
   },
 
   // -------------------------------------------------------------
@@ -919,8 +919,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "branding-identity", "logo-design", "poster-design"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467704664-dc092ebb-c75f-421e-88af-42549e2b3a1f.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794467704664-dc092ebb-c75f-421e-88af-42549e2b3a1f.png",
+    thumbnail: "/images/services/menu-design.webp",
+    coverImage: "/images/services/menu-design.webp",
   },
 
   // -------------------------------------------------------------
@@ -994,8 +994,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["management-software", "custom-software", "web-application", "ai-integration"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468349964-3576a0e2-23c8-4b65-9ce0-c5b77b2e7a6d.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468349964-3576a0e2-23c8-4b65-9ce0-c5b77b2e7a6d.png",
+    thumbnail: "/images/services/crm-system.webp",
+    coverImage: "/images/services/crm-system.webp",
   },
 
   // -------------------------------------------------------------
@@ -1069,8 +1069,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "banner-design", "content-creation", "advertising-creative"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468278981-2ca3eac1-8d72-4e96-af72-f32bd655c67b.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468278981-2ca3eac1-8d72-4e96-af72-f32bd655c67b.png",
+    thumbnail: "/images/services/social-media-design.webp",
+    coverImage: "/images/services/social-media-design.webp",
   },
 
   // -------------------------------------------------------------
@@ -1144,8 +1144,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["custom-software", "web-application", "crm-system", "ai-integration"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468388419-6a7f1265-2cdf-4962-b548-b2347f579ce5.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468388419-6a7f1265-2cdf-4962-b548-b2347f579ce5.png",
+    thumbnail: "/images/services/management-software.webp",
+    coverImage: "/images/services/management-software.webp",
   },
 
   // -------------------------------------------------------------
@@ -1219,8 +1219,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["digital-marketing", "banner-design", "video-production", "content-creation"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468430203-ec5b5ca7-636d-4ee9-8793-8b683a9409c7.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468430203-ec5b5ca7-636d-4ee9-8793-8b683a9409c7.png",
+    thumbnail: "/images/services/advertising-creative.webp",
+    coverImage: "/images/services/advertising-creative.webp",
   },
 
   // -------------------------------------------------------------
@@ -1294,8 +1294,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["management-software", "web-application", "crm-system", "ai-integration"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468735477-baae31a8-0d06-474c-b3be-ac6b8e6e6d6f.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468735477-baae31a8-0d06-474c-b3be-ac6b8e6e6d6f.png",
+    thumbnail: "/images/services/custom-software.webp",
+    coverImage: "/images/services/custom-software.webp",
   },
 
   // -------------------------------------------------------------
@@ -1369,8 +1369,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["ai-video-production", "advertising-creative", "media-quang-ngai", "content-creation"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468491083-63710140-cba9-44c2-8988-b8b597d71746.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468491083-63710140-cba9-44c2-8988-b8b597d71746.png",
+    thumbnail: "/images/services/video-production.webp",
+    coverImage: "/images/services/video-production.webp",
   },
 
   // -------------------------------------------------------------
@@ -1444,8 +1444,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["custom-software", "web-application", "crm-system", "ai-video-production"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468786926-8a517459-9883-4792-920d-03af47dc935f.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468786926-8a517459-9883-4792-920d-03af47dc935f.png",
+    thumbnail: "/images/services/ai-integration.webp",
+    coverImage: "/images/services/ai-integration.webp",
   },
 
   // -------------------------------------------------------------
@@ -1519,8 +1519,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["video-production", "advertising-creative", "ai-integration", "content-creation"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468834152-fe55c1e5-04f7-4140-864b-c3e1034287a9.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468834152-fe55c1e5-04f7-4140-864b-c3e1034287a9.png",
+    thumbnail: "/images/services/ai-video-production.webp",
+    coverImage: "/images/services/ai-video-production.webp",
   },
 
   // -------------------------------------------------------------
@@ -1593,8 +1593,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "corporate-website", "e-commerce-website", "web-application"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468889544-e92cdb77-d6bf-44be-831e-c219d82fe5fa.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468889544-e92cdb77-d6bf-44be-831e-c219d82fe5fa.png",
+    thumbnail: "/images/services/website-maintenance.webp",
+    coverImage: "/images/services/website-maintenance.webp",
   },
 
   // -------------------------------------------------------------
@@ -1668,8 +1668,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["advertising-creative", "content-creation", "landing-page", "business-website"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794469038128-4c9792eb-22be-466e-94e5-777540b2da76.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794469038128-4c9792eb-22be-466e-94e5-777540b2da76.png",
+    thumbnail: "/images/services/digital-marketing.webp",
+    coverImage: "/images/services/digital-marketing.webp",
   },
 
   // -------------------------------------------------------------
@@ -1743,8 +1743,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["web-application", "mobile-application", "business-website", "custom-software"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794469433590-a229e5fe-0664-46dc-ae26-68cf52a4e924.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794469433590-a229e5fe-0664-46dc-ae26-68cf52a4e924.png",
+    thumbnail: "/images/services/ui-ux-design.webp",
+    coverImage: "/images/services/ui-ux-design.webp",
   },
 
   // -------------------------------------------------------------
@@ -1818,8 +1818,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["digital-marketing", "social-media-design", "advertising-creative", "business-website"],
-    thumbnail: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468998443-4c9792eb-22be-466e-94e5-777540b2da76.png",
-    coverImage: "https://ftwfwhxfbrqnrwmjrmrq.supabase.co/storage/v1/object/public/nguyen-agency-media/services/1794468998443-4c9792eb-22be-466e-94e5-777540b2da76.png",
+    thumbnail: "/images/services/content-creation.webp",
+    coverImage: "/images/services/content-creation.webp",
   },
 ];
 

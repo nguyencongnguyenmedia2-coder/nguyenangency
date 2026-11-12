@@ -150,10 +150,10 @@ export default async function ServiceDetailPage({
   const folder = official.slug === "e-commerce-website" ? "ecommerce-website" : official.slug;
 
   const bannerImage =
-    dbService?.coverImage ||
-    dbService?.thumbnail ||
     official.coverImage ||
-    official.thumbnail;
+    official.thumbnail ||
+    dbService?.coverImage ||
+    dbService?.thumbnail;
 
   // Resolve gallery images
   let galleryList: string[] = [];

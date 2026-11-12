@@ -84,7 +84,7 @@ export default async function ServicesPage({
       categoryName: official.categoryName,
       shortDesc: official.shortDesc,
       proposedItems: official.proposedItems,
-      thumbnail: dbMatch?.thumbnail || official.thumbnail,
+      thumbnail: official.thumbnail || dbMatch?.thumbnail,
       priceLabel: dbMatch?.priceLabel || (official.group === "TECH" ? "Tư vấn & Báo giá" : "Báo giá theo gói"),
       startingPrice: dbMatch?.startingPrice || null,
       estimatedTime: dbMatch?.estimatedTime || (official.group === "TECH" ? "2 - 6 tuần" : "3 - 10 ngày"),
@@ -202,10 +202,10 @@ export default async function ServicesPage({
                       src={service.thumbnail}
                       alt={service.title}
                       fill
-                      priority={index < 3}
-                      loading={index < 3 ? "eager" : "lazy"}
+                      priority={index < 6}
+                      loading={index < 6 ? "eager" : "lazy"}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
-                      quality={80}
+                      quality={85}
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
