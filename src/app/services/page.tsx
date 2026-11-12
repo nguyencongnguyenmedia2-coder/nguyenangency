@@ -84,7 +84,7 @@ export default async function ServicesPage({
       categoryName: official.categoryName,
       shortDesc: official.shortDesc,
       proposedItems: official.proposedItems,
-      thumbnail: official.thumbnail,
+      thumbnail: dbMatch?.thumbnail || official.thumbnail,
       priceLabel: dbMatch?.priceLabel || (official.group === "TECH" ? "Tư vấn & Báo giá" : "Báo giá theo gói"),
       startingPrice: dbMatch?.startingPrice || null,
       estimatedTime: dbMatch?.estimatedTime || (official.group === "TECH" ? "2 - 6 tuần" : "3 - 10 ngày"),

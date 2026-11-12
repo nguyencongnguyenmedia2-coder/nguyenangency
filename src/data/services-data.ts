@@ -101,7 +101,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["corporate-website", "landing-page", "e-commerce-website", "website-maintenance"],
-    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/business-website/thumbnail.jpg",
+    coverImage: "/uploads/services/business-website/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -174,7 +175,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["logo-design", "graphic-design", "corporate-website", "advertising-creative"],
-    thumbnail: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/branding-identity/thumbnail.jpg",
+    coverImage: "/uploads/services/branding-identity/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -249,7 +251,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "branding-identity", "management-software", "website-maintenance"],
-    thumbnail: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/corporate-website/thumbnail.jpg",
+    coverImage: "/uploads/services/corporate-website/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -323,7 +326,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["branding-identity", "graphic-design", "poster-design", "menu-design"],
-    thumbnail: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/logo-design/thumbnail.jpg",
+    coverImage: "/uploads/services/logo-design/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -397,7 +401,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "advertising-creative", "digital-marketing", "e-commerce-website"],
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/landing-page/thumbnail.jpg",
+    coverImage: "/uploads/services/landing-page/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -469,7 +474,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["branding-identity", "banner-design", "poster-design", "social-media-design"],
-    thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/graphic-design/thumbnail.jpg",
+    coverImage: "/uploads/services/graphic-design/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -544,7 +550,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "landing-page", "crm-system", "digital-marketing"],
-    thumbnail: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/ecommerce-website/thumbnail.jpg",
+    coverImage: "/uploads/services/ecommerce-website/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -616,7 +623,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "poster-design", "advertising-creative", "social-media-design"],
-    thumbnail: "https://images.unsplash.com/photo-1542744094-3a3172722188?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/banner-design/thumbnail.jpg",
+    coverImage: "/uploads/services/banner-design/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -690,7 +698,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["management-software", "custom-software", "crm-system", "ai-integration"],
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/web-application/thumbnail.jpg",
+    coverImage: "/uploads/services/web-application/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -762,7 +771,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "banner-design", "advertising-creative", "video-production"],
-    thumbnail: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/poster-design/thumbnail.jpg",
+    coverImage: "/uploads/services/poster-design/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -836,7 +846,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["web-application", "e-commerce-website", "crm-system", "ui-ux-design"],
-    thumbnail: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/mobile-application/thumbnail.jpg",
+    coverImage: "/uploads/services/mobile-application/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -908,7 +919,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "branding-identity", "logo-design", "poster-design"],
-    thumbnail: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/menu-design/thumbnail.jpg",
+    coverImage: "/uploads/services/menu-design/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -982,7 +994,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["management-software", "custom-software", "web-application", "ai-integration"],
-    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/crm-system/thumbnail.jpg",
+    coverImage: "/uploads/services/crm-system/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1056,7 +1069,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["graphic-design", "banner-design", "content-creation", "advertising-creative"],
-    thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/social-media-design/thumbnail.jpg",
+    coverImage: "/uploads/services/social-media-design/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1130,7 +1144,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["custom-software", "web-application", "crm-system", "ai-integration"],
-    thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/management-software/thumbnail.jpg",
+    coverImage: "/uploads/services/management-software/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1204,7 +1219,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["digital-marketing", "banner-design", "video-production", "content-creation"],
-    thumbnail: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/advertising-creative/thumbnail.jpg",
+    coverImage: "/uploads/services/advertising-creative/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1278,7 +1294,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["management-software", "web-application", "crm-system", "ai-integration"],
-    thumbnail: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/custom-software/thumbnail.jpg",
+    coverImage: "/uploads/services/custom-software/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1352,7 +1369,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["ai-video-production", "advertising-creative", "media-quang-ngai", "content-creation"],
-    thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/video-production/thumbnail.jpg",
+    coverImage: "/uploads/services/video-production/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1426,7 +1444,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["custom-software", "web-application", "crm-system", "ai-video-production"],
-    thumbnail: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/ai-integration/thumbnail.jpg",
+    coverImage: "/uploads/services/ai-integration/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1500,7 +1519,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["video-production", "advertising-creative", "ai-integration", "content-creation"],
-    thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/ai-video-production/thumbnail.jpg",
+    coverImage: "/uploads/services/ai-video-production/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1573,7 +1593,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["business-website", "corporate-website", "e-commerce-website", "web-application"],
-    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/website-maintenance/thumbnail.jpg",
+    coverImage: "/uploads/services/website-maintenance/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1647,7 +1668,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["advertising-creative", "content-creation", "landing-page", "business-website"],
-    thumbnail: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/digital-marketing/thumbnail.jpg",
+    coverImage: "/uploads/services/digital-marketing/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1721,7 +1743,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["web-application", "mobile-application", "business-website", "custom-software"],
-    thumbnail: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/ui-ux-design/thumbnail.jpg",
+    coverImage: "/uploads/services/ui-ux-design/cover.jpg",
   },
 
   // -------------------------------------------------------------
@@ -1795,7 +1818,8 @@ export const OFFICIAL_24_SERVICES: ServiceDetailData[] = [
       },
     ],
     relatedSlugs: ["digital-marketing", "social-media-design", "advertising-creative", "business-website"],
-    thumbnail: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80",
+    thumbnail: "/uploads/services/content-creation/thumbnail.jpg",
+    coverImage: "/uploads/services/content-creation/cover.jpg",
   },
 ];
 
@@ -1805,3 +1829,4 @@ export function getServiceBySlug(slug: string): ServiceDetailData | undefined {
     (s) => s.slug === normalized || s.aliases?.includes(normalized)
   );
 }
+

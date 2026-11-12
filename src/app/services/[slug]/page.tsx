@@ -62,10 +62,22 @@ export async function generateMetadata({
     };
   }
 
+  let dbService: any = null;
+  try {
+    dbService = await prisma.service.findUnique({
+      where: { slug: official.slug },
+      select: { thumbnail: true, coverImage: true },
+    });
+  } catch {}
+
   const title = `${official.seoTitle} | NGUYÊN AGENCY`;
   const description = official.metaDescription;
   const canonicalUrl = `https://nguyenagency.online/services/${official.slug}`;
-  const ogImage = official.thumbnail;
+  const ogImage =
+    dbService?.coverImage ||
+    dbService?.thumbnail ||
+    official.coverImage ||
+    official.thumbnail;
 
   return {
     title,
@@ -128,6 +140,12 @@ export default async function ServiceDetailPage({
   const accentColor = isMedia ? "#FF2D95" : "#00E5FF";
   const accentBg = isMedia ? "rgba(255, 45, 149, 0.08)" : "rgba(0, 229, 255, 0.08)";
   const accentBorder = isMedia ? "rgba(255, 45, 149, 0.3)" : "rgba(0, 229, 255, 0.3)";
+
+  const bannerImage =
+    dbService?.coverImage ||
+    dbService?.thumbnail ||
+    official.coverImage ||
+    official.thumbnail;
 
   // Resolve related services (3 to 4)
   const relatedServices: ServiceDetailData[] = official.relatedSlugs
@@ -371,7 +389,7 @@ export default async function ServiceDetailPage({
           {/* Banner Image 16:9 Standard */}
           <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden bg-[#121622] border border-white/10 shadow-2xl">
             <Image
-              src={official.thumbnail}
+              src={bannerImage}
               alt={`${official.title} - ${official.titleVn} | NGUYÊN AGENCY`}
               fill
               priority

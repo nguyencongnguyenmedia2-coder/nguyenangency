@@ -128,10 +128,18 @@ async function main() {
   });
 
   // Seed 24 Official Services (12 Media + 12 Tech)
-  console.log("Seeding 24 official services from services-data.ts...");
+  console.log("Seeding 24 official services with preserved uploaded images...");
   for (const s of OFFICIAL_24_SERVICES) {
     const isMedia = s.group === "MEDIA";
     const catId = isMedia ? mediaCat.id : techCat.id;
+    const folder = s.slug === "e-commerce-website" ? "ecommerce-website" : s.slug;
+    const localThumb = `/uploads/services/${folder}/thumbnail.jpg`;
+    const localCover = `/uploads/services/${folder}/cover.jpg`;
+    const localGallery = JSON.stringify([
+      `/uploads/services/${folder}/gallery-1.jpg`,
+      `/uploads/services/${folder}/gallery-2.jpg`,
+      `/uploads/services/${folder}/gallery-3.jpg`,
+    ]);
 
     await prisma.service.upsert({
       where: { slug: s.slug },
@@ -144,7 +152,9 @@ async function main() {
         description: s.intro,
         metaTitle: s.seoTitle,
         metaDescription: s.metaDescription,
-        thumbnail: s.thumbnail,
+        thumbnail: localThumb,
+        coverImage: localCover,
+        galleryJson: localGallery,
         benefitsJson: JSON.stringify(s.proposedItems),
         featuresJson: JSON.stringify(s.deliverables),
         processJson: JSON.stringify(s.process),
@@ -160,7 +170,9 @@ async function main() {
         description: s.intro,
         metaTitle: s.seoTitle,
         metaDescription: s.metaDescription,
-        thumbnail: s.thumbnail,
+        thumbnail: localThumb,
+        coverImage: localCover,
+        galleryJson: localGallery,
         icon: isMedia ? "Palette" : "Cpu",
         benefitsJson: JSON.stringify(s.proposedItems),
         featuresJson: JSON.stringify(s.deliverables),
@@ -188,7 +200,9 @@ async function main() {
             description: s.intro,
             metaTitle: s.seoTitle,
             metaDescription: s.metaDescription,
-            thumbnail: s.thumbnail,
+            thumbnail: localThumb,
+            coverImage: localCover,
+            galleryJson: localGallery,
             benefitsJson: JSON.stringify(s.proposedItems),
             featuresJson: JSON.stringify(s.deliverables),
             processJson: JSON.stringify(s.process),
@@ -204,7 +218,9 @@ async function main() {
             description: s.intro,
             metaTitle: s.seoTitle,
             metaDescription: s.metaDescription,
-            thumbnail: s.thumbnail,
+            thumbnail: localThumb,
+            coverImage: localCover,
+            galleryJson: localGallery,
             icon: isMedia ? "Palette" : "Cpu",
             benefitsJson: JSON.stringify(s.proposedItems),
             featuresJson: JSON.stringify(s.deliverables),
