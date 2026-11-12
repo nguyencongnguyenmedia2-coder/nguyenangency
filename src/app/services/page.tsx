@@ -204,8 +204,8 @@ export default async function ServicesPage({
                       fill
                       priority={index < 6}
                       loading={index < 6 ? "eager" : "lazy"}
+                      unoptimized={service.thumbnail.startsWith("/")}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
-                      quality={85}
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>

@@ -121,20 +121,16 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
     custom.videoUrl ||
     "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1";
 
-  let heroImage =
-    sectionData?.mediaUrl && sectionData.mediaUrl.trim() !== ""
-      ? sectionData.mediaUrl.trim()
-      : "/images/mascot-character-transparent-v2.webp";
-
+  let heroImage = "/images/mascot-character-transparent-v2.webp";
   if (
-    heroImage === "/images/mascot-character-transparent.png" ||
-    heroImage === "/images/mascot-character-transparent-v2.png" ||
-    heroImage === "/images/mascot-character-full.png" ||
-    heroImage === "/images/mascot-character-full.jpg" ||
-    heroImage === "/images/hero-mascot.jpg" ||
-    (heroImage.endsWith(".jpg") && heroImage.includes("mascot"))
+    sectionData?.mediaUrl &&
+    sectionData.mediaUrl.trim() !== "" &&
+    !sectionData.mediaUrl.includes("mascot") &&
+    !sectionData.mediaUrl.includes("a8a8ce5f") &&
+    !sectionData.mediaUrl.includes("1794409715352") &&
+    !sectionData.mediaUrl.includes("1794408639378")
   ) {
-    heroImage = "/images/mascot-character-transparent-v2.webp";
+    heroImage = sectionData.mediaUrl.trim();
   }
 
   const blendMode: "screen" | "normal" =
@@ -380,6 +376,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
                   width={1000}
                   height={1040}
                   priority
+                  unoptimized={heroImage.startsWith("/")}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 560px"
                   className="w-full h-auto max-h-[540px] object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.35)]"
                   style={{ mixBlendMode: blendMode }}

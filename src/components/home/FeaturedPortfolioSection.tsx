@@ -22,6 +22,14 @@ interface PortfolioItem {
   };
 }
 
+function getOptimizedPortfolioThumb(url: string, idx: number) {
+  if (!url) return `/images/portfolio/portfolio-${(idx % 3) + 1}.webp`;
+  if (url.includes("1794403259387") || url.includes("f62a8cd0")) return "/images/portfolio/portfolio-1.webp";
+  if (url.includes("1794404863051") || url.includes("db0db3f8")) return "/images/portfolio/portfolio-2.webp";
+  if (url.includes("1794404928953") || url.includes("3de2c8d1")) return "/images/portfolio/portfolio-3.webp";
+  return url;
+}
+
 export default function FeaturedPortfolioSection({
   portfolios,
   sectionData,
@@ -111,6 +119,7 @@ export default function FeaturedPortfolioSection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-8">
           {filteredPortfolios.map((item, idx) => {
             const isHeroCard = idx === 0 && activeFilter === "ALL";
+            const thumb = getOptimizedPortfolioThumb(item.thumbnail, idx);
             let techStack: string[] = [];
             try {
               techStack = JSON.parse(item.technologiesJson || "[]");
@@ -148,11 +157,11 @@ export default function FeaturedPortfolioSection({
                       </div>
 
                       <Image
-                        src={item.thumbnail}
+                        src={thumb}
                         alt={item.title}
                         fill
-                        loading="lazy"
-                        quality={80}
+                        priority
+                        unoptimized={thumb.startsWith("/")}
                         className="object-cover pt-8 transition-transform duration-700 ease-out group-hover:scale-105"
                         sizes="(max-width: 1024px) 100vw, 60vw"
                       />
@@ -269,11 +278,11 @@ export default function FeaturedPortfolioSection({
                     </div>
 
                     <Image
-                      src={item.thumbnail}
+                      src={thumb}
                       alt={item.title}
                       fill
                       loading="lazy"
-                      quality={80}
+                      unoptimized={thumb.startsWith("/")}
                       className="object-cover pt-6 transition-transform duration-700 ease-out group-hover:scale-105"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
