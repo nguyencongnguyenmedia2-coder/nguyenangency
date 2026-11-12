@@ -401,8 +401,8 @@ export function InteractiveGallery({
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
                 className={`${
-                  isFullSpan ? "md:col-span-12 aspect-[16/9]" : "md:col-span-6 aspect-[16/10]"
-                } group relative rounded-3xl overflow-hidden border border-[#292929] hover:border-[#007BA7] bg-[#121212] cursor-pointer transition-all duration-500`}
+                  isFullSpan ? "md:col-span-12" : "md:col-span-6"
+                } aspect-[16/9] group relative rounded-3xl overflow-hidden border border-[#292929] hover:border-[#007BA7] bg-[#121212] cursor-pointer transition-all duration-500`}
               >
                 <Image
                   src={imgUrl}

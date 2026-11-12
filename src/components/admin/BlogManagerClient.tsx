@@ -404,7 +404,7 @@ export default function BlogManagerClient({
               <div>
                 <ImageUploadField
                   name="thumbnail"
-                  label="Ảnh bìa bài viết (Cover Thumbnail)"
+                  label="Ảnh bìa bài viết (Cover Thumbnail • Chuẩn tỉ lệ 16:9 • VD: 1920x1080)"
                   defaultValue={editingPost?.thumbnail}
                   folder="blog"
                   placeholder="https://images.unsplash.com/... hoặc tải ảnh lên"

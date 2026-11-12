@@ -470,7 +470,7 @@ export default function PortfolioManagerClient({
               <div>
                 <ImageUploadField
                   name="thumbnail"
-                  label="Ảnh Cover Thumbnail (Upload file hoặc nhập URL)"
+                  label="Ảnh Cover Thumbnail (Chuẩn tỉ lệ 16:9 • VD: 1920x1080 hoặc 1280x720)"
                   defaultValue={editingItem?.thumbnail || ""}
                   folder="portfolio"
                   placeholder="https://images.unsplash.com/... hoặc chọn upload"

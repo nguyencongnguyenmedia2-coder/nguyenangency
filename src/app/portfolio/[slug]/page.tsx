@@ -301,10 +301,10 @@ export default async function PortfolioDetailPage({
             </div>
           </div>
 
-          {/* Full-Width Cover Image */}
+          {/* Full-Width Cover Image (16:9 Standard) */}
           <div
             data-hero-visual
-            className="relative aspect-[16/9] md:aspect-[21/9] w-full rounded-3xl overflow-hidden border border-[#292929] bg-[#121212]"
+            className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden border border-[#292929] bg-[#121212]"
           >
             <Image
               src={item.thumbnail}

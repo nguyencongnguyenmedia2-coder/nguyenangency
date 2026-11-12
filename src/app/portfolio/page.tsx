@@ -300,8 +300,8 @@ export default async function PortfolioPage({
                   </div>
                 </div>
 
-                {/* Visual Thumbnail */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
+                {/* Visual Thumbnail (16:9 Standard) */}
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60">
                   <Image
                     src={item.thumbnail}
                     alt={item.title}

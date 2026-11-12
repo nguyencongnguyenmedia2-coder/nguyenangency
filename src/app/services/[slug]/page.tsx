@@ -429,10 +429,10 @@ export default async function ServiceDetailPage({
             </div>
           </div>
 
-          {/* Large Hero Visual with Clip-Path Reveal */}
+          {/* Large Hero Visual (16:9 Standard) */}
           <div
             data-hero-visual
-            className="relative aspect-[16/9] md:aspect-[21/9] w-full rounded-3xl overflow-hidden border border-[#292929] bg-[#121212]"
+            className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden border border-[#292929] bg-[#121212]"
           >
             <Image
               src={heroCover}
@@ -803,7 +803,7 @@ export default async function ServiceDetailPage({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {galleryList.map((gUrl, gIdx) => (
                 <RevealOnScroll key={gIdx} delay={gIdx * 0.1}>
-                  <div className="group relative aspect-[4/3] rounded-3xl overflow-hidden border border-[#292929] hover:border-[#FF2D95]/60 transition-all duration-500 bg-[#121212]">
+                  <div className="group relative aspect-[16/9] rounded-3xl overflow-hidden border border-[#292929] hover:border-[#FF2D95]/60 transition-all duration-500 bg-[#121212]">
                     <Image
                       src={gUrl}
                       alt={`${service.title} - Mẫu thực tế ${gIdx + 1}`}

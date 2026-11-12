@@ -273,7 +273,7 @@ export default async function BlogPostDetailPage({
           {post.thumbnail && (
             <div
               data-hero-visual
-              className="relative aspect-[16/9] md:aspect-[21/9] w-full rounded-3xl overflow-hidden border border-[#292929] bg-[#121212]"
+              className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden border border-[#292929] bg-[#121212]"
             >
               <Image
                 src={post.thumbnail}
@@ -410,7 +410,7 @@ export default async function BlogPostDetailPage({
                         href={`/blog/${rel.slug}`}
                         className="group rounded-3xl bg-[#121212] border border-[#292929] hover:border-[#007BA7] overflow-hidden flex flex-col justify-between h-full transition-all"
                       >
-                        <div className="relative aspect-[16/10] w-full bg-[#171717] overflow-hidden">
+                        <div className="relative aspect-[16/9] w-full bg-[#171717] overflow-hidden">
                           <Image
                             src={rel.thumbnail}
                             alt={rel.title}

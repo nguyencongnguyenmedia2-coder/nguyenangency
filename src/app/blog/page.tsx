@@ -224,7 +224,7 @@ export default async function BlogPage({
             className="group block rounded-3xl bg-[#0D0F17]/90 border border-white/[0.1] hover:border-white/[0.25] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_rgba(0,0,0,0.8)] backdrop-blur-xl"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-              <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto min-h-[300px] overflow-hidden bg-black/60">
+              <div className="lg:col-span-7 relative aspect-[16/9] lg:aspect-auto min-h-[300px] overflow-hidden bg-black/60">
                 <Image
                   src={featuredPost.thumbnail}
                   alt={featuredPost.title}
@@ -296,7 +296,7 @@ export default async function BlogPage({
                 href={`/blog/${post.slug}`}
                 className="group rounded-3xl bg-[#0D0F17]/80 border border-white/[0.08] hover:border-white/[0.2] overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60">
                   <Image
                     src={post.thumbnail}
                     alt={post.title}

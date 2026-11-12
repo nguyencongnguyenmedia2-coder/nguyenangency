@@ -278,7 +278,7 @@ export default function LabManagerClient({
                 <div>
                   <ImageUploadField
                     name="thumbnail"
-                    label="Ảnh Thumbnail Sản Phẩm"
+                    label="Ảnh Thumbnail Sản Phẩm (Chuẩn tỉ lệ 16:9 • VD: 1920x1080)"
                     defaultValue={editingProd?.thumbnail || ""}
                     folder="lab"
                     placeholder="https://images.unsplash.com/... hoặc chọn upload"

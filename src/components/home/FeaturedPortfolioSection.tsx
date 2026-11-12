@@ -251,7 +251,7 @@ export default function FeaturedPortfolioSection({
                   {/* Visual Preview */}
                   <Link
                     href={`/portfolio/${item.slug}`}
-                    className="relative aspect-[16/10] w-full overflow-hidden bg-[#121622] block"
+                    className="relative aspect-[16/9] w-full overflow-hidden bg-[#121622] block"
                   >
                     {/* Browser Mockup Top Bar */}
                     <div className="absolute top-0 inset-x-0 z-20 px-3.5 py-2 bg-[#08090E]/90 backdrop-blur-md border-b border-white/10 flex items-center justify-between">

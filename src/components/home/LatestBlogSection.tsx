@@ -63,7 +63,7 @@ export default function LatestBlogSection({
                   className="group h-full rounded-3xl bg-[#121212] border border-[#292929] hover:border-[#007BA7] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5"
                 >
                   <div>
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#171717] border-b border-[#292929]">
+                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#171717] border-b border-[#292929]">
                       <Image
                         src={cover}
                         alt={post.title}

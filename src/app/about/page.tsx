@@ -131,7 +131,7 @@ export default function AboutPage() {
 
         {/* Narrative & Visual Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          <div className="lg:col-span-7 relative aspect-[16/10] rounded-3xl overflow-hidden border border-white/[0.08] bg-[#0E121E] shadow-2xl">
+          <div className="lg:col-span-7 relative aspect-[16/9] rounded-3xl overflow-hidden border border-white/[0.08] bg-[#0E121E] shadow-2xl">
             <Image
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80"
               alt="NGUYÊN AGENCY Workspace"

@@ -506,7 +506,7 @@ export default function ServiceManagerClient({
                   <div>
                     <ImageUploadField
                       name="thumbnail"
-                      label="1. Ảnh Đại Diện Thumbnail * (Bắt buộc khi xuất bản)"
+                      label="1. Ảnh Đại Diện Thumbnail * (Chuẩn tỉ lệ 16:9 • VD: 1920x1080)"
                       defaultValue={editingService?.thumbnail || ""}
                       folder="services"
                       placeholder="https://... hoặc tải file lên"
@@ -515,7 +515,7 @@ export default function ServiceManagerClient({
                   <div>
                     <ImageUploadField
                       name="coverImage"
-                      label="2. Ảnh Bìa Banner Lớn (Hero Cover)"
+                      label="2. Ảnh Bìa Banner Lớn (Hero Cover • Chuẩn tỉ lệ 16:9)"
                       defaultValue={editingService?.coverImage || ""}
                       folder="services"
                       placeholder="https://... hoặc tải file lên"
