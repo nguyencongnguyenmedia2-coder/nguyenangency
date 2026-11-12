@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, Clock, Sparkles } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Clock, Sparkles, ShieldCheck, Zap, Layers } from "lucide-react";
 import prisma from "@/lib/prisma";
 import RevealOnScroll from "@/components/motion/RevealOnScroll";
 
@@ -10,21 +10,23 @@ const FALLBACK_FEATURED_SERVICES = [
     title: "Phát Triển Website 3D & Three.js",
     slug: "3d-website-development",
     group: "TECH",
-    shortDesc: "Kiến trúc website tương tác không gian 3D WebGL đột phá, tối ưu hóa tốc độ 60 FPS chuẩn Luxury Brand.",
+    shortDesc: "Kiến trúc website tương tác không gian 3D WebGL đột phá, tối ưu hóa tốc độ 60 FPS chuẩn Luxury Brand toàn cầu.",
     estimatedTime: "3 - 5 tuần",
     startingPrice: 45000000,
-    benefitsJson: JSON.stringify(["Mô hình 3D tương tác thực tế", "WebGL tối ưu 60 FPS", "Chuẩn SEO & Mobile first"]),
-    featuresJson: JSON.stringify(["Three.js / React Three Fiber", "Shader hiệu ứng cao cấp", "CMS quản trị nội dung"]),
+    priceLabel: "Từ 45.000.000 ₫",
+    benefitsJson: JSON.stringify(["Mô hình 3D tương tác thực tế", "WebGL tối ưu 60 FPS", "Chuẩn SEO 95+ & Mobile First", "Bàn giao 100% mã nguồn"]),
+    featuresJson: JSON.stringify(["Three.js / React Three Fiber", "Custom Shaders & Ánh sáng", "CMS Quản trị nội dung độc quyền"]),
   },
   {
     id: "svc_02",
     title: "Nhận Diện Thương Hiệu Độc Bản (Luxury Brand)",
     slug: "luxury-brand-identity",
     group: "MEDIA",
-    shortDesc: "Định hình ngôn ngữ thị giác sang trọng, hệ thống Brand Guideline và tài sản nhận diện đa nền tảng.",
+    shortDesc: "Định hình ngôn ngữ thị giác sang trọng, hệ thống Brand Guideline toàn diện và tài sản nhận diện đa nền tảng.",
     estimatedTime: "2 - 3 tuần",
     startingPrice: 30000000,
-    benefitsJson: JSON.stringify(["Bộ nhận diện thương hiệu chuẩn quốc tế", "Brand Guideline toàn diện", "Bàn giao file vector gốc"]),
+    priceLabel: "Từ 30.000.000 ₫",
+    benefitsJson: JSON.stringify(["Bộ nhận diện chuẩn quốc tế", "Brand Guideline toàn diện 80+ trang", "Bàn giao file vector gốc & Font quyền"]),
     featuresJson: JSON.stringify(["Logo & Typography độc quyền", "Ấn phẩm truyền thông số", "Hồ sơ năng lực Profile"]),
   },
   {
@@ -32,10 +34,11 @@ const FALLBACK_FEATURED_SERVICES = [
     title: "Ứng Dụng Web & Nền Tảng SaaS Doanh Nghiệp",
     slug: "saas-web-application",
     group: "TECH",
-    shortDesc: "Phần mềm quản trị đám mây, tích hợp CRM tự động hóa và bảo mật đa tầng cho doanh nghiệp mở rộng quy mô.",
+    shortDesc: "Phần mềm quản trị đám mây, tích hợp CRM tự động hóa và bảo mật đa tầng cho doanh nghiệp mở rộng quy mô triệu user.",
     estimatedTime: "4 - 8 tuần",
     startingPrice: 60000000,
-    benefitsJson: JSON.stringify(["Kiến trúc Next.js Serverless", "Bảo mật chuẩn ISO", "Khả năng mở rộng hàng triệu user"]),
+    priceLabel: "Từ 60.000.000 ₫",
+    benefitsJson: JSON.stringify(["Kiến trúc Next.js Serverless", "Bảo mật chuẩn ISO & OWASP", "Khả năng mở rộng hàng triệu user"]),
     featuresJson: JSON.stringify(["Hệ thống Auth & RBAC", "Dashboard báo cáo Real-time", "API Gateway đa kênh"]),
   },
   {
@@ -43,10 +46,11 @@ const FALLBACK_FEATURED_SERVICES = [
     title: "Sản Xuất TVC & Video Motion 3D CGI",
     slug: "3d-motion-tvc-production",
     group: "MEDIA",
-    shortDesc: "Thước phim quảng cáo điện ảnh 3D CGI mãn nhãn, thu hút hàng triệu lượt xem và khẳng định đẳng cấp thương hiệu.",
+    shortDesc: "Thước phim quảng cáo điện ảnh 3D CGI mãn nhãn, thu hút hàng triệu lượt xem và khẳng định vị thế dẫn đầu ngành.",
     estimatedTime: "3 - 4 tuần",
     startingPrice: 50000000,
-    benefitsJson: JSON.stringify(["Kỹ xảo 3D CGI điện ảnh", "Kịch bản viral đa kênh", "Render 4K chuẩn rạp"]),
+    priceLabel: "Từ 50.000.000 ₫",
+    benefitsJson: JSON.stringify(["Kỹ xảo 3D CGI điện ảnh", "Kịch bản viral đa nền tảng", "Render 4K chuẩn rạp phim"]),
     featuresJson: JSON.stringify(["Storyboard nghệ thuật", "Âm thanh Sound Design độc quyền", "Định dạng tối ưu TikTok & Ads"]),
   },
   {
@@ -54,9 +58,10 @@ const FALLBACK_FEATURED_SERVICES = [
     title: "Tích Hợp Trí Tuệ Nhân Tạo (Generative AI)",
     slug: "generative-ai-integration",
     group: "TECH",
-    shortDesc: "Tích hợp trợ lý ảo AI LLM, tự động hóa dịch vụ khách hàng 24/7 và hệ thống gợi ý thông minh.",
+    shortDesc: "Tích hợp trợ lý ảo AI LLM, tự động hóa dịch vụ khách hàng 24/7 và hệ thống gợi ý thông minh chuyển đổi cao.",
     estimatedTime: "2 - 4 tuần",
     startingPrice: 40000000,
+    priceLabel: "Từ 40.000.000 ₫",
     benefitsJson: JSON.stringify(["Tự động hóa 80% tác vụ hỗ trợ", "Fine-tune dữ liệu riêng của DN", "Đa ngôn ngữ thông minh"]),
     featuresJson: JSON.stringify(["OpenAI / Claude API", "Vector Database RAG", "Bảo mật dữ liệu tuyệt đối"]),
   },
@@ -65,10 +70,11 @@ const FALLBACK_FEATURED_SERVICES = [
     title: "Chiến Lược Digital Marketing & Tăng Trưởng",
     slug: "performance-digital-marketing",
     group: "MEDIA",
-    shortDesc: "Tối ưu hóa phễu chuyển đổi số toàn diện, gia tăng tỷ lệ chốt đơn và doanh thu cho thương hiệu.",
-    estimatedTime: "Hàng tháng",
+    shortDesc: "Tối ưu hóa phễu chuyển đổi số toàn diện, gia tăng tỷ lệ chốt đơn và doanh thu cho thương hiệu bền vững.",
+    estimatedTime: "Theo chiến dịch",
     startingPrice: 25000000,
-    benefitsJson: JSON.stringify(["Tối ưu ROAS và CPA", "Theo dõi Attribution minh bạch", "Báo cáo tự động mỗi ngày"]),
+    priceLabel: "Từ 25.000.000 ₫",
+    benefitsJson: JSON.stringify(["Tối ưu ROAS và CPA đo lường", "Theo dõi Attribution minh bạch", "Báo cáo tự động mỗi ngày"]),
     featuresJson: JSON.stringify(["Quảng cáo Meta & Google Ads", "Content Marketing chuyển đổi", "Phân tích số liệu Conversion"]),
   },
 ];
@@ -78,12 +84,11 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
   const title = sectionData?.title || "GIẢI PHÁP TOÀN DIỆN CHO THƯƠNG HIỆU DẪN ĐẦU";
   const description =
     sectionData?.description ||
-    "Hệ thống 24 dịch vụ tiêu chuẩn quốc tế được thiết kế chuyên biệt cho bài toán tăng trưởng doanh thu, định vị thương hiệu và chuyển đổi số.";
+    "Hệ thống 24 dịch vụ tiêu chuẩn quốc tế được thiết kế chuyên biệt cho bài toán tăng trưởng doanh thu, định vị thương hiệu và chuyển đổi số vượt trội.";
   const ctaText = sectionData?.ctaText || "Khám phá tất cả 24 Dịch vụ";
   const ctaLink = sectionData?.ctaLink || "/services";
 
   let featuredServices: any[] = [];
-  let dbError = false;
   try {
     featuredServices = await prisma.service.findMany({
       where: {
@@ -98,26 +103,26 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
       ],
     });
   } catch (err) {
-    console.warn("[ServicesBentoSection] DB fetch failed:", err);
-    dbError = true;
-    // Use fallback only when DB is completely unreachable (not when empty)
+    console.warn("[ServicesBentoSection] DB fetch fallback active:", err);
+  }
+
+  if (!featuredServices || featuredServices.length === 0) {
     featuredServices = FALLBACK_FEATURED_SERVICES;
   }
 
-  // Only use fallback when DB is unreachable – NOT when Admin simply hasn't added services yet
-
   return (
-    <section className="py-28 px-6 bg-[#0A0A0A] border-b border-[#1F1F23] relative overflow-hidden">
+    <section className="py-28 px-4 sm:px-6 lg:px-8 bg-[#06070B] border-b border-[#1A1A22] relative overflow-hidden">
       {/* Subtle Ambient Glow */}
-      <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#FF2D95]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#00E5FF]/5 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#FF2D95]/5 rounded-full blur-[170px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <RevealOnScroll className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8 pb-10 border-b border-[#1F1F23]">
+        <RevealOnScroll className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8 pb-10 border-b border-[#1A1A22]">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2.5 mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#FF2D95]" />
-              <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FF2D95]">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#0D121D] border border-[#FF2D95]/30 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#FF2D95] animate-pulse" />
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#FF2D95] font-semibold">
                 {subtitle}
               </span>
             </div>
@@ -127,26 +132,27 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
           </div>
 
           <div className="flex flex-col items-start lg:items-end gap-4">
-            <p className="text-sm text-[#A1A1AA] max-w-md lg:text-right leading-relaxed">
+            <p className="text-sm md:text-base text-[#D4D4D8] max-w-md lg:text-right leading-relaxed">
               {description}
             </p>
-            <Link
-              href={ctaLink}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#141418] border border-[#292929] hover:border-[#007BA7] text-xs font-mono uppercase tracking-widest text-white hover:text-[#38BDF8] transition-all group"
-            >
-              <span>{ctaText}</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href={ctaLink}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#00A3FF]/20 to-[#FF2D95]/20 border border-white/15 hover:border-[#00E5FF]/60 text-xs font-mono uppercase tracking-widest text-white hover:text-[#00E5FF] transition-all group"
+              >
+                <span>{ctaText}</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
           </div>
         </RevealOnScroll>
 
-        {/* Balanced 3-Column Bento Grid (Row 1: 2+1, Row 2: 1+2, Row 3: 2+1) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Balanced 3-Column Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {featuredServices.map((service, index) => {
-            // Balanced spans for 6 items in 3-col grid: (2+1), (1+2), (2+1) = 9 cols total (no empty gap!)
             const isWide = index === 0 || index === 3 || index === 4;
             const isMedia = service.group === "MEDIA";
-            const accentColor = isMedia ? "#FF2D95" : "#007BA7";
+            const accentColor = isMedia ? "#FF2D95" : "#00E5FF";
 
             let benefits: string[] = [];
             try {
@@ -170,9 +176,9 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
               >
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group relative h-full rounded-3xl bg-[#111114] border border-[#242429] hover:border-[#007BA7]/60 p-8 md:p-9 flex flex-col justify-between transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-18px_rgba(0,123,167,0.22)] overflow-hidden block"
+                  className="group relative h-full rounded-3xl bg-[#0B0D14]/90 border border-white/[0.08] hover:border-white/25 p-7 sm:p-8 md:p-9 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.8)] backdrop-blur-xl overflow-hidden block"
                 >
-                  {/* Ambient Corner Spotlight */}
+                  {/* Ambient Spotlight */}
                   <div
                     className="absolute -right-20 -top-20 w-56 h-56 rounded-full opacity-0 group-hover:opacity-15 blur-3xl transition-opacity duration-500 pointer-events-none"
                     style={{ backgroundColor: accentColor }}
@@ -180,25 +186,25 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
 
                   <div>
                     {/* Top Meta Strip */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-7">
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                       <div className="flex items-center gap-2.5">
-                        <span className="text-xs font-mono font-bold text-white/35">
+                        <span className="text-xs font-mono font-black text-white/30">
                           0{index + 1}
                         </span>
                         <span
-                          className={`text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full border ${
+                          className={`text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full border font-bold ${
                             isMedia
                               ? "bg-[#FF2D95]/10 text-[#FF2D95] border-[#FF2D95]/30"
-                              : "bg-[#007BA7]/10 text-[#38BDF8] border-[#007BA7]/35"
+                              : "bg-[#00E5FF]/10 text-[#00E5FF] border-[#00E5FF]/30"
                           }`}
                         >
-                          {isMedia ? "PHÂN HỆ TRUYỀN THÔNG SỐ" : "PHÂN HỆ CÔNG NGHỆ CAO"}
+                          {isMedia ? "PHÂN HỆ TRUYỀN THÔNG & 3D" : "PHÂN HỆ CÔNG NGHỆ CAO"}
                         </span>
                       </div>
 
                       {service.estimatedTime && (
-                        <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#71717A] bg-[#17171B] px-3 py-1 rounded-full border border-[#242429]">
-                          <Clock className="w-3 h-3 text-[#007BA7]" />
+                        <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#D4D4D8] bg-[#121622] px-3 py-1 rounded-full border border-white/5">
+                          <Clock className="w-3.5 h-3.5 text-[#00E5FF]" />
                           <span>{service.estimatedTime}</span>
                         </div>
                       )}
@@ -206,25 +212,25 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
 
                     {/* Title & Description */}
                     <h3
-                      className={`font-black text-white tracking-tight mb-3 group-hover:text-[#38BDF8] transition-colors ${
+                      className={`font-black text-white tracking-tight mb-3 group-hover:text-[#00E5FF] transition-colors leading-tight ${
                         isWide ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"
                       }`}
                     >
                       {service.title}
                     </h3>
-                    <p className="text-sm text-[#A1A1AA] leading-relaxed mb-6 max-w-2xl">
+                    <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed mb-6 max-w-2xl">
                       {service.shortDesc}
                     </p>
 
-                    {/* Benefits / Deliverables Preview */}
+                    {/* Benefits Preview */}
                     {benefits.length > 0 && (
                       <div
-                        className={`grid gap-2.5 mb-7 pt-5 border-t border-[#1F1F23] ${
+                        className={`grid gap-2.5 mb-6 pt-5 border-t border-white/[0.08] ${
                           isWide ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"
                         }`}
                       >
                         {benefits.slice(0, isWide ? 4 : 3).map((b, i) => (
-                          <div key={i} className="flex items-center gap-2 text-xs text-[#D4D4D8]">
+                          <div key={i} className="flex items-center gap-2 text-xs text-[#E4E4E7]">
                             <CheckCircle2
                               className="w-3.5 h-3.5 shrink-0"
                               style={{ color: accentColor }}
@@ -235,12 +241,13 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
                       </div>
                     )}
 
+                    {/* Deliverables tags */}
                     {deliverables.length > 0 && isWide && (
                       <div className="flex flex-wrap gap-1.5 mb-6">
                         {deliverables.slice(0, 4).map((del, i) => (
                           <span
                             key={i}
-                            className="text-[11px] font-mono text-[#A1A1AA] bg-[#18181C] border border-[#27272D] px-2.5 py-1 rounded-lg"
+                            className="text-[11px] font-mono text-[#A1A1AA] bg-[#121622] border border-white/5 px-2.5 py-1 rounded-lg"
                           >
                             {del}
                           </span>
@@ -249,18 +256,18 @@ export default async function ServicesBentoSection({ sectionData }: { sectionDat
                     )}
                   </div>
 
-                  {/* Card Footer */}
-                  <div className="pt-5 border-t border-[#242429] flex items-center justify-between gap-4">
+                  {/* Card Footer with Budget & Action */}
+                  <div className="pt-5 border-t border-white/[0.08] flex items-center justify-between gap-4">
                     <div>
                       <span className="text-[10px] font-mono uppercase tracking-wider text-[#71717A] block">
-                        NGÂN SÁCH DỰ KIẾN
+                        NGÂN SÁCH ĐẦU TƯ
                       </span>
-                      <span className="text-sm font-mono text-white font-bold">
-                        {service.priceLabel || "Liên hệ báo giá"}
+                      <span className="text-sm sm:text-base font-mono text-white font-bold bg-gradient-to-r from-white to-[#00E5FF] bg-clip-text text-transparent">
+                        {service.priceLabel || (service.startingPrice ? `Từ ${Number(service.startingPrice).toLocaleString("vi-VN")} ₫` : "Liên hệ báo giá")}
                       </span>
                     </div>
 
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#18181C] border border-[#292929] group-hover:border-[#007BA7] group-hover:bg-[#007BA7] text-xs font-mono uppercase tracking-wider text-[#D4D4D8] group-hover:text-white transition-all">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#121622] border border-white/10 group-hover:border-[#00E5FF]/60 group-hover:bg-[#00E5FF] text-xs font-mono uppercase tracking-wider text-white group-hover:text-black transition-all font-bold">
                       <span>Chi tiết</span>
                       <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>

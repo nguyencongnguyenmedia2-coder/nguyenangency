@@ -11,6 +11,12 @@ import {
   Layers,
   Play,
   X,
+  CheckCircle2,
+  ShieldCheck,
+  Zap,
+  Sparkles,
+  Award,
+  Users,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,18 +42,35 @@ const MARQUEE_ITEMS = [
   "TĂNG TRƯỞNG & CHUYỂN ĐỔI SỐ BỀN VỮNG",
 ];
 
+const TRUST_STATS = [
+  { value: "50+", label: "Dự Án Bàn Giao", detail: "Đa ngành nghề & Quốc tế" },
+  { value: "99.8%", label: "Tỷ Lệ Hài Lòng", detail: "Cam kết đúng hạn SLA" },
+  { value: "100%", label: "Mã Nguồn Độc Bản", detail: "Bàn giao toàn quyền sở hữu" },
+  { value: "24/7", label: "Đồng Hành Kỹ Thuật", detail: "Bảo hành 12 tháng tận tâm" },
+];
+
+const TECH_PARTNERS = [
+  { name: "Next.js 14", tag: "Full-Stack Framework" },
+  { name: "Three.js & WebGL", tag: "3D Engine" },
+  { name: "Supabase & Postgres", tag: "Cloud Database" },
+  { name: "Tailwind CSS", tag: "Modern Styling" },
+  { name: "OpenAI GPT-4o", tag: "Generative AI" },
+  { name: "Vercel & AWS", tag: "Edge Infrastructure" },
+  { name: "Cloudflare", tag: "Global CDN & WAF" },
+];
+
 const DEFAULT_CARDS = [
   {
-    title: "Thiết kế Website",
-    desc: "Chuẩn SEO - Hiệu quả",
+    title: "Thiết Kế Website 3D",
+    desc: "Chuẩn SEO • Tốc độ 60 FPS",
   },
   {
-    title: "Marketing Online",
-    desc: "Tăng nhận diện - Thu hút khách",
+    title: "Marketing & Tăng Trưởng",
+    desc: "Tăng nhận diện • Bứt phá ROI",
   },
   {
-    title: "Giải pháp AI & Automation",
-    desc: "Tối ưu vận hành - Bứt phá hiệu suất",
+    title: "Giải Pháp AI & SaaS",
+    desc: "Tự động hóa • May đo doanh nghiệp",
   },
 ];
 
@@ -89,7 +112,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
   const title = sectionData?.title || "VƯỢT CHUẨN SỐ HOÁ";
   const description =
     sectionData?.description ||
-    "Đối tác sáng tạo & công nghệ, đồng hành cùng doanh nghiệp xây dựng thương hiệu, tăng trưởng và chuyển đổi số bền vững.";
+    "Đối tác sáng tạo & công nghệ, đồng hành cùng doanh nghiệp xây dựng thương hiệu, tăng trưởng và chuyển đổi số bền vững với hệ sinh thái 24 giải pháp toàn diện.";
   const ctaText = sectionData?.ctaText || "Khám phá dịch vụ";
   const ctaLink = sectionData?.ctaLink || "/services";
 
@@ -176,19 +199,19 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
     <section
       id="hero-section"
       ref={containerRef}
-      className="relative w-full min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#050508] border-b border-[#1A1A22]"
+      className="relative w-full min-h-[96vh] flex flex-col justify-between overflow-hidden bg-[#06070B] border-b border-[#1A1A22]"
     >
       {/* 3D WebGL Background Layer */}
       {mount3D && <Hero3DScene />}
 
       {/* Atmospheric Neon Gradients */}
-      <div className="absolute top-1/4 left-1/6 -translate-x-1/2 w-[520px] h-[520px] bg-[#00E5FF]/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/6 translate-x-1/2 w-[550px] h-[550px] bg-[#FF2D95]/12 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/6 -translate-x-1/2 w-[550px] h-[550px] bg-[#00E5FF]/10 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/6 translate-x-1/2 w-[600px] h-[600px] bg-[#FF2D95]/12 rounded-full blur-[180px] pointer-events-none" />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 60% 40%, transparent 20%, rgba(5,5,8,0.5) 70%, rgba(5,5,8,0.95) 100%)",
+            "radial-gradient(circle at 60% 40%, transparent 20%, rgba(6,7,11,0.55) 70%, rgba(6,7,11,0.98) 100%)",
         }}
       />
 
@@ -196,15 +219,15 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
       <div className="h-20 sm:h-24 md:h-28 shrink-0" />
 
       {/* Main 2-Column Hero Content Grid */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex items-center py-6 md:py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
-          {/* LEFT COLUMN: Typography, Cards, CTAs */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex items-center py-8 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center w-full">
+          {/* LEFT COLUMN: Typography, Cards, CTAs, Trust Metrics */}
           <div
             ref={leftColRef}
             className="lg:col-span-7 flex flex-col items-start text-left z-20"
           >
             {/* 1. Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#0D1117]/90 border border-[#00E5FF]/40 mb-5 sm:mb-6 backdrop-blur-md shadow-[0_0_25px_rgba(0,229,255,0.2)]">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#0D121D]/90 border border-[#00E5FF]/40 mb-5 sm:mb-6 backdrop-blur-md shadow-[0_0_25px_rgba(0,229,255,0.2)]">
               <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-[#00A3FF] to-[#FF2D95] p-0.5 flex items-center justify-center shadow-sm">
                 <span className="text-[11px] font-black italic text-white leading-none">
                   N
@@ -257,16 +280,16 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
                 return (
                   <div
                     key={idx}
-                    className="p-3 sm:p-3.5 rounded-2xl bg-[#0F131C]/85 border border-[#1E293B] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group"
+                    className="p-3.5 sm:p-4 rounded-2xl bg-[#0D111A]/90 border border-white/[0.08] hover:border-[#00E5FF]/50 transition-all backdrop-blur-md flex items-center sm:items-start gap-3 group hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,229,255,0.12)]"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00E5FF]/15 to-[#007BA7]/10 border border-[#00E5FF]/30 flex items-center justify-center text-[#00E5FF] shrink-0 group-hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
                       <IconComp className="w-5 h-5" />
                     </div>
                     <div>
                       <h4 className="text-white font-bold text-xs sm:text-[13px] leading-tight">
                         {card.title}
                       </h4>
-                      <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-0.5">
+                      <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] mt-1">
                         {card.desc}
                       </p>
                     </div>
@@ -276,10 +299,10 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
             </div>
 
             {/* 5. CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full mb-8 sm:mb-9">
               <Link
                 href={ctaLink}
-                className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-[#00A3FF] via-[#007BA7] to-[#FF2D95] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_32px_rgba(255,45,149,0.5)] hover:scale-105 flex items-center justify-center gap-2 group"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#00A3FF] via-[#007BA7] to-[#FF2D95] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_36px_rgba(255,45,149,0.55)] hover:scale-105 flex items-center justify-center gap-2 group"
               >
                 <span>{ctaText}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -288,35 +311,76 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
               <button
                 type="button"
                 onClick={() => setIsVideoOpen(true)}
-                className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#121217]/90 hover:bg-[#1A1A22] border border-white/20 hover:border-white/40 text-white font-semibold text-xs tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 backdrop-blur-md"
+                className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-[#121622]/90 hover:bg-[#1A2030] border border-white/20 hover:border-[#00E5FF]/50 text-white font-semibold text-xs tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 backdrop-blur-md group"
               >
-                <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-white">
+                <div className="w-5 h-5 rounded-full bg-white/10 group-hover:bg-[#00E5FF]/20 flex items-center justify-center text-white group-hover:text-[#00E5FF] transition-colors">
                   <Play className="w-2.5 h-2.5 fill-current ml-0.5" />
                 </div>
                 <span>{videoBtnText}</span>
               </button>
+
+              <Link
+                href="/contact"
+                className="text-xs font-mono text-[#A1A1AA] hover:text-[#00E5FF] transition-colors underline-offset-4 hover:underline flex items-center gap-1.5 ml-1"
+              >
+                <span>Báo giá theo yêu cầu</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </Link>
+            </div>
+
+            {/* 6. Live Trust Metric Counter Bar */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-5 border-t border-white/[0.08] w-full">
+              {TRUST_STATS.map((stat, idx) => (
+                <div key={idx} className="flex flex-col">
+                  <span className="text-xl sm:text-2xl font-black font-mono text-white tracking-tight bg-gradient-to-r from-white via-white to-[#00E5FF] bg-clip-text text-transparent">
+                    {stat.value}
+                  </span>
+                  <span className="text-xs font-bold text-[#E4E4E7] mt-0.5">
+                    {stat.label}
+                  </span>
+                  <span className="text-[10px] text-[#71717A] mt-0.5 font-mono">
+                    {stat.detail}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT COLUMN: 3D Mascot Character / Custom Uploaded Image */}
+          {/* RIGHT COLUMN: 3D Mascot Character with Floating Cyber Chips */}
           <div
             ref={rightColRef}
             className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0"
           >
-            <div className="relative w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px] aspect-[984/1024] flex items-center justify-center">
+            <div className="relative w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px] aspect-[1000/1040] flex items-center justify-center">
               {/* Backlight Neon Halos */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/20 via-[#007BA7]/15 to-[#FF2D95]/20 rounded-full blur-[90px] pointer-events-none animate-mascot-aura" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/20 via-[#007BA7]/15 to-[#FF2D95]/20 rounded-full blur-[100px] pointer-events-none animate-mascot-aura" />
 
-              {/* Mascot / Custom Banner Graphic */}
+              {/* Top-Right Cyber HUD Badge */}
+              <div className="absolute -top-3 right-0 sm:right-2 z-20 px-3 py-1.5 rounded-full bg-[#0D121E]/90 border border-[#00E5FF]/40 backdrop-blur-md shadow-[0_0_20px_rgba(0,229,255,0.25)] flex items-center gap-2 pointer-events-none animate-pulse">
+                <Zap className="w-3.5 h-3.5 text-[#00E5FF]" />
+                <span className="text-[10px] font-mono font-bold text-white uppercase tracking-wider">
+                  60 FPS WebGL 3D
+                </span>
+              </div>
+
+              {/* Bottom-Left Cyber HUD Badge */}
+              <div className="absolute bottom-4 left-0 sm:left-2 z-20 px-3 py-1.5 rounded-full bg-[#0D121E]/90 border border-[#FF2D95]/40 backdrop-blur-md shadow-[0_0_20px_rgba(255,45,149,0.25)] flex items-center gap-2 pointer-events-none">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#FF2D95]" />
+                <span className="text-[10px] font-mono font-bold text-white uppercase tracking-wider">
+                  SLA 99.9% Uptime
+                </span>
+              </div>
+
+              {/* Mascot Graphic with Clean Transparency */}
               <div className="relative z-10 w-full h-full animate-mascot-float flex items-center justify-center">
                 {heroImage.startsWith("/") ? (
                   <Image
                     src={heroImage}
                     alt={title}
-                    width={984}
-                    height={1024}
+                    width={1000}
+                    height={1040}
                     priority
-                    className="w-full h-auto object-contain drop-shadow-[0_20px_60px_rgba(0,163,255,0.45)]"
+                    className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.35)]"
                     style={{ mixBlendMode: blendMode }}
                   />
                 ) : (
@@ -324,7 +388,7 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
                   <img
                     src={heroImage}
                     alt={title}
-                    className="w-full h-auto max-h-[540px] object-contain drop-shadow-[0_20px_60px_rgba(0,163,255,0.45)]"
+                    className="w-full h-auto max-h-[540px] object-contain drop-shadow-[0_20px_50px_rgba(0,163,255,0.35)]"
                     style={{ mixBlendMode: blendMode }}
                   />
                 )}
@@ -345,6 +409,29 @@ export default function HeroSection({ sectionData }: { sectionData?: any }) {
               <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#00E5FF] to-[#FF2D95]" />
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Tech Partners & Enterprise Standards Strip */}
+      <div className="relative z-20 w-full border-t border-white/[0.05] bg-[#07080D] py-3.5 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#71717A] uppercase tracking-wider shrink-0">
+            <Award className="w-3.5 h-3.5 text-[#00E5FF]" />
+            <span>Tiêu Chuẩn Công Nghệ & Hạ Tầng:</span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {TECH_PARTNERS.map((tech, idx) => (
+              <div
+                key={idx}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#0F131D] border border-white/[0.06] text-[11px] font-mono text-[#D4D4D8] hover:border-[#00E5FF]/30 transition-colors"
+              >
+                <span className="text-white font-bold">{tech.name}</span>
+                <span className="text-[#52525B]">/</span>
+                <span className="text-[10px] text-[#A1A1AA]">{tech.tag}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
