@@ -25,20 +25,22 @@ export const metadata: Metadata = {
   },
   description:
     "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
-  authors: [{ name: "Nguyễn Công Nguyên", url: "https://nguyenangency.vercel.app" }],
+  authors: [{ name: "Nguyễn Công Nguyên", url: "https://nguyenagency.online/nguyen-cong-nguyen" }],
   creator: "Nguyễn Công Nguyên",
   publisher: "NGUYÊN AGENCY",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://nguyenangency.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL && !process.env.NEXT_PUBLIC_SITE_URL.includes("localhost")
+      ? process.env.NEXT_PUBLIC_SITE_URL
+      : "https://nguyenagency.online"
   ),
   alternates: {
-    canonical: "/",
+    canonical: "https://nguyenagency.online",
   },
   openGraph: {
     title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
     description:
       "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
-    url: "https://nguyenangency.vercel.app",
+    url: "https://nguyenagency.online",
     siteName: "NGUYÊN AGENCY",
     images: [
       {
@@ -165,11 +167,11 @@ export default async function RootLayout({
         {/* OpenGraph Image */}
         <meta
           property="og:image"
-          content="https://nguyenangency.vercel.app/images/og-image.jpg"
+          content="https://nguyenagency.online/images/og-image.jpg"
         />
         <meta
           property="og:image:secure_url"
-          content="https://nguyenangency.vercel.app/images/og-image.jpg"
+          content="https://nguyenagency.online/images/og-image.jpg"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -180,7 +182,7 @@ export default async function RootLayout({
         />
         <meta
           name="twitter:image"
-          content="https://nguyenangency.vercel.app/images/og-image.jpg"
+          content="https://nguyenagency.online/images/og-image.jpg"
         />
         <meta
           name="google-site-verification"
