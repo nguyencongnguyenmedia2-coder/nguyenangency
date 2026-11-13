@@ -89,6 +89,7 @@ export const metadata: Metadata = {
       ...(process.env.NEXT_PUBLIC_BING_VERIFICATION
         ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION }
         : {}),
+      "p:domain_verify": "6e551eddcd258d7c9b123812810a8a33",
     },
   },
 };
