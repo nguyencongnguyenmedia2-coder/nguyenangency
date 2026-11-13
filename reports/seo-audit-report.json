@@ -1,0 +1,592 @@
+{
+  "summary": {
+    "baseUrl": "https://nguyenagency.online",
+    "auditedAt": "2026-11-13T02:45:15.380Z",
+    "endpoints": {
+      "/robots.txt": {
+        "status": 200,
+        "bytes": 166
+      },
+      "/llms.txt": {
+        "status": 404,
+        "bytes": 42185
+      },
+      "/llms-full.txt": {
+        "status": 404,
+        "bytes": 42190
+      },
+      "/sitemap.xml": {
+        "status": 200,
+        "bytes": 8947
+      }
+    },
+    "pagesChecked": 50,
+    "brokenInternalLinks": [
+      {
+        "url": "https://nguyenagency.online/terms",
+        "status": 404
+      },
+      {
+        "url": "https://nguyenagency.online/privacy",
+        "status": 404
+      }
+    ],
+    "counts": {
+      "Critical": 11,
+      "High": 3,
+      "Medium": 3,
+      "Low": 0
+    }
+  },
+  "issues": [
+    {
+      "severity": "Medium",
+      "category": "GEO",
+      "url": "https://nguyenagency.online/robots.txt",
+      "message": "robots.txt does not explicitly list Search/AI search crawlers"
+    },
+    {
+      "severity": "Critical",
+      "category": "Discovery",
+      "url": "https://nguyenagency.online/llms.txt",
+      "message": "Endpoint returned HTTP 404"
+    },
+    {
+      "severity": "Critical",
+      "category": "Discovery",
+      "url": "https://nguyenagency.online/llms-full.txt",
+      "message": "Endpoint returned HTTP 404"
+    },
+    {
+      "severity": "Medium",
+      "category": "Heading",
+      "url": "https://nguyenagency.online/lien-he",
+      "message": "Missing <h1>"
+    },
+    {
+      "severity": "Medium",
+      "category": "Heading",
+      "url": "https://nguyenagency.online/contact",
+      "message": "Missing <h1>"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/portfolio/aura-lumina-luxury-fashion",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/aura-lumina-luxury-fashion"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/portfolio/case-study-test-12527",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/case-study-test-12527"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/portfolio/synapse-ai-neural-automation",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/synapse-ai-neural-automation"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/portfolio/nexus-fintech-trading-portal",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/nexus-fintech-trading-portal"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/lab/nguyen-ai-agent-12527",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/nguyen-ai-agent-12527"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/lab/pulsedesk-erp",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/pulsedesk-erp"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/lab/pinnacle-anhdep4k-online-core-engine",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/pinnacle-anhdep4k-online-core-engine"
+    },
+    {
+      "severity": "Critical",
+      "category": "Canonical",
+      "url": "https://nguyenagency.online/lab/kroma-studio-ai",
+      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/kroma-studio-ai"
+    },
+    {
+      "severity": "Critical",
+      "category": "HTTP",
+      "url": "https://nguyenagency.online/blog/xu-huong-su-dung-ai-de-lap-trinh-thiet-ke-website-xu-huong-dot-pha-cong-nghe-so-2026",
+      "message": "HTTP 500"
+    },
+    {
+      "severity": "High",
+      "category": "Duplicate",
+      "url": "https://nguyenagency.online, https://nguyenagency.online/contact",
+      "message": "Duplicate <title> \"Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi\" across 2 pages"
+    },
+    {
+      "severity": "High",
+      "category": "BrokenLink",
+      "url": "https://nguyenagency.online/terms",
+      "message": "Internal link returned HTTP 404"
+    },
+    {
+      "severity": "High",
+      "category": "BrokenLink",
+      "url": "https://nguyenagency.online/privacy",
+      "message": "Internal link returned HTTP 404"
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://nguyenagency.online",
+      "status": 200,
+      "title": "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 1,
+      "jsonLdCount": 4
+    },
+    {
+      "url": "https://nguyenagency.online/nguyen-cong-nguyen",
+      "status": 200,
+      "title": "Nguyễn Công Nguyên – Founder &amp; Technical Lead | Nguyên Agency | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/nguyen-cong-nguyen",
+      "h1Count": 1,
+      "jsonLdCount": 4
+    },
+    {
+      "url": "https://nguyenagency.online/thiet-ke-website-quang-ngai",
+      "status": 200,
+      "title": "Thiết Kế Website Quảng Ngãi – Chuẩn SEO, 3D WebGL Độc Bản | Nguyên Agency | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/thiet-ke-website-quang-ngai",
+      "h1Count": 1,
+      "jsonLdCount": 4
+    },
+    {
+      "url": "https://nguyenagency.online/media-quang-ngai",
+      "status": 200,
+      "title": "Media Quảng Ngãi – Dịch Vụ Quay Phim, Chụp Ảnh &amp; Thiết Kế | Nguyên Media | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/media-quang-ngai",
+      "h1Count": 1,
+      "jsonLdCount": 4
+    },
+    {
+      "url": "https://nguyenagency.online/digital-marketing-quang-ngai",
+      "status": 200,
+      "title": "Dịch Vụ Digital Marketing Quảng Ngãi – Tăng Trưởng Thực Chiến | Nguyên Agency | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/digital-marketing-quang-ngai",
+      "h1Count": 1,
+      "jsonLdCount": 4
+    },
+    {
+      "url": "https://nguyenagency.online/thiet-ke-logo",
+      "status": 200,
+      "title": "Thiết Kế Logo &amp; Bộ Nhận Diện Thương Hiệu Độc Bản | Nguyên Agency | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/thiet-ke-logo",
+      "h1Count": 1,
+      "jsonLdCount": 4
+    },
+    {
+      "url": "https://nguyenagency.online/ai-automation",
+      "status": 200,
+      "title": "AI Automation – Giải Pháp Tự Động Hóa &amp; Tác Tử AI Doanh Nghiệp | Nguyên Agency | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/ai-automation",
+      "h1Count": 1,
+      "jsonLdCount": 4
+    },
+    {
+      "url": "https://nguyenagency.online/du-an",
+      "status": 200,
+      "title": "Dự Án Thực Tế &amp; Case Studies Tiêu Biểu | Nguyên Agency Quảng Ngãi | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/du-an",
+      "h1Count": 1,
+      "jsonLdCount": 2
+    },
+    {
+      "url": "https://nguyenagency.online/lien-he",
+      "status": 200,
+      "title": "Liên Hệ Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/lien-he",
+      "h1Count": 0,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/about",
+      "status": 200,
+      "title": "Về Chúng Tôi – NGUYÊN AGENCY | Beyond Digital | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 1,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/services",
+      "status": 200,
+      "title": "Hệ Sinh Thái 24 Dịch Vụ Digital – NGUYÊN AGENCY | Media &amp; Tech Solutions | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services",
+      "h1Count": 1,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/portfolio",
+      "status": 200,
+      "title": "Portfolio &amp; Case Studies Tiêu Biểu – NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 1,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/lab",
+      "status": 200,
+      "title": "Digital LAB – NGUYÊN AGENCY | AI &amp; SaaS R&amp;D Engine | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 1,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/pricing",
+      "status": 200,
+      "title": "Bảng Giá Dịch Vụ Minh Bạch &amp; Chuyển Giao Trọn Gói – NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 1,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/blog",
+      "status": 200,
+      "title": "Bài Viết &amp; Góc Nhìn Chuyên Gia – NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 1,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/contact",
+      "status": 200,
+      "title": "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 0,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/faq",
+      "status": 200,
+      "title": "Câu Hỏi Thường Gặp (FAQ) – NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online",
+      "h1Count": 1,
+      "jsonLdCount": 1
+    },
+    {
+      "url": "https://nguyenagency.online/services/logo-design",
+      "status": 200,
+      "title": "Thiết Kế Logo Chuyên Nghiệp | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/logo-design",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/graphic-design",
+      "status": 200,
+      "title": "Dịch Vụ Thiết Kế Đồ Họa Chuyên Nghiệp | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/graphic-design",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/banner-design",
+      "status": 200,
+      "title": "Thiết Kế Banner Quảng Cáo Đa Nền Tảng | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/banner-design",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/poster-design",
+      "status": 200,
+      "title": "Thiết Kế Poster Quảng Cáo &amp; Sự Kiện | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/poster-design",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/advertising-creative",
+      "status": 200,
+      "title": "Sáng Tạo Nội Dung Quảng Cáo Hiệu Quả | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/advertising-creative",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/ai-video-production",
+      "status": 200,
+      "title": "Sản Xuất Video Bằng AI Sáng Tạo | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/ai-video-production",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/content-creation",
+      "status": 200,
+      "title": "Dịch Vụ Sáng Tạo Nội Dung Đa Nền Tảng | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/content-creation",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/digital-marketing",
+      "status": 200,
+      "title": "Dịch Vụ Digital Marketing Quảng Ngãi | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/digital-marketing",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/corporate-website",
+      "status": 200,
+      "title": "Thiết Kế Website Doanh Nghiệp | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/corporate-website",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/ecommerce-website",
+      "status": 200,
+      "title": "Thiết Kế Website Bán Hàng E-Commerce | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/e-commerce-website",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/mobile-application",
+      "status": 200,
+      "title": "Thiết Kế Ứng Dụng Di Động iOS &amp; Android | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/mobile-application",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/management-software",
+      "status": 200,
+      "title": "Phần Mềm Quản Lý Doanh Nghiệp Tùy Chỉnh | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/management-software",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/ai-integration",
+      "status": 200,
+      "title": "Tích Hợp AI Cho Doanh Nghiệp &amp; Tự Động Hóa | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/ai-integration",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/ui-ux-design",
+      "status": 200,
+      "title": "Thiết Kế Giao Diện UI UX Chuyên Nghiệp | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/ui-ux-design",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/branding-identity",
+      "status": 200,
+      "title": "Thiết Kế Bộ Nhận Diện Thương Hiệu | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/branding-identity",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/social-media-design",
+      "status": 200,
+      "title": "Thiết Kế Hình Ảnh Mạng Xã Hội Đa Kênh | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/social-media-design",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/video-production",
+      "status": 200,
+      "title": "Sản Xuất Video Quảng Cáo Doanh Nghiệp &amp; TVC | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/video-production",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/website-maintenance",
+      "status": 200,
+      "title": "Dịch Vụ Bảo Trì Website Chuyên Nghiệp | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/website-maintenance",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/menu-design",
+      "status": 200,
+      "title": "Thiết Kế Menu Nhà Hàng Quán Cafe Đẹp | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/menu-design",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/landing-page",
+      "status": 200,
+      "title": "Thiết Kế Landing Page Chuyển Đổi Cao | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/landing-page",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/business-website",
+      "status": 200,
+      "title": "Thiết Kế Website Kinh Doanh | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/business-website",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/crm-system",
+      "status": 200,
+      "title": "Phần Mềm Quản Lý Khách Hàng CRM | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/crm-system",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/custom-software",
+      "status": 200,
+      "title": "Lập Trình Phần Mềm Theo Yêu Cầu Doanh Nghiệp | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/custom-software",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/services/web-application",
+      "status": 200,
+      "title": "Phát Triển Ứng Dụng Web Chuyên Sâu | Nguyên Agency | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenagency.online/services/web-application",
+      "h1Count": 1,
+      "jsonLdCount": 5
+    },
+    {
+      "url": "https://nguyenagency.online/portfolio/case-study-test-12527",
+      "status": 200,
+      "title": "Kho Dịch Vụ Digital Nguyên MMO - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/portfolio/case-study-test-12527",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/portfolio/aura-lumina-luxury-fashion",
+      "status": 200,
+      "title": "AN LỊCH AI – Lịch Việt &amp; Phong Thủy - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/portfolio/aura-lumina-luxury-fashion",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/portfolio/nexus-fintech-trading-portal",
+      "status": 200,
+      "title": "Target Lock Academy.  Aim for Success! Win your Future! - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/portfolio/nexus-fintech-trading-portal",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/portfolio/synapse-ai-neural-automation",
+      "status": 200,
+      "title": "PDF Tools NCN - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/portfolio/synapse-ai-neural-automation",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/lab/kroma-studio-ai",
+      "status": 200,
+      "title": "Kroma Studio AI Core Engine – NGUYÊN LAB | Automated 3D Motion &amp; Visual Branding Engine | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/lab/kroma-studio-ai",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/lab/pulsedesk-erp",
+      "status": 200,
+      "title": "PulseDesk ERP Core Engine – NGUYÊN LAB | Next-Gen Agency Operations &amp; CRM Orchestrator | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/lab/pulsedesk-erp",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/lab/nguyen-ai-agent-12527",
+      "status": 200,
+      "title": "Nguyên AI Assistant 12527 Core Engine – NGUYÊN LAB | Trợ lý ảo doanh nghiệp | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/lab/nguyen-ai-agent-12527",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/lab/pinnacle-anhdep4k-online-core-engine",
+      "status": 200,
+      "title": "Pinnacle – anhdep4k.online Core Engine – NGUYÊN LAB | Pinnacle | Nguyên Agency",
+      "hasDescription": true,
+      "canonical": "https://nguyenangency.vercel.app/lab/pinnacle-anhdep4k-online-core-engine",
+      "h1Count": 1,
+      "jsonLdCount": 3
+    },
+    {
+      "url": "https://nguyenagency.online/blog/xu-huong-su-dung-ai-de-lap-trinh-thiet-ke-website-xu-huong-dot-pha-cong-nghe-so-2026",
+      "status": 500
+    }
+  ]
+}
