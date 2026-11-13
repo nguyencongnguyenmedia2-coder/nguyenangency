@@ -1,19 +1,19 @@
 {
   "summary": {
     "baseUrl": "https://nguyenagency.online",
-    "auditedAt": "2026-11-13T02:45:15.380Z",
+    "auditedAt": "2026-11-13T03:09:57.963Z",
     "endpoints": {
       "/robots.txt": {
         "status": 200,
         "bytes": 166
       },
       "/llms.txt": {
-        "status": 404,
-        "bytes": 42185
+        "status": 200,
+        "bytes": 23832
       },
       "/llms-full.txt": {
-        "status": 404,
-        "bytes": 42190
+        "status": 200,
+        "bytes": 134152
       },
       "/sitemap.xml": {
         "status": 200,
@@ -23,16 +23,16 @@
     "pagesChecked": 50,
     "brokenInternalLinks": [
       {
-        "url": "https://nguyenagency.online/terms",
+        "url": "https://nguyenagency.online/privacy",
         "status": 404
       },
       {
-        "url": "https://nguyenagency.online/privacy",
+        "url": "https://nguyenagency.online/terms",
         "status": 404
       }
     ],
     "counts": {
-      "Critical": 11,
+      "Critical": 1,
       "High": 3,
       "Medium": 3,
       "Low": 0
@@ -46,18 +46,6 @@
       "message": "robots.txt does not explicitly list Search/AI search crawlers"
     },
     {
-      "severity": "Critical",
-      "category": "Discovery",
-      "url": "https://nguyenagency.online/llms.txt",
-      "message": "Endpoint returned HTTP 404"
-    },
-    {
-      "severity": "Critical",
-      "category": "Discovery",
-      "url": "https://nguyenagency.online/llms-full.txt",
-      "message": "Endpoint returned HTTP 404"
-    },
-    {
       "severity": "Medium",
       "category": "Heading",
       "url": "https://nguyenagency.online/lien-he",
@@ -68,54 +56,6 @@
       "category": "Heading",
       "url": "https://nguyenagency.online/contact",
       "message": "Missing <h1>"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/portfolio/aura-lumina-luxury-fashion",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/aura-lumina-luxury-fashion"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/portfolio/case-study-test-12527",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/case-study-test-12527"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/portfolio/synapse-ai-neural-automation",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/synapse-ai-neural-automation"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/portfolio/nexus-fintech-trading-portal",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/portfolio/nexus-fintech-trading-portal"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/lab/nguyen-ai-agent-12527",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/nguyen-ai-agent-12527"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/lab/pulsedesk-erp",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/pulsedesk-erp"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/lab/pinnacle-anhdep4k-online-core-engine",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/pinnacle-anhdep4k-online-core-engine"
-    },
-    {
-      "severity": "Critical",
-      "category": "Canonical",
-      "url": "https://nguyenagency.online/lab/kroma-studio-ai",
-      "message": "Stale vercel.app canonical: https://nguyenangency.vercel.app/lab/kroma-studio-ai"
     },
     {
       "severity": "Critical",
@@ -132,13 +72,13 @@
     {
       "severity": "High",
       "category": "BrokenLink",
-      "url": "https://nguyenagency.online/terms",
+      "url": "https://nguyenagency.online/privacy",
       "message": "Internal link returned HTTP 404"
     },
     {
       "severity": "High",
       "category": "BrokenLink",
-      "url": "https://nguyenagency.online/privacy",
+      "url": "https://nguyenagency.online/terms",
       "message": "Internal link returned HTTP 404"
     }
   ],
@@ -229,7 +169,7 @@
       "status": 200,
       "title": "Về Chúng Tôi – NGUYÊN AGENCY | Beyond Digital | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenagency.online",
+      "canonical": "https://nguyenagency.online/about",
       "h1Count": 1,
       "jsonLdCount": 1
     },
@@ -247,7 +187,7 @@
       "status": 200,
       "title": "Portfolio &amp; Case Studies Tiêu Biểu – NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenagency.online",
+      "canonical": "https://nguyenagency.online/portfolio",
       "h1Count": 1,
       "jsonLdCount": 1
     },
@@ -256,7 +196,7 @@
       "status": 200,
       "title": "Digital LAB – NGUYÊN AGENCY | AI &amp; SaaS R&amp;D Engine | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenagency.online",
+      "canonical": "https://nguyenagency.online/lab",
       "h1Count": 1,
       "jsonLdCount": 1
     },
@@ -265,7 +205,7 @@
       "status": 200,
       "title": "Bảng Giá Dịch Vụ Minh Bạch &amp; Chuyển Giao Trọn Gói – NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenagency.online",
+      "canonical": "https://nguyenagency.online/pricing",
       "h1Count": 1,
       "jsonLdCount": 1
     },
@@ -274,7 +214,7 @@
       "status": 200,
       "title": "Bài Viết &amp; Góc Nhìn Chuyên Gia – NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenagency.online",
+      "canonical": "https://nguyenagency.online/blog",
       "h1Count": 1,
       "jsonLdCount": 1
     },
@@ -292,7 +232,7 @@
       "status": 200,
       "title": "Câu Hỏi Thường Gặp (FAQ) – NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenagency.online",
+      "canonical": "https://nguyenagency.online/faq",
       "h1Count": 1,
       "jsonLdCount": 1
     },
@@ -517,7 +457,7 @@
       "status": 200,
       "title": "Kho Dịch Vụ Digital Nguyên MMO - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/portfolio/case-study-test-12527",
+      "canonical": "https://nguyenagency.online/portfolio/case-study-test-12527",
       "h1Count": 1,
       "jsonLdCount": 3
     },
@@ -526,7 +466,7 @@
       "status": 200,
       "title": "AN LỊCH AI – Lịch Việt &amp; Phong Thủy - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/portfolio/aura-lumina-luxury-fashion",
+      "canonical": "https://nguyenagency.online/portfolio/aura-lumina-luxury-fashion",
       "h1Count": 1,
       "jsonLdCount": 3
     },
@@ -535,7 +475,7 @@
       "status": 200,
       "title": "Target Lock Academy.  Aim for Success! Win your Future! - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/portfolio/nexus-fintech-trading-portal",
+      "canonical": "https://nguyenagency.online/portfolio/nexus-fintech-trading-portal",
       "h1Count": 1,
       "jsonLdCount": 3
     },
@@ -544,7 +484,7 @@
       "status": 200,
       "title": "PDF Tools NCN - Trải Nghiệm Số Không Gian Tương Tác – Case Study | NGUYÊN AGENCY | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/portfolio/synapse-ai-neural-automation",
+      "canonical": "https://nguyenagency.online/portfolio/synapse-ai-neural-automation",
       "h1Count": 1,
       "jsonLdCount": 3
     },
@@ -553,7 +493,7 @@
       "status": 200,
       "title": "Kroma Studio AI Core Engine – NGUYÊN LAB | Automated 3D Motion &amp; Visual Branding Engine | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/lab/kroma-studio-ai",
+      "canonical": "https://nguyenagency.online/lab/kroma-studio-ai",
       "h1Count": 1,
       "jsonLdCount": 3
     },
@@ -562,7 +502,7 @@
       "status": 200,
       "title": "PulseDesk ERP Core Engine – NGUYÊN LAB | Next-Gen Agency Operations &amp; CRM Orchestrator | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/lab/pulsedesk-erp",
+      "canonical": "https://nguyenagency.online/lab/pulsedesk-erp",
       "h1Count": 1,
       "jsonLdCount": 3
     },
@@ -571,7 +511,7 @@
       "status": 200,
       "title": "Nguyên AI Assistant 12527 Core Engine – NGUYÊN LAB | Trợ lý ảo doanh nghiệp | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/lab/nguyen-ai-agent-12527",
+      "canonical": "https://nguyenagency.online/lab/nguyen-ai-agent-12527",
       "h1Count": 1,
       "jsonLdCount": 3
     },
@@ -580,7 +520,7 @@
       "status": 200,
       "title": "Pinnacle – anhdep4k.online Core Engine – NGUYÊN LAB | Pinnacle | Nguyên Agency",
       "hasDescription": true,
-      "canonical": "https://nguyenangency.vercel.app/lab/pinnacle-anhdep4k-online-core-engine",
+      "canonical": "https://nguyenagency.online/lab/pinnacle-anhdep4k-online-core-engine",
       "h1Count": 1,
       "jsonLdCount": 3
     },

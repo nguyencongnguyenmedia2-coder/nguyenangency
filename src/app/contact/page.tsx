@@ -468,8 +468,20 @@ export default function ContactPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#06070B] flex items-center justify-center text-zinc-400 font-mono text-xs uppercase tracking-widest">
-          Đang khởi tạo hệ thống liên hệ...
+        <div className="pt-32 pb-24 px-6 bg-[#06070B] text-white relative min-h-screen">
+          <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+            <div className="max-w-3xl space-y-6">
+              <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight leading-[1.08]">
+                KHỞI ĐỘNG DỰ ÁN & <br />
+                <span className="bg-gradient-to-r from-[#00E5FF] via-[#FF2D95] to-[#A855F7] bg-clip-text text-transparent">
+                  ĐẶT DỊCH VỤ CHUYÊN GIA.
+                </span>
+              </h1>
+              <p className="text-base sm:text-lg text-[#94A3B8] leading-relaxed">
+                Đang khởi tạo hệ thống liên hệ...
+              </p>
+            </div>
+          </div>
         </div>
       }
     >

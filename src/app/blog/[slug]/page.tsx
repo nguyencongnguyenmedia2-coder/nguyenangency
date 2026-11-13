@@ -129,23 +129,30 @@ export default async function BlogPostDetailPage({
   }
 
   // Related Content Engine: Related Posts + Next Post + Related Services
-  const [relatedPosts, relatedServices] = await Promise.all([
-    prisma.blogPost.findMany({
-      where: {
-        id: { not: post.id },
-        status: "PUBLISHED",
-      },
-      include: { category: true },
-      orderBy: [{ categoryId: "asc" }, { publishedAt: "desc" }],
-      take: 3,
-    }),
-    prisma.service.findMany({
-      where: { status: "PUBLISHED" },
-      include: { category: true },
-      orderBy: [{ isFeatured: "desc" }, { order: "asc" }],
-      take: 3,
-    }),
-  ]);
+  let relatedPosts: any[] = [];
+  let relatedServices: any[] = [];
+  try {
+    [relatedPosts, relatedServices] = await Promise.all([
+      prisma.blogPost.findMany({
+        where: {
+          id: { not: post.id },
+          status: "PUBLISHED",
+          deletedAt: null,
+        },
+        include: { category: true },
+        orderBy: [{ categoryId: "asc" }, { publishedAt: "desc" }],
+        take: 3,
+      }),
+      prisma.service.findMany({
+        where: { status: "PUBLISHED", deletedAt: null },
+        include: { category: true },
+        orderBy: [{ isFeatured: "desc" }, { order: "asc" }],
+        take: 3,
+      }),
+    ]);
+  } catch (err) {
+    console.warn("[BlogPostDetailPage] Related content fallback active:", err);
+  }
 
   const nextPost = relatedPosts[0] || null;
   const headings = extractBlogHeadings(post.content);
