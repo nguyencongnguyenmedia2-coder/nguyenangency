@@ -14,12 +14,12 @@ import {
 } from "lucide-react";
 import { formatDateVN } from "@/lib/utils";
 import RevealOnScroll from "@/components/motion/RevealOnScroll";
+import { extractBlogHeadings } from "@/lib/blog-toc";
 import {
   DetailBreadcrumbs,
   DetailHeroReveal,
   ReadingProgressBar,
   ShareCopyButton,
-  extractBlogHeadings,
   BlogTableOfContents,
   RichArticleRenderer,
 } from "@/components/common/DetailInteractiveTools";
