@@ -21,6 +21,24 @@ export const metadata = {
   title: "Bảng Giá Dịch Vụ Minh Bạch & Chuyển Giao Trọn Gói – NGUYÊN AGENCY",
   description:
     "Bảng giá các gói dịch vụ Branding, Thiết kế 3D Website, Web Application và Phần mềm chuyển giao 100% mã nguồn, cam kết không phát sinh chi phí.",
+  alternates: {
+    canonical: "https://nguyenagency.online/pricing",
+  },
+  openGraph: {
+    title: "Bảng Giá Dịch Vụ Minh Bạch & Chuyển Giao Trọn Gói – NGUYÊN AGENCY",
+    description:
+      "Bảng giá các gói dịch vụ Branding, Thiết kế 3D Website, Web Application và Phần mềm chuyển giao 100% mã nguồn, cam kết không phát sinh chi phí.",
+    url: "https://nguyenagency.online/pricing",
+    siteName: "NGUYÊN AGENCY",
+    type: "website",
+    locale: "vi_VN",
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "Bảng Giá Dịch Vụ Minh Bạch & Chuyển Giao Trọn Gói – NGUYÊN AGENCY",
+    description:
+      "Bảng giá các gói dịch vụ Branding, Thiết kế 3D Website, Web Application và Phần mềm chuyển giao 100% mã nguồn, cam kết không phát sinh chi phí.",
+  },
 };
 
 export const revalidate = 60;

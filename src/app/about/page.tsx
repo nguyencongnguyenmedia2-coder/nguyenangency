@@ -25,6 +25,24 @@ export const metadata = {
   title: "Về Chúng Tôi – NGUYÊN AGENCY | Beyond Digital",
   description:
     "Tìm hiểu về sứ mệnh, triết lý sáng tạo, đội ngũ chuyên gia và hệ thống công nghệ tiên tiến tại NGUYÊN AGENCY.",
+  alternates: {
+    canonical: "https://nguyenagency.online/about",
+  },
+  openGraph: {
+    title: "Về Chúng Tôi – NGUYÊN AGENCY | Beyond Digital",
+    description:
+      "Tìm hiểu về sứ mệnh, triết lý sáng tạo, đội ngũ chuyên gia và hệ thống công nghệ tiên tiến tại NGUYÊN AGENCY.",
+    url: "https://nguyenagency.online/about",
+    siteName: "NGUYÊN AGENCY",
+    type: "website",
+    locale: "vi_VN",
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "Về Chúng Tôi – NGUYÊN AGENCY | Beyond Digital",
+    description:
+      "Tìm hiểu về sứ mệnh, triết lý sáng tạo, đội ngũ chuyên gia và hệ thống công nghệ tiên tiến tại NGUYÊN AGENCY.",
+  },
 };
 
 export default function AboutPage() {

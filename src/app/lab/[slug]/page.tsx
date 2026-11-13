@@ -72,7 +72,7 @@ export async function generateMetadata({
     prod.tagline || "Digital Product"
   }`;
   const description = prod.metaDescription || prod.shortDesc;
-  const canonicalUrl = `https://nguyenangency.vercel.app/lab/${prod.slug}`;
+  const canonicalUrl = `https://nguyenagency.online/lab/${prod.slug}`;
 
   return {
     title,
@@ -257,7 +257,7 @@ export default async function LabProductDetailPage({
     author: {
       "@type": "Organization",
       name: "NGUYÊN AGENCY",
-      url: "https://nguyenangency.vercel.app",
+      url: "https://nguyenagency.online",
     },
   };
 

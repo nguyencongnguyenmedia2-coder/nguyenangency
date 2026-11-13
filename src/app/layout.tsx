@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SmoothScrollProvider from "@/components/motion/SmoothScrollProvider";
 import ScrollProgressIndicator from "@/components/motion/ScrollProgressIndicator";
+import GoogleAnalyticsTracker from "@/components/analytics/GoogleAnalyticsTracker";
 import dynamic from "next/dynamic";
 import { getPublicSiteSettings, type PublicSiteSettings } from "@/lib/site-settings";
 
@@ -84,6 +85,9 @@ export const metadata: Metadata = {
         "google65e91d408d51fefb.html",
         "google65e91d408d51fefb",
       ],
+      ...(process.env.NEXT_PUBLIC_BING_VERIFICATION
+        ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION }
+        : {}),
     },
   },
 };
@@ -220,6 +224,7 @@ export default async function RootLayout({
           />
           <MascotSupportAssistant settings={settings} />
         </SmoothScrollProvider>
+        <GoogleAnalyticsTracker gaId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
     </html>
   );

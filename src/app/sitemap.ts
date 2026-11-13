@@ -38,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     // Dynamic published services
     const services = await prisma.service.findMany({
-      where: { status: "PUBLISHED" },
+      where: { status: "PUBLISHED", deletedAt: null },
       select: { slug: true, updatedAt: true },
     });
     const serviceRoutes = services.map((s) => ({
@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Dynamic published portfolio case studies
     const portfolios = await prisma.portfolio.findMany({
-      where: { status: "PUBLISHED" },
+      where: { status: "PUBLISHED", deletedAt: null },
       select: { slug: true, updatedAt: true },
     });
     const portfolioRoutes = portfolios.map((p) => ({
@@ -62,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Dynamic published LAB products
     const labProducts = await prisma.labProduct.findMany({
-      where: { status: "PUBLISHED" },
+      where: { status: "PUBLISHED", deletedAt: null },
       select: { slug: true, updatedAt: true },
     });
     const labRoutes = labProducts.map((l) => ({
@@ -74,8 +74,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Dynamic published blog posts
     const blogPosts = await prisma.blogPost.findMany({
-      where: { status: "PUBLISHED" },
-      select: { slug: true, publishedAt: true },
+      where: { status: "PUBLISHED", deletedAt: null },
+      select: { slug: true, publishedAt: true, updatedAt: true },
     });
     const blogRoutes = blogPosts.map((b) => ({
       url: `${baseUrl}/blog/${b.slug}`,

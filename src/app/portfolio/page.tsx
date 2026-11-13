@@ -20,6 +20,24 @@ export const metadata = {
   title: "Portfolio & Case Studies Tiêu Biểu – NGUYÊN AGENCY",
   description:
     "Bộ sưu tập các dự án kỹ thuật số, nhận diện thương hiệu độc bản và ứng dụng Web 3D tiêu biểu do NGUYÊN AGENCY thực hiện với số liệu tăng trưởng thực tế.",
+  alternates: {
+    canonical: "https://nguyenagency.online/portfolio",
+  },
+  openGraph: {
+    title: "Portfolio & Case Studies Tiêu Biểu – NGUYÊN AGENCY",
+    description:
+      "Bộ sưu tập các dự án kỹ thuật số, nhận diện thương hiệu độc bản và ứng dụng Web 3D tiêu biểu do NGUYÊN AGENCY thực hiện với số liệu tăng trưởng thực tế.",
+    url: "https://nguyenagency.online/portfolio",
+    siteName: "NGUYÊN AGENCY",
+    type: "website",
+    locale: "vi_VN",
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "Portfolio & Case Studies Tiêu Biểu – NGUYÊN AGENCY",
+    description:
+      "Bộ sưu tập các dự án kỹ thuật số, nhận diện thương hiệu độc bản và ứng dụng Web 3D tiêu biểu do NGUYÊN AGENCY thực hiện với số liệu tăng trưởng thực tế.",
+  },
 };
 
 export const revalidate = 60;

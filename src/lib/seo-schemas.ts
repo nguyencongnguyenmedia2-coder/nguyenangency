@@ -224,3 +224,26 @@ export function getFAQSchema(faqs: { question: string; answer: string }[]) {
   };
 }
 
+export function getWebPageSchema({
+  name,
+  description,
+  url,
+}: {
+  name: string;
+  description: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    name,
+    description,
+    url,
+    inLanguage: "vi-VN",
+    isPartOf: {
+      "@id": `${SITE_URL}/#website`,
+    },
+  };
+}
+

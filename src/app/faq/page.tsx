@@ -6,6 +6,24 @@ export const metadata = {
   title: "Câu Hỏi Thường Gặp (FAQ) – NGUYÊN AGENCY",
   description:
     "Giải đáp toàn bộ thắc mắc về quy trình ký kết, công nghệ 3D Three.js, chi phí và chuyển giao mã nguồn tại NGUYÊN AGENCY.",
+  alternates: {
+    canonical: "https://nguyenagency.online/faq",
+  },
+  openGraph: {
+    title: "Câu Hỏi Thường Gặp (FAQ) – NGUYÊN AGENCY",
+    description:
+      "Giải đáp toàn bộ thắc mắc về quy trình ký kết, công nghệ 3D Three.js, chi phí và chuyển giao mã nguồn tại NGUYÊN AGENCY.",
+    url: "https://nguyenagency.online/faq",
+    siteName: "NGUYÊN AGENCY",
+    type: "website",
+    locale: "vi_VN",
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "Câu Hỏi Thường Gặp (FAQ) – NGUYÊN AGENCY",
+    description:
+      "Giải đáp toàn bộ thắc mắc về quy trình ký kết, công nghệ 3D Three.js, chi phí và chuyển giao mã nguồn tại NGUYÊN AGENCY.",
+  },
 };
 
 export const revalidate = 60;

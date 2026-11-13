@@ -19,6 +19,24 @@ export const metadata = {
   title: "Bài Viết & Góc Nhìn Chuyên Gia – NGUYÊN AGENCY",
   description:
     "Góc nhìn chuyên sâu về nghệ thuật thị giác đương đại, tối ưu hóa 3D WebGL, kiến trúc Next.js và ứng dụng AI Agent trong sản xuất phần mềm thực tế.",
+  alternates: {
+    canonical: "https://nguyenagency.online/blog",
+  },
+  openGraph: {
+    title: "Bài Viết & Góc Nhìn Chuyên Gia – NGUYÊN AGENCY",
+    description:
+      "Góc nhìn chuyên sâu về nghệ thuật thị giác đương đại, tối ưu hóa 3D WebGL, kiến trúc Next.js và ứng dụng AI Agent trong sản xuất phần mềm thực tế.",
+    url: "https://nguyenagency.online/blog",
+    siteName: "NGUYÊN AGENCY",
+    type: "website",
+    locale: "vi_VN",
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "Bài Viết & Góc Nhìn Chuyên Gia – NGUYÊN AGENCY",
+    description:
+      "Góc nhìn chuyên sâu về nghệ thuật thị giác đương đại, tối ưu hóa 3D WebGL, kiến trúc Next.js và ứng dụng AI Agent trong sản xuất phần mềm thực tế.",
+  },
 };
 
 export const revalidate = 60;

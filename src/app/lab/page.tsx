@@ -23,6 +23,24 @@ export const metadata = {
   title: "Digital LAB – NGUYÊN AGENCY | AI & SaaS R&D Engine",
   description:
     "Phòng nghiên cứu & phát triển (R&D) các giải pháp Generative AI, công cụ 3D Web tương tác và nền tảng SaaS độc quyền của NGUYÊN AGENCY.",
+  alternates: {
+    canonical: "https://nguyenagency.online/lab",
+  },
+  openGraph: {
+    title: "Digital LAB – NGUYÊN AGENCY | AI & SaaS R&D Engine",
+    description:
+      "Phòng nghiên cứu & phát triển (R&D) các giải pháp Generative AI, công cụ 3D Web tương tác và nền tảng SaaS độc quyền của NGUYÊN AGENCY.",
+    url: "https://nguyenagency.online/lab",
+    siteName: "NGUYÊN AGENCY",
+    type: "website",
+    locale: "vi_VN",
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: "Digital LAB – NGUYÊN AGENCY | AI & SaaS R&D Engine",
+    description:
+      "Phòng nghiên cứu & phát triển (R&D) các giải pháp Generative AI, công cụ 3D Web tương tác và nền tảng SaaS độc quyền của NGUYÊN AGENCY.",
+  },
 };
 
 export const revalidate = 60;

@@ -6,6 +6,10 @@ import QuotationViewerClient from "@/components/quotation/QuotationViewerClient"
 export async function generateMetadata({ params }: { params: { code: string } }) {
   return {
     title: `Báo Giá Dịch Vụ #${params.code} – NGUYÊN AGENCY`,
+    robots: {
+      index: false,
+      follow: false,
+    },
   };
 }
 

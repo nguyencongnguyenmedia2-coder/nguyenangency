@@ -49,7 +49,7 @@ export async function generateMetadata({
   const title = `${post.metaTitle || post.title} – NGUYÊN AGENCY Editorial`;
   const description = post.metaDescription || post.excerpt;
   const canonicalUrl =
-    post.canonicalUrl || `https://nguyenangency.vercel.app/blog/${post.slug}`;
+    post.canonicalUrl || `https://nguyenagency.online/blog/${post.slug}`;
   const ogImage = post.ogImage || post.thumbnail;
 
   return {
@@ -166,7 +166,7 @@ export default async function BlogPostDetailPage({
     publisher: {
       "@type": "Organization",
       name: "NGUYÊN AGENCY",
-      url: "https://nguyenangency.vercel.app",
+      url: "https://nguyenagency.online",
     },
   };
 
