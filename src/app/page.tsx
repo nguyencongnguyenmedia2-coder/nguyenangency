@@ -17,7 +17,6 @@ import ContactCTASection from "@/components/home/ContactCTASection";
 
 import type { Metadata } from "next";
 import {
-  getWebsiteAndOrganizationSchema,
   getLocalBusinessSchema,
   getPersonSchema,
   SITE_URL,
@@ -26,18 +25,18 @@ import {
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+  title: "Nguyên Agency | Thiết Kế Website & Marketing Quảng Ngãi",
   description:
-    "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+    "Nguyên Agency cung cấp dịch vụ thiết kế website, logo, nhận diện thương hiệu, Digital Marketing và giải pháp phần mềm tại Quảng Ngãi.",
   alternates: {
-    canonical: SITE_URL,
+    canonical: `${SITE_URL}/`,
   },
   openGraph: {
-    title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+    title: "Nguyên Agency | Thiết Kế Website & Marketing Quảng Ngãi",
     description:
-      "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
-    url: SITE_URL,
-    siteName: "NGUYÊN AGENCY",
+      "Nguyên Agency cung cấp dịch vụ thiết kế website, logo, nhận diện thương hiệu, Digital Marketing và giải pháp phần mềm tại Quảng Ngãi.",
+    url: `${SITE_URL}/`,
+    siteName: "Nguyên Agency",
     locale: "vi_VN",
     type: "website",
     images: [
@@ -140,19 +139,12 @@ export default async function HomePage() {
     }));
   }
 
-  const organizationSchemas = getWebsiteAndOrganizationSchema();
   const localBusinessSchema = getLocalBusinessSchema();
   const personSchema = getPersonSchema();
 
   return (
     <div className="flex flex-col">
-      {/* Search Engine Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchemas),
-        }}
-      />
+      {/* Search Engine Structured Data (WebSite + Organization are in RootLayout) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -48,7 +48,8 @@ export async function GET() {
 
 - **Tên thương hiệu:** ${BRAND_INFO.name}
 - **Người sáng lập:** ${BRAND_INFO.founder}
-- **Website chính thức:** ${SITE_URL}
+- **Website chính thức:** ${SITE_URL}/
+- **Facebook chính thức:** ${BRAND_INFO.officialFacebook}
 - **Thông điệp:** ${BRAND_INFO.slogan}
 - **Thị trường phục vụ:** Quảng Ngãi và toàn quốc (Việt Nam)
 - **Ngôn ngữ chính:** Tiếng Việt (vi-VN)

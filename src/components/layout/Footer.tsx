@@ -27,7 +27,7 @@ export default function Footer({
   hotline = "+84 344 979 307",
   officeAddress = "TP. Quảng Ngãi - TP. Hồ Chí Minh",
   zaloUrl = "https://zalo.me/0344979307",
-  facebookUrl = "https://www.facebook.com/nguyenads7",
+  facebookUrl = "https://www.facebook.com/nguyenagency07",
   linkedinUrl = "https://linkedin.com",
   behanceUrl = "https://behance.net",
 }: FooterProps) {
@@ -160,19 +160,19 @@ export default function Footer({
               Kết Nối & Hỗ Trợ
             </h4>
             <div className="flex flex-col gap-2.5 text-xs text-[#A1A1AA]">
-              <a href={zaloUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center justify-between group">
+              <a href={zaloUrl} target="_blank" rel="noopener noreferrer" aria-label="Zalo chính thức của Nguyên Agency" className="hover:text-white flex items-center justify-between group">
                 <span>Zalo Doanh Nghiệp</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-[#71717A] group-hover:text-[#00E5FF] transition-colors" />
               </a>
-              <a href="https://t.me/NguyenAgencyBot" target="_blank" rel="noreferrer" className="hover:text-white flex items-center justify-between group">
+              <a href="https://t.me/NguyenAgencyBot" target="_blank" rel="noopener noreferrer" aria-label="Telegram Bot hỗ trợ của Nguyên Agency" className="hover:text-white flex items-center justify-between group">
                 <span>Telegram Bot 24/7</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-[#71717A] group-hover:text-[#00E5FF] transition-colors" />
               </a>
-              <a href={facebookUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center justify-between group">
+              <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook chính thức của Nguyên Agency" className="hover:text-white flex items-center justify-between group">
                 <span>Facebook Fanpage</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-[#71717A] group-hover:text-[#FF2D95] transition-colors" />
               </a>
-              <a href={linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-white flex items-center justify-between group">
+              <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn của Nguyên Agency" className="hover:text-white flex items-center justify-between group">
                 <span>LinkedIn Network</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-[#71717A] transition-colors" />
               </a>

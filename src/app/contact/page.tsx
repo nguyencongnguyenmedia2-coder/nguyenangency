@@ -198,9 +198,10 @@ function ContactContent() {
                     <span>Zalo Official</span>
                   </a>
                   <a
-                    href="https://www.facebook.com/nguyenads7"
+                    href="https://www.facebook.com/nguyenagency07"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook Fanpage chính thức của Nguyên Agency"
                     className="flex-1 px-3 py-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 hover:border-indigo-400 text-indigo-400 text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <span>Facebook Fanpage</span>

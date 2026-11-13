@@ -7,6 +7,7 @@ import ScrollProgressIndicator from "@/components/motion/ScrollProgressIndicator
 import GoogleAnalyticsTracker from "@/components/analytics/GoogleAnalyticsTracker";
 import dynamic from "next/dynamic";
 import { getPublicSiteSettings, type PublicSiteSettings } from "@/lib/site-settings";
+import { BRAND_INFO, getWebsiteAndOrganizationSchema } from "@/lib/seo-schemas";
 
 const MascotSupportAssistant = dynamic(
   () => import("@/components/mascot/MascotSupportAssistant"),
@@ -21,34 +22,34 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: {
-    default: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+    default: "Nguyên Agency | Thiết Kế Website & Marketing Quảng Ngãi",
     template: "%s | Nguyên Agency",
   },
   description:
-    "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+    "Nguyên Agency cung cấp dịch vụ thiết kế website, logo, nhận diện thương hiệu, Digital Marketing và giải pháp phần mềm tại Quảng Ngãi.",
   authors: [{ name: "Nguyễn Công Nguyên", url: "https://nguyenagency.online/nguyen-cong-nguyen" }],
   creator: "Nguyễn Công Nguyên",
-  publisher: "NGUYÊN AGENCY",
+  publisher: "Nguyên Agency",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL && !process.env.NEXT_PUBLIC_SITE_URL.includes("localhost")
       ? process.env.NEXT_PUBLIC_SITE_URL
       : "https://nguyenagency.online"
   ),
   alternates: {
-    canonical: "https://nguyenagency.online",
+    canonical: "https://nguyenagency.online/",
   },
   openGraph: {
-    title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+    title: "Nguyên Agency | Thiết Kế Website & Marketing Quảng Ngãi",
     description:
-      "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
-    url: "https://nguyenagency.online",
-    siteName: "NGUYÊN AGENCY",
+      "Nguyên Agency cung cấp dịch vụ thiết kế website, logo, nhận diện thương hiệu, Digital Marketing và giải pháp phần mềm tại Quảng Ngãi.",
+    url: "https://nguyenagency.online/",
+    siteName: "Nguyên Agency",
     images: [
       {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Nguyên Agency – Nguyễn Công Nguyên Media Quảng Ngãi",
+        alt: "Nguyên Agency – Thiết Kế Website & Marketing Quảng Ngãi",
       },
     ],
     locale: "vi_VN",
@@ -56,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+    title: "Nguyên Agency | Thiết Kế Website & Marketing Quảng Ngãi",
     description:
-      "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+      "Nguyên Agency cung cấp dịch vụ thiết kế website, logo, nhận diện thương hiệu, Digital Marketing và giải pháp phần mềm tại Quảng Ngãi.",
     images: ["/images/og-image.jpg"],
   },
   icons: {
@@ -100,7 +101,7 @@ const DEFAULT_SETTINGS: PublicSiteSettings = {
   hotline: "+84 344 979 307",
   officeAddress: "TP. Quảng Ngãi - TP. Hồ Chí Minh",
   zaloUrl: "https://zalo.me/0344979307",
-  facebookUrl: "https://www.facebook.com/nguyenads7",
+  facebookUrl: BRAND_INFO.officialFacebook,
   linkedinUrl: "https://linkedin.com",
   behanceUrl: "https://behance.net",
   telegramBotUsername: "nguyenangency_bot",
@@ -127,30 +128,7 @@ export default async function RootLayout({
     // DB unavailable → use defaults; site still renders
   }
 
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": settings.brandName || "NGUYÊN AGENCY",
-    "url": "https://nguyenagency.online",
-    "logo": "https://nguyenagency.online/images/og-image.jpg",
-    "image": "https://nguyenagency.online/images/og-image.jpg",
-    "description": settings.brandDescription,
-    "email": settings.contactEmail,
-    "telephone": settings.hotline,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": settings.officeAddress,
-      "addressLocality": "Quảng Ngãi",
-      "addressRegion": "Quảng Ngãi",
-      "addressCountry": "VN",
-    },
-    "sameAs": [
-      settings.facebookUrl,
-      settings.linkedinUrl,
-      settings.behanceUrl,
-      settings.zaloUrl,
-    ].filter(Boolean),
-  };
+  const organizationSchema = getWebsiteAndOrganizationSchema();
 
   return (
     <html lang="vi" className="dark" style={{ backgroundColor: "#0A0A0A", colorScheme: "dark" }}>

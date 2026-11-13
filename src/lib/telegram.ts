@@ -570,7 +570,7 @@ export async function handleTelegramUpdate(update: TelegramUpdate): Promise<{
           '• Email: contact@nguyenagency.vn',
           '• Trụ sở: TP. Quảng Ngãi - TP. Hồ Chí Minh',
           '• Zalo: https://zalo.me/0344979307',
-          '• Facebook: https://www.facebook.com/nguyenads7',
+          '• Facebook: https://www.facebook.com/nguyenagency07',
           '',
           'Tiếp đón đối tác theo lịch hẹn trước tại Executive Studio Suite. Bạn có thể bấm "Đặt dịch vụ" bên dưới để chuyên gia của chúng tôi liên hệ lại trong vòng 15 - 30 phút!',
         ].join('\n'),
@@ -917,7 +917,7 @@ export async function handleTelegramUpdate(update: TelegramUpdate): Promise<{
           '• Email: contact@nguyenagency.vn',
           '• Địa chỉ: TP. Quảng Ngãi - TP. Hồ Chí Minh (Tiếp đón tại Executive Studio Suite)',
           '• Zalo: https://zalo.me/0344979307',
-          '• Facebook: https://www.facebook.com/nguyenads7',
+          '• Facebook: https://www.facebook.com/nguyenagency07',
           '• Đặt dịch vụ trực tiếp trên Bot: gõ /booking',
         ].join('\n'),
         getMainMenuKeyboard()

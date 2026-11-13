@@ -389,6 +389,34 @@ export default function AboutPage() {
           <p className="text-xs sm:text-sm text-[#D4D4D8] max-w-xl mx-auto leading-relaxed">
             Đặt lịch trao đổi trực tiếp cùng Solution Architect để nhận phân tích kiến trúc công nghệ và báo giá chi tiết trong vòng 24 giờ.
           </p>
+          <div className="max-w-2xl mx-auto rounded-2xl bg-[#06070B]/70 border border-white/10 p-5 text-left space-y-2 text-xs sm:text-sm text-[#D4D4D8]">
+            <p className="font-bold text-white">
+              Nguyên Agency – Nguyễn Công Nguyên Media Quảng Ngãi
+            </p>
+            <p>
+              Nguyên Agency là thương hiệu cung cấp dịch vụ thiết kế website, thiết kế đồ họa, xây dựng nhận diện thương hiệu, Digital Marketing và giải pháp công nghệ tại Quảng Ngãi.
+            </p>
+            <p className="flex flex-wrap gap-x-6 gap-y-1 pt-1 font-mono text-xs">
+              <span>
+                Website chính thức:{" "}
+                <a href="https://nguyenagency.online/" className="text-[#00E5FF] underline">
+                  https://nguyenagency.online/
+                </a>
+              </span>
+              <span>
+                Facebook chính thức:{" "}
+                <a
+                  href="https://www.facebook.com/nguyenagency07"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook chính thức của Nguyên Agency"
+                  className="text-[#FF2D95] underline"
+                >
+                  https://www.facebook.com/nguyenagency07
+                </a>
+              </span>
+            </p>
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               href="/contact"

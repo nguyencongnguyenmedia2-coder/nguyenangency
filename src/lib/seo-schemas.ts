@@ -9,17 +9,19 @@ export const SITE_URL =
     : "https://nguyenagency.online";
 
 export const BRAND_INFO = {
-  name: "NGUYÊN AGENCY",
+  name: "Nguyên Agency",
   alternateName: [
-    "Nguyên Agency",
+    "Nguyễn Công Nguyên Media Quảng Ngãi",
+    "NGUYÊN AGENCY",
     "Nguyên Media",
     "Nguyễn Công Nguyên Media",
     "Nguyễn Công Nguyên Agency",
   ],
   slogan: "NÂNG TẦM THƯƠNG HIỆU",
   founder: "Nguyễn Công Nguyên",
-  hotline: "+84 344 979 307",
+  hotline: "+84344979307",
   email: "contact@nguyenagency.vn",
+  officialFacebook: "https://www.facebook.com/nguyenagency07",
   address: {
     street: "TP. Quảng Ngãi",
     locality: "Quảng Ngãi",
@@ -27,7 +29,7 @@ export const BRAND_INFO = {
     country: "VN",
   },
   socials: [
-    "https://www.facebook.com/nguyenads7",
+    "https://www.facebook.com/nguyenagency07",
     "https://zalo.me/0344979307",
     "https://t.me/nguyenangency_bot",
   ],
@@ -41,10 +43,10 @@ export function getWebsiteAndOrganizationSchema() {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
-      url: SITE_URL,
-      name: "Nguyên Agency | Nguyễn Công Nguyên Media Quảng Ngãi",
+      url: `${SITE_URL}/`,
+      name: "Nguyên Agency | Thiết Kế Website & Marketing Quảng Ngãi",
       description:
-        "Nguyên Agency – Nguyễn Công Nguyên Media tại Quảng Ngãi. Chuyên thiết kế website, logo, quảng cáo, Digital Marketing, phần mềm và giải pháp AI cho doanh nghiệp.",
+        "Nguyên Agency cung cấp dịch vụ thiết kế website, logo, nhận diện thương hiệu, Digital Marketing và giải pháp phần mềm tại Quảng Ngãi.",
       publisher: {
         "@id": `${SITE_URL}/#organization`,
       },
@@ -56,10 +58,11 @@ export function getWebsiteAndOrganizationSchema() {
       "@id": `${SITE_URL}/#organization`,
       name: BRAND_INFO.name,
       alternateName: BRAND_INFO.alternateName,
-      url: SITE_URL,
+      url: `${SITE_URL}/`,
       logo: BRAND_INFO.logo,
       image: BRAND_INFO.image,
       slogan: BRAND_INFO.slogan,
+      telephone: BRAND_INFO.hotline,
       founder: {
         "@type": "Person",
         "@id": `${SITE_URL}/#founder`,
@@ -91,8 +94,11 @@ export function getLocalBusinessSchema() {
     name: "Nguyên Agency – Nguyễn Công Nguyên Media Quảng Ngãi",
     alternateName: "Nguyên Media Quảng Ngãi",
     image: BRAND_INFO.image,
-    url: SITE_URL,
+    url: `${SITE_URL}/`,
     telephone: BRAND_INFO.hotline,
+    parentOrganization: {
+      "@id": `${SITE_URL}/#organization`,
+    },
     priceRange: "15.000.000 VNĐ - 95.000.000 VNĐ",
     address: {
       "@type": "PostalAddress",

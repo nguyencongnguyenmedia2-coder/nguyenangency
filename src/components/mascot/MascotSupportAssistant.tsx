@@ -264,7 +264,7 @@ const KNOWLEDGE_RESPONSES: Record<string, { reply: string; link?: { text: string
       "• Email liên hệ: contact@nguyenagency.vn (Phản hồi kèm NDA bảo mật)\n" +
       "• Địa chỉ: TP. Quảng Ngãi - TP. Hồ Chí Minh (Tiếp đón tại Executive Studio Suite theo lịch hẹn)\n" +
       "• Zalo: https://zalo.me/0344979307\n" +
-      "• Facebook Fanpage: https://www.facebook.com/nguyenads7\n" +
+      "• Facebook Fanpage: https://www.facebook.com/nguyenagency07\n" +
       "Hoặc bạn có thể gửi yêu cầu báo giá ngay trong ô bên dưới để chuyên viên liên hệ trong 15 phút!",
     link: { text: "Trang liên hệ chính thức", href: "/contact" },
   },

@@ -69,7 +69,7 @@ const DEFAULT_SETTINGS_SEED = [
   },
   {
     key: "facebook_url",
-    value: "https://www.facebook.com/nguyenads7",
+    value: "https://www.facebook.com/nguyenagency07",
     group: "SOCIAL",
     description: "Liên kết Fanpage Facebook chính thức",
   },
@@ -189,7 +189,10 @@ export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
       rawMap["address"] ||
       "TP. Quảng Ngãi - TP. Hồ Chí Minh",
     zaloUrl: rawMap["zalo_url"] || "https://zalo.me/0344979307",
-    facebookUrl: rawMap["facebook_url"] || "https://www.facebook.com/nguyenads7",
+    facebookUrl:
+      !rawMap["facebook_url"] || rawMap["facebook_url"].includes("nguyenads7")
+        ? "https://www.facebook.com/nguyenagency07"
+        : rawMap["facebook_url"],
     linkedinUrl: rawMap["linkedin_url"] || "https://linkedin.com",
     behanceUrl: rawMap["behance_url"] || "https://behance.net",
     telegramBotUsername:

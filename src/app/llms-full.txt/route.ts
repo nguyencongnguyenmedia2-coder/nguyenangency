@@ -166,6 +166,7 @@ ${faqMd}
 - **Hotline / Zalo:** ${BRAND_INFO.hotline}
 - **Khu vực:** ${BRAND_INFO.address.street}, ${BRAND_INFO.address.locality}, Việt Nam
 - **Trang liên hệ:** ${SITE_URL}/lien-he (và ${SITE_URL}/contact)
+- **Facebook chính thức:** ${BRAND_INFO.officialFacebook}
 - **Sitemap XML:** ${SITE_URL}/sitemap.xml
 - **Robots.txt:** ${SITE_URL}/robots.txt
 - **Tóm tắt dịch vụ (llms.txt):** ${SITE_URL}/llms.txt
