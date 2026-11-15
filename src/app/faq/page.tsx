@@ -1,6 +1,7 @@
 import React from "react";
 import prisma from "@/lib/prisma";
 import FAQPageClient from "@/components/faq/FAQPageClient";
+import { getFAQSchema, getBreadcrumbSchema } from "@/lib/seo-schemas";
 
 export const metadata = {
   title: "Câu Hỏi Thường Gặp (FAQ) – NGUYÊN AGENCY",
@@ -39,5 +40,33 @@ export default async function FAQPage() {
     console.warn("[FAQPage] DB fetch fallback active:", err);
   }
 
-  return <FAQPageClient faqs={faqs} />;
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Trang chủ", path: "/" },
+    { name: "Câu hỏi thường gặp (FAQ)", path: "/faq" },
+  ]);
+  const faqSchema =
+    faqs.length > 0
+      ? getFAQSchema(
+          faqs.map((f) => ({
+            question: f.question,
+            answer: f.answer,
+          }))
+        )
+      : null;
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      <FAQPageClient faqs={faqs} />
+    </>
+  );
 }
